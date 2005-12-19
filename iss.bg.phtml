@@ -1,0 +1,143 @@
+<?php
+  $I18N_LANG = 'bg';
+  include 'sysutil.php';
+  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sotirov.Net - Информация, Състояние, Статистики</title>
+<meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
+<meta name="description" content="Sotirov.Net - Информация за сървъра" />
+<meta name="keywords" content="Сотиров" />
+<meta name="CVS" content="$Id: iss.bg.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<link rel="icon" href="img/sotirov_net" />
+<link rel="shortcut icon" href="img/sotirov_net" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
+<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
+
+<link rel="top" href="index" title="Начало" />
+<link rel="up" href="iss" title="Горе" />
+</head>
+
+<body>
+<div id="header">
+<h1>Информация, състояние, статистики</h1>
+</div>
+
+<div id="navigation">
+<p class="navigation">
+[&nbsp;<a
+href="/">Начална страница</a>&nbsp;|&nbsp;<a
+href="iss.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]
+</p>
+</div>
+
+<p>Тази информация е предоставена главно с цел системно наблюдение
+и е за ситемните администратори. Все пак тя може да бъде полезна
+и интересна за нормалните потребители или посетители.</p>
+</div>
+
+<div id="info_status_stats">
+<div id="server_himself">
+<img alt="Снимка на сървъра" id="server_pic" height="350" src="img/server"
+title="Самият сървър" width="320" />
+</div>
+<h2>Обща информация</h2>
+<pre><?php
+  printf("<i><abbr title=\"Операционна система\">ОС</abbr></i>:          <span lang=\"en\">%s</span>\n", os_info());
+  printf("<i><abbr title=\"Операционна система\">ОС</abbr></i>          <span lang=\"en\">%s</span>\n", os_info());
+  printf("<i>Ядро</i>        <span lang=\"en\">%s</span>\n", kernel_info());
+  printf("<i>Дистрибуция</i> <span lang=\"en\">%s</span>\n", slack_ver());
+  printf("<i>Архитектура</i> <span lang=\"en\">%s</span>\n", mach_info());
+  printf("<i>Процесор</i>    <span lang=\"en\">%s</span>\n", cpu_info());
+</pre>
+<h2>Състояние на сървъра</h2>
+<pre><?php
+  $sysup = sysup();
+  printf("<i>Работещ от</i>:         %s\n", $sysup[0]);
+  printf("<i>Работещ от</i>         %s\n", $sysup[0]);
+  printf("<i>Време на работа</i>    %s\n", $sysup[1]);
+  printf("<i>Средно натоварване</i> %s\n", loadavg());
+  printf("<i>Памет</i>:              %s\n", $meminfo[0]);
+  printf("<i>Памет</i>              %s\n", $meminfo[0]);
+  printf("<i>Виртуална памет</i>    %s\n", $meminfo[1]);
+</pre>
+<h2>Използван капацитет</h2>
+<!-- The bandwidth bar program is available at:
+ http://www.kernel.org/pub/software/web/bwbar/ -->
+<?php
+  $bwbar = fopen("bwbar/bwbar.txt", "r");
+  fscanf($bwbar, "%f %f %s", $cur_bw, $max_bw, $unit);
+  fclose($bwbar);
+?>
+<p>Текущо <?php
+  printf("%6.2f %s", $cur_bw, hr_bandw($unit));
+?> от <?php printf("%6.2f %s", $max_bw, hr_bandw($unit));
+?> използвани<br />
+<img alt="Използван капацитет" height="6" longdesc="http://www.kernel.org/pub/software/web/bwbar/" src="bwbar/bwbar.png" width="602" />
+<img alt="Използван капацитет" height="6" src="bwbar/bwbar.png" width="602" />
+<h2>Статистики</h2>
+<ul>
+<li><a href="stats/traffic/" hreflang="en">Трафик</a>&nbsp;<img alt="[парола]"
+height="16" longdesc="/img/lock" src="/img/lock" title="Изисква се удостоверяване" width="16" /></li>
+height="16" src="/img/lock" title="Изисква се удостоверяване" width="16" /></li>
+alt="[парола]" height="16" longdesc="/img/lock" src="/img/lock" title="Изисква се удостоверяване"
+alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
+<li><a href="stats/awstats/awstats.pl?config=web">Web</a>&nbsp;<img
+alt="[парола]" height="16" longdesc="/img/lock" src="/img/lock" title="Изисква се удостоверяване"
+alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
+alt="[парола]" height="16" longdesc="/img/lock" src="/img/lock" title="Изисква се удостоверяване"
+alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
+</ul>
+</div>
+</div>
+
+<div id="conformance">
+<hr />
+<map id="conformancebar">
+<p class="align-center">
+<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+&nbsp;<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Икона Валиден XHTML 1.0]" height="31" src="img/valid-xhtml" title="Валиден XHTML 1.0!" width="88" />
+</a>&nbsp;
+<a href="http://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=gsotirov79.ddns.homelan.bg&amp;usermedium=all" hreflang="en">
+<img alt="[Икона Валиден CSS]" height="31" src="img/valid-css" title="Валиден CSS!" width="88" />
+</a>&nbsp;
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
+<img alt="[Икона за съответствие с ниво двойно А]" height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
+<img alt="[Икона за съответствие с ниво двойно А, W3C-WAI Web Content Accessibility Guidelines 1.0]"
+height="31" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" />
+</a>&nbsp;
+<!-- WebXact -->
+<a href="http://webxact.watchfire.com/submit.aspx?SCANURL=http://gsotirov79.ddns.homelan.bg/iss&amp;GL=wcag1-aa" hreflang="en">
+<img alt="[Проверка на ниво AA през WebXact]" height="31" src="/img/webxact" title="Проверка на ниво AA през WebXact" width="88" />
+</a>&nbsp;
+<!-- UTF-8 Encoded -->
+<img alt="[Икона Кодирано в UTF-8]" height="31" longdesc="http://www.unicode.org/" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
+<img alt="[Икона Кодирано в UTF-8]" height="31" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
+</p>
+
+<div id="poweredby">
+<div id="powered_by">
+<p>&nbsp;<a href="http://www.kernel.org/" hreflang="en">
+<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" />
+</a>&nbsp;<a href="http://www.apache.org/" hreflang="en">
+<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" />
+</a>&nbsp;<a href="http://www.php.net/" hreflang="en">
+<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" />
+</a>&nbsp;</p>
+
+<div id="generated">
+<p>Страницата е създадена: <?php echo date("Y-m-d H:i:s T"); ?></p>
+</div>
+
+</body>
+</html>

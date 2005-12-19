@@ -1,0 +1,17 @@
+/* Sotirov.net Default Teletype Styles
+ *
+ * Written by George D. Sotirov <gdsotirov@dir.bg>
+ * $Id: tty.css,v 1.1 2005/12/19 18:47:12 gsotirov Exp $
+ * This stylesheet conforms to the CSS 2.1 Specification from W3 Organization.
+ * http://http://www.w3.org/TR/CSS21/
+ * 
+ * Media: tty
+ */
+
+a:before {
+  content: "[";
+}
+
+a:after {
+  content: "]";
+}

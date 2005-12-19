@@ -1,0 +1,137 @@
+<?php
+  $I18N_LANG = 'en';
+  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sotirov.Net - News</title>
+<meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
+<meta name="description" content="Новинарска страница на Sotirov.Net" />
+<meta name="keywords" content="sotirov.net, Georgi Sotirov" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<link rel="icon" href="img/sotirov_net" />
+<link rel="shortcut icon" href="img/sotirov_net" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
+<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=0.91" title="Новини от Sotirov.net (RSS 0.91)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=1.0" title="Новини от Sotirov.net (RSS 1.0)" type="application/rdf+xml" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=2.0" title="Новини от Sotirov.net (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=atom" title="Новини от Sotirov.net (Atom 0.3)" type="application/atom+xml" />
+<link rel="up" href="news" title="Up" />
+</head>
+
+<body>
+<div class="logo_pic">
+<img alt="Картинка на вестник" src="/img/news" title="Новини" />
+</div>
+
+<div id="header">
+<h1>Новини от Sotirov.net</h1>
+</div>
+
+<div id="navigation">
+<p class="navigation">
+[&nbsp;<a href="index">Начало</a>&nbsp;|
+&nbsp;<a href="#copyright">Авторски права</a>&nbsp;]<br />
+[&nbsp;<a href="news.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]<br />
+[&nbsp;<a href="nfeed?f=rss&amp;ver=0.91" type="application/rss+xml">RSS 0.91 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=rss&amp;ver=1.0" type="application/rdf+xml">RSS 1.0 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=rss&amp;ver=2.0" type="application/rss+xml">RSS 2.0 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=atom" type="application/atom+xml">Atom Feed</a>&nbsp;]
+</p>
+</div>
+
+<?php
+  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
+    if ( mysql_select_db("sotirov_net", $news_c) ) {
+      $query = "SELECT news_bg.id, news_bg.title, news_bg.body, news_bg.author, news_bg.posted,";
+      $query .= " news_bg.modified, users.name, users.first_name, users.email";
+      $query .= " FROM news_bg, users";
+      $query .= " WHERE news_bg.posted <> '0000-00-00 00:00:00' AND news_bg.author = users.id";
+      $query .= " ORDER BY news_bg.posted DESC";
+      $res = mysql_query($query, $news_c);
+      if ( mysql_num_rows($res) > 0 ) {
+        while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          print("<div id=\"newsid_".$item['id']."\" class=\"clear\">\n");
+          print("<h3>".$item['title']."</h3>\n");
+          $user_name = $item['first_name']." ".$item['name'];
+          print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
+          $posted = $item['posted'];
+          print(" на $posted&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          if ( strtotime($item['modified']) > strtotime($item['posted']) ) {
+            $modified = $item['modified'];
+            print(", променено на $modified&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          }
+          print("</p>\n");
+          print("<div class=\"body\">\n");
+          print($item['body']);
+          print("</div>\n");
+          print("</div>\n\n");
+        }
+      }
+      else
+        print("<p>Новините не са достъпни в момента.</p>\n");
+      mysql_free_result($res);
+    }
+    else
+      print("<p>Новините не са достъпни в момента.</p>\n");
+    mysql_close($news_c);
+  }
+  else
+    print("<p>Новините не са достъпни в момента.</p>\n");
+?>
+
+<div id="copyright">
+<hr />
+<p>Автор &copy; 2004-2006 <a href="mailto:gdsotirov@dir.bg">Георги Д. Сотиров</a><br />
+Всички права запазени</p>
+</div>
+
+<div id="conformance">
+<p class="align-center">
+<!-- Valid XHTML 1.0 -->
+&nbsp;<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Икона Валиден XHTML 1.0]" height="31" src="img/valid-xhtml" title="Валиден XHTML 1.0!" width="88" />
+</a>&nbsp;
+<!-- Valid CSS -->
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=gsotirov79.ddns.homelan.bg&amp;usermedium=all" hreflang="en">
+<img alt="[Икона Валиден CSS]" height="31" src="img/valid-css" title="Валиден CSS!" width="88" />
+</a>&nbsp;
+<!-- WAI WCAG Conformance -->
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
+<img alt="[Икона за съответствие с ниво двойно А, W3C-WAI Web Content Accessibility Guidelines 1.0]"
+height="31" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" />
+</a>&nbsp;
+<!-- WebXact -->
+<a href="http://webxact.watchfire.com/submit.aspx?SCANURL=http://gsotirov79.ddns.homelan.bg/index&amp;GL=wcag1-aa" hreflang="en">
+<img alt="[Проверка на ниво AA през WebXact]" height="31" src="/img/webxact" title="Проверка на ниво AA през WebXact" width="88" />
+</a>&nbsp;
+<!-- UTF-8 Encoded -->
+<a href="http://www.unicode.org/" hreflang="en">
+<img alt="[Икона Кодирано в UTF-8]" height="31" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
+</p>
+</div>
+
+<div id="powered_by">
+<p>&nbsp;<a href="http://www.kernel.org/" hreflang="en">
+<img alt="[Работи с моща на Linux]" height="31" src="img/linux_pb" title="Работи с моща на Linux" width="88" />
+</a>&nbsp;<a href="http://www.apache.org/" hreflang="en">
+<img alt="[Работи с моща на Apache]" height="31" src="img/apache_pb" title="Работи с моща на Apache" width="88" />
+</a>&nbsp;<a href="http://www.php.net/" hreflang="en">
+<img alt="[Работи с моща на PHP]" height="31" src="img/php_pb" title="Работи с моща на PHP" width="88" />
+</a>&nbsp;<a href="http://www.mysql.com/" hreflang="en">
+<img alt="[Работи с MySQL]" height="31" src="img/mysql_pb" title="Работи с MySQL" width="88" /></a>
+</p>
+</div>
+
+</body>
+
+</html>
+

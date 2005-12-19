@@ -1,0 +1,179 @@
+<?php
+  $I18N_LANG = 'bg';
+  include 'sysutil.php';
+  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Добре дошли в Sotirov-BG.Net</title>
+<meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
+<meta name="description" content="Sotirov.net - Домашният сървър на Георги Сотиров" />
+<meta name="keywords" content="sotirov.net, Георги Сотиров" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<link rel="icon" href="img/sotirov_net" />
+<link rel="shortcut icon" href="img/sotirov_net" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Стил по подразбиране" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
+<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=2.0" title="Новини от Sotirov.net (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=atom" title="Новини от Sotirov.net (Atom 0.3)" type="application/atom+xml" />
+<link rel="up" href="index" title="Горе" />
+</head>
+
+<body>
+<div id="header">
+<h1>Добре дошли в Sotirov-BG.Net</h1>
+</div>
+
+<div id="nosoftwarepatents">
+<p class="align-center">
+<a href="http://www.nosoftwarepatents.com/" lang="en">
+<b>Не на софтуерните патенти</b></a></p>
+</div>
+
+<div id="navigation">
+<p class="navigation">
+[&nbsp;<a href="#news">Новини</a>&nbsp;|&nbsp;<a
+href="#about">Относно</a>&nbsp;|&nbsp;<a
+href="#avail">Достъпност</a>&nbsp;|&nbsp;<a
+href="#content">Съдържание</a>&nbsp;|&nbsp;<a
+href="iss">Информация, Състояние, Статистики</a>&nbsp;|&nbsp;<a
+href="#copyright">Авторски права</a>&nbsp;]
+<br />
+[&nbsp;<a href="index.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]
+</p>
+</div>
+
+<div id="news">
+<h2>Новини</h2>
+<p>Заглавия на 10-те последни новини.</p>
+<p><?php
+  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
+    if ( mysql_select_db($db_db, $news_c) ) {
+      $query = "SELECT id, title, posted";
+      $query .= " FROM news_bg WHERE posted <> '0000-00-00 00:00:00'";
+      $query .= " ORDER BY posted DESC";
+      $query .= " LIMIT 10";
+      $res = mysql_query($query, $news_c);
+      if ( mysql_num_rows($res) > 0 ) {
+        while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          print("<b>".$news['posted']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time - Източно Европейско Време\">EET</abbr></b> ".$news['title']."&nbsp;[<a href=\"news#newsid_".$news['id']."\">Още...</a>]<br />\n");
+        }
+      }
+      else
+        print("Новините не са достъпни в момента.\n");
+      mysql_free_result($res);
+    }
+    else
+      print("Новините не са достъпни в момента.\n");
+    mysql_close($news_c);
+  }
+  else
+    print("Новините не са достъпни в момента.\n");
+?></p>
+<p><a href="news">Архив</a>&nbsp;|&nbsp;<a
+href="nfeed?f=rss&amp;ver=2.0"><img alt="RSS Икона" src="/img/rss_feed" title="RSS Feed" /></a>&nbsp;|&nbsp;<a
+href="nfeed?f=atom"><img alt="XML Икона" src="/img/xml_feed" title="Atom Feed" /></a>
+</p>
+</div>
+
+<div id="about">
+<h2>Относно</h2>
+<p class="text_p">Това е домашният сървър на <a href="mailto:Георги Сотиров &lt;gdsotirov@dir.bg&gt;">
+Георги Сотиров</a>. Тук можете да намерите най-актуалната и точна информация
+за мен, да разгледате и ползвате нещата които съм направил и като цяло да се
+запознаете с моите възможности. Моля, имайте в предвид, че цялото съдържание
+намиращо се на този сървър в момента е под <strong>постоянна
+разработка</strong>.</p>
+<p class="text_p">Всички станици на този сървър са издържани в публичните
+стандарти на <a href="http://www.w3.org/"><abbr
+title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr></a>
+и са създадени така, че да са възможно
+най-достъпни за едно по-добро и по-качествено Интернет изживяване.</p>
+</div>
+
+<div id="avail">
+<h2>Достъпност</h2>
+<p class="text_p">Моля, имайте в предвид, че този сървър е свързан към света
+чрез средна по скорост комутируема връзка и не винаги е достъпен, защото не
+разполага с непрекъсваемо захранване. Минималните скорости са както
+следва:</p>
+<ul class="inline">
+<li>за целия свят - 768 <abbr title="кило бита за секунда">Кбзс</abbr> (96 <abbr title="кило Байта за секунда">КБзс</abbr>)</li>
+<li>от България - 7,7 <abbr title="Мега бита за секунда">Мбзс</abbr> (960 <abbr title="кило Байта за секунда">КБзс</abbr>)</li>
+</ul>
+</div>
+
+<div id="content">
+<h2>Съдържание</h2>
+<h3>Стопанисвани страници</h3>
+<ul class="inline">
+<li>Георги Сотиров<br />
+<ul>
+<li><a href="~gsotirov/" hreflang="bg">Лични страници на Георги</a></li>
+<li><a href="ftp://gsotirov79.ddns.homelan.bg/pub/slackware/contrib/packages/">Пакети за Slackware</a></li>
+</ul></li>
+<li>Ивелина Белева-Сотирова
+<ul>
+<li><a href="~ibeleva/" hreflang="bg">Лични страници на Ивелина</a></li>
+<li><a href="~ibeleva/wedding/" hreflang="bg">Сватбен албум на сем. Сотирови</a></li>
+</ul></li></ul>
+
+<h3>Стопанисвани приложения</h3>
+<ul class="inline">
+<li><a href="apps/calc/mcalc/" hreflang="bg">Ипотечен калкулатор</a></li>
+<li><a href="apps/calc/icalc/" hreflang="bg">Лихвен калкулатор</a></li>
+</ul>
+</div>
+
+<div id="copyright">
+<hr />
+<p>Автор &copy; 2004-2006 <a href="mailto:Георги Сотиров &lt;gdsotirov@dir.bg&gt;">Георги
+Д. Сотиров</a><br />Всички права запазени</p>
+</div>
+
+<div id="conformance">
+<p class="align-center">
+<!-- Valid XHTML 1.0 -->
+&nbsp;<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Икона Валиден XHTML 1.0]" height="31" src="img/valid-xhtml" title="Валиден XHTML 1.0!" width="88" />
+</a>&nbsp;
+<!-- Valid CSS -->
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=gsotirov79.ddns.homelan.bg&amp;usermedium=all" hreflang="en">
+<img alt="[Икона Валиден CSS]" height="31" src="img/valid-css" title="Валиден CSS!" width="88" />
+</a>&nbsp;
+<!-- WAI WCAG Conformance -->
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
+<img alt="[Икона за съответствие с ниво двойно А, W3C-WAI Web Content Accessibility Guidelines 1.0]"
+height="31" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" />
+</a>&nbsp;
+<!-- WebXact -->
+<a href="http://webxact.watchfire.com/submit.aspx?SCANURL=http://gsotirov79.ddns.homelan.bg/index&amp;GL=wcag1-aa" hreflang="en">
+<img alt="[Проверка на ниво AA през WebXact]" height="31" src="/img/webxact" title="Проверка на ниво AA през WebXact" width="88" />
+</a>&nbsp;
+<!-- UTF-8 Encoded -->
+<a href="http://www.unicode.org/" hreflang="en">
+<img alt="[Икона Кодирано в UTF-8]" height="31" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
+</p>
+</div>
+
+<div id="powered_by">
+<p>&nbsp;<a href="http://www.kernel.org/" hreflang="en">
+<img alt="[Работи с моща на Linux]" height="31" src="img/linux_pb" title="Работи с моща на Linux" width="88" />
+</a>&nbsp;<a href="http://www.apache.org/" hreflang="en">
+<img alt="[Работи с моща на Apache]" height="31" src="img/apache_pb" title="Работи с моща на Apache" width="88" />
+</a>&nbsp;<a href="http://www.php.net/" hreflang="en">
+<img alt="[Работи с моща на PHP]" height="31" src="img/php_pb" title="Работи с моща на PHP" width="88" />
+</a>&nbsp;<a href="http://www.mysql.com/" hreflang="en">
+<img alt="[Работи с MySQL]" height="31" src="img/mysql_pb" title="Работи с MySQL" width="88" /></a>
+</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<?php
+  $I18N_LANG = 'en';
+  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Sotirov.Net - Новини</title>
+<meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
+<meta name="description" content="Sotirov.Net News Page" />
+<meta name="keywords" content="sotirov.net, Georgi Sotirov" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<link rel="icon" href="img/sotirov_net" />
+<link rel="shortcut icon" href="img/sotirov_net" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
+<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=0.91" title="Sotirov.net News (RSS 0.91)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=1.0" title="Sotirov.net News (RSS 1.0)" type="application/rdf+xml" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=2.0" title="Sotirov.net News (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=atom" title="Sotirov.net News (Atom 0.3)" type="application/atom+xml" />
+<link rel="up" href="news" title="Up" />
+</head>
+
+<body>
+<div class="logo_pic">
+<img alt="Newspaper picture" src="/img/news" title="News" />
+</div>
+
+<div id="header">
+<h1>Sotirov.net News</h1>
+</div>
+
+<div id="navigation">
+<p class="navigation">
+[&nbsp;<a href="index">Home</a>&nbsp;|
+&nbsp;<a href="#copyright">Copyright</a>&nbsp;]<br />
+[&nbsp;<a href="news.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]<br />
+[&nbsp;<a href="nfeed?f=rss&amp;ver=0.91" type="application/rss+xml">RSS 0.91 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=rss&amp;ver=1.0" type="application/rdf+xml">RSS 1.0 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=rss&amp;ver=2.0" type="application/rss+xml">RSS 2.0 Feed</a>&nbsp;|
+&nbsp;<a href="nfeed?f=atom" type="application/atom+xml">Atom Feed</a>&nbsp;]
+</p>
+</div>
+
+<?php
+  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
+    if ( mysql_select_db("sotirov_net", $news_c) ) {
+      $query = "SELECT news.id, news.title, news.body, news.author, news.posted,";
+      $query .= " news.modified, users.name, users.first_name, users.email";
+      $query .= " FROM news, users";
+      $query .= " WHERE news.posted <> '0000-00-00 00:00:00' AND news.author = users.id";
+      $query .= " ORDER BY news.posted DESC";
+      $res = mysql_query($query, $news_c);
+      if ( mysql_num_rows($res) > 0 ) {
+        while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+          print("<div id=\"newsid_".$item['id']."\" class=\"clear\">\n");
+          print("<h3>".$item['title']."</h3>\n");
+          $user_name = $item['first_name']." ".$item['name'];
+          print("<p class=\"italic\">Posted by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
+          $datetime = $item['posted'];
+          print(" at $datetime&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
+          if ( strtotime($item['modified']) > strtotime($item['posted']) ) {
+            $modified = $item['modified'];
+            print(", changed on $modified&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          }
+          print("</p>\n");
+          print("<div class=\"body\">\n");
+          print($item['body']);
+          print("</div>\n");
+          print("</div>\n\n");
+        if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
+        print("</div>\n");
+      else
+        print("<p>News currently not available.</p>\n");
+      mysql_free_result($res);
+      else
+    else
+      print("<p>News currently not available.</p>\n");
+    mysql_close($news_c);
+    }
+    mysql_free_result($res);
+  }
+  else
+?>
+<div id="copyright">
+
+<p>
+Copyright &copy; 2004-2006 <a href="mailto:gdsotirov@dir.bg">George D. Sotirov</a><br />
+<hr />
+<p>Copyright &copy; 2004-2006 <a href="mailto:gdsotirov@dir.bg">George D. Sotirov</a><br />
+All right reserved</p>
+</div>
+<p class="align-center">
+<map id="conformancebar">
+&nbsp;<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Valid XHTML 1.0 icon]" height="31" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" />
+</a>&nbsp;
+<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=gsotirov79.ddns.homelan.bg&amp;usermedium=all" hreflang="en">
+<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" />
+</a>&nbsp;
+<!-- Valid RSS 2.0 -->
+<a href="http://feedvalidator.org/check.cgi?url=http://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed?f=rss&amp;v=2.0"><img src="/img/valid-rss" alt="[Valid RSS]" title="Validate my RSS feed" /></a>&nbsp;
+<!-- WAI WCAG Conformance -->
+height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" />
+</a>&nbsp;
+<!-- WebXact -->
+<a href="http://webxact.watchfire.com/submit.aspx?SCANURL=http://gsotirov79.ddns.homelan.bg/index&amp;GL=wcag1-aa" hreflang="en">
+<img alt="[Verification of Level AA through WebXact]" height="31" src="/img/webxact" title="Verification of Level AA through WebXact" width="88" />
+</a>&nbsp;
+<img alt="[Level Double-A conformance icon, W3C-WAI Web Content Accessibility Guidelines 1.0]"
+height="31" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>&nbsp;
+<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" />
+</a>&nbsp;
+</p>
+<img alt="[Encoded in UTF-8]" height="31" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>&nbsp;
+</p></map>
+<div id="powered_by">
+<p>&nbsp;<a href="http://www.kernel.org/" hreflang="en">
+<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" />
+</a>&nbsp;<a href="http://www.apache.org/" hreflang="en">
+<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" />
+</a>&nbsp;<a href="http://www.php.net/" hreflang="en">
+<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" />
+</a>&nbsp;<a href="http://www.mysql.com/" hreflang="en">
+<img alt="[Works with MySQL]" height="31" src="img/mysql_pb" title="Works with MySQL" width="88" /></a>
+</p>
+<img alt="[Works with MySQL]" height="31" src="/img/mysql_pb" title="Works with MySQL" width="88" /></a>
+</p></map>
+</div>
+
+  mysql_close($news_c);
+?>
+</html>
+

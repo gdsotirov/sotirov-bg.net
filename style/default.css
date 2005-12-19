@@ -1,0 +1,205 @@
+/* Sotirov.net Default Screen and Print Styles
+ *
+ * Written by George D. Sotirov <gdsotirov@dir.bg>
+ * $Id: default.css,v 1.1 2005/12/19 18:47:12 gsotirov Exp $
+ * This stylesheet conforms to the CSS 2.1 Specification from W3 Organization.
+ * http://http://www.w3.org/TR/CSS21/
+ *
+ * Media: screen, print
+ */
+
+/* Screen media specific styles */
+@media screen {
+  acronym:hover, abbr:hover, acronym[title], abbr[title] {
+    cursor: help;
+  }
+
+  body {
+    color: #000;
+    background: #fff url(/img/back) repeat-x;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  div#server_himself,
+  div#server_info_status_stats {
+    float: left;
+  }
+
+  div#server_info_status_stats h2:first-child {
+    margin-top: 0;
+  }
+
+  div#server_info_status_stats h2 {
+    border-bottom: none;
+  }
+
+  div#conformance {
+    clear: left;
+  }
+
+  div#news table {
+    padding-left: 1em;
+  }
+
+  h1 {
+    padding-top: 1em;
+    padding-bottom: 3em;
+  }
+
+  h2 {
+    border-bottom: 1px solid #ddd;
+    padding-left: 0.3em;
+  }
+
+  h3 {
+    padding-left: 1em;
+  }
+}
+
+/* Print media specific styles */
+@media print {
+  h1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+  }
+
+  h2 {
+    border-bottom: 1px solid #000;
+  }
+
+  div#powered_by {
+    display: none;
+  }
+}
+
+/* Common styles */
+@media screen, print {
+  acronym, abbr {
+    font-style: normal;
+  }
+
+  acronym[title], abbr[title] {
+    border-bottom: thin dotted;
+  }
+
+  div#copyright, div#conformance, div#generated, div#powered_by {
+    text-align: center;
+  }
+
+  div#copyright, div#conformance {
+    font-size: small;
+  }
+
+  div#generated {
+    color: #ccc;
+    background-color: inherit;
+    font-size: xx-small;
+  }
+
+  div.body {
+    margin-left: 3em;
+  }
+
+  div.clear {
+    clear: both;
+  }
+
+  div.left {
+    float: left;
+  }
+
+  div.logo_pic {
+    left: 0.2em;
+    position: absolute;
+    top: 0.2em;
+  }
+
+  img {
+    border: none;
+  }
+
+  img#server_pic {
+    margin: 0em 1em 1em 1em;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  h2 {
+    padding-left: 0.3em;
+  }
+
+  p, pre {
+    padding-left: 1em;
+  }
+
+  p.text_p {
+    text-align: justify;
+    text-indent: 1em;
+  }
+  p.navigation {
+    text-align: center;
+  }
+
+  ul.inline {
+    margin-left: 3em;
+    padding-left: 1em;
+  }
+
+  ul {
+    margin-left: 1em;
+    padding-left: 1em;
+  }
+
+  ul, ol {
+    list-style: disc;
+  }
+
+  ul ul, ul ol, ol ul, ol ol {
+    list-style: circle;
+  }
+
+  ul ul ul, ul ul ol, ul ol ul,
+  ul ol ol, ol ul ul, ol ul ol,
+  ol ol ul, ol ol ol {
+    list-style: square;
+  }
+
+  /* Pseudo classes */
+  .align-right {
+    text-align: right;
+  }
+
+  .align-left {
+    text-align: left;
+  }
+
+  .align-center {
+    text-align: center;
+  }
+
+  .align-justify {
+    text-align: justify;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .new {
+    color: #f00;
+    background-color: inherit;
+    font-weight: bold;
+  }
+
+  .mono-font {
+    font-family: monospace;
+  }
+}
+

@@ -1,0 +1,103 @@
+/* Sotirov.net Default Speech Style
+ *
+ * Written by George D. Sotirov <gdsotirov@dir.bg>
+ * $Id: speech.css,v 1.1 2005/12/19 18:47:12 gsotirov Exp $
+ * This stylesheet conforms to the CSS 2.1 Specification from W3 Organization.
+ * http://http://www.w3.org/TR/CSS21/
+ * 
+ * Media: aural, speech
+ */
+
+/* Code in this stylesheet is partially based on the example code given in the
+ * CSS 2.1 Specification at http://http://www.w3.org/TR/CSS21/
+ */
+
+@media aural {
+  a:link {
+    voice-family: harry, male;
+  }
+
+  a:visited {
+    voice-family: betty, female;
+  }
+
+  a:active {
+    voice-family: betty, female;
+    pitch-range: 80;
+    pitch: x-high;
+  }
+
+  abbr {
+    speak: spell-out;
+  }
+
+  acronym {
+    speak: normal;
+  }
+
+  b {
+    pitch: medium;
+    pitch-range: 60;
+    stress: 90;
+    richness: 90;
+  }
+
+  dt {
+    stress: 80;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    voice-family: paul, male;
+    stress: 20;
+    richness: 90;
+  }
+
+  h1 {
+    pitch: x-low;
+    pitch-range: 90;
+  }
+
+  h2 {
+    pitch: x-low;
+    pitch-range: 80;
+  }
+
+  h3 {
+    pitch: low;
+    pitch-range: 70;
+  }
+
+  h4 {
+    pitch: medium;
+    pitch-range: 60;
+  }
+
+  h5 {
+    pitch: medium;
+    pitch-range: 50;
+  }
+
+  h6 {
+    pitch: medium;
+    pitch-range: 40;
+  }
+
+  i {
+    pitch: medium;
+    pitch-range: 60;
+    stress: 60;
+    richness: 50;
+  }
+
+  li, dt, dd {
+    pitch: medium;
+    richness: 60;
+  }
+
+  pre, code, tt {
+    pitch: medium;
+    pitch-range: 0;
+    stress: 0;
+    richness: 80;
+  }
+}

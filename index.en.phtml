@@ -1,0 +1,182 @@
+<?php
+  $I18N_LANG = 'en';
+  include 'sysutil.php';
+  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+  include '../news.php.inc';
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome to Sotirov-BG.Net</title>
+<meta name="author" content="George D. Sotirov, gdsotirov@dir.bg" />
+<meta name="description" content="Sotirov.Net - The home server of Georgi Sotirov" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.1 2005/12/19 18:47:12 gsotirov Exp $" />
+<link rel="icon" href="img/sotirov_net" />
+<link rel="shortcut icon" href="img/sotirov_net" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
+<link rel="alternate" href="nfeed?f=rss&amp;ver=2.0" title="Sotirov.net News (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="nfeed?f=atom" title="Sotirov.net News (Atom 0.3)" type="application/atom+xml" />
+<link rel="alternate" href="news/feed?f=atom" title="Sotirov.net News (Atom)" type="application/atom+xml" />
+<link rel="up" href="index" title="Up" />
+</head>
+
+<body>
+<div id="header">
+<h1>Welcome to Sotirov-BG.Net</h1>
+</div>
+
+<div id="nosoftwarepatents">
+<a href="http://www.nosoftwarepatents.com/"><b>No software patents</b></a></p>
+<a href="http://www.nosoftwarepatents.com/"><b>No software patents!</b></a></p>
+</div>
+
+<div id="navigation">
+<p class="navigation">
+[&nbsp;
+<a href="#news">News</a>&nbsp;|&nbsp;<a
+href="#about">About</a>&nbsp;|&nbsp;<a
+href="#avail">Availability</a>&nbsp;|&nbsp;<a
+href="#content">Content</a>&nbsp;|&nbsp;<a
+href="iss">Info, Status, Statistics</a>&nbsp;|&nbsp;<a
+href="#copyright">Copyright</a>&nbsp;]
+<br />
+[&nbsp;<a href="index.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]
+</p>
+</div>
+
+<div id="news">
+<h2>News</h2>
+<p>Last ten news headers.</p>
+  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
+    if ( mysql_select_db($db_db, $news_c) ) {
+    if ( mysql_select_db($news_db, $news_c) ) {
+      $query = "SELECT id, title, posted";
+      $query .= " FROM news WHERE posted <> '0000-00-00 00:00:00'";
+      $query .= " ORDER BY posted DESC";
+      $query .= " LIMIT 10";
+      $res = mysql_query($query, $news_c);
+      if ( mysql_num_rows($res) > 0 ) {
+          print("<b>".$news['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr></b> ".$news['title']."&nbsp;[<a href=\"news#newsid_".$news['id']."\">More...</a>]<br />\n");
+          print("<b>".$news['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr></b> ".$news['title']."&nbsp;[<a href=\"news?id=".$news['id']."\">More...</a>]<br />\n");
+        }
+      }
+      else
+        print("News currently not available.\n");
+      mysql_free_result($res);
+    }
+    else
+      print("News currently not available.\n");
+    mysql_close($news_c);
+  }
+  else
+    print("News currently not available.\n");
+?></p>
+<a href="news">Archive</a>&nbsp;|&nbsp;<a
+href="nfeed?f=rss&amp;ver=2.0"><img alt="RSS Icon" src="/img/rss_feed" title="RSS Feed" /></a>&nbsp;|&nbsp;<a
+href="nfeed?f=atom"><img alt="XML Icon" src="/img/xml_feed" title="Atom Feed" /></a>
+href="news/feed?f=rss&amp;v=2.0"><acronym title="Really Simple Syndication">RSS</acronym></a>
+</p>
+</div>
+
+<div id="about">
+<h2>About</h2>
+<p class="text_p">This is the home server of <a href="mailto:Georgi Sotirov &gt;gdsotirov@dir.bg&lt;">
+Georgi Sotirov</a>. Here you can find the most recent and actual information
+about me, to view and use the things that I made and in general to get familiar
+with my posibilities. Please, note that all of the content on this server is
+<p class="text_p">All pages on this server conform to the public standards of 
+<p class="text_p">All pages on this server conform to the public standards of
+<a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a>
+and are created thus to be as accessable as possible for a better and more
+quality Internet experience.</p>
+</div>
+
+<div id="avail">
+<h2>Availability</h2>
+<p class="text_p">Please, note that this server is connected to the world with
+with <abbr title="">UPS</abbr>. The minimum speeds are as
+with <abbr title="Uinterruptible Power Supply">UPS</abbr>. The minimal speeds are as
+follows:</p>
+<li>Worldwide - 768 <abbr title="kilo bits per second">Kbps</abbr> (96 <abbr title="kilo Bytes per second">KBps</abbr>)</li>
+<li>From Bulgaria - 7.7 <abbr title="Мega bits per second">Mbps</abbr> (960 <abbr title="kilo Bytes per second">KBps</abbr>)</li>
+<li>From Bulgaria - 12.5 <abbr title="Мega bits per second">Mbps</abbr> (1.6 <abbr title="Mega Bytes per second">МBps</abbr>)</li>
+</ul>
+</div>
+
+<div id="content">
+<h2>Content</h2>
+<h3>Hosted sites</h3>
+<ul class="inline">
+<li>George Sotirov<br />
+<ul>
+<li><a href="~gsotirov/">George's Personal Pages</a></li>
+<li><a href="ftp://gsotirov79.ddns.homelan.bg/pub/slackware/contrib/packages/">Slackware packages</a></li>
+</ul></li>
+<li>Ivelina Beleva-Sotirova<br />
+<ul>
+<li><a href="~ibeleva/">Ivelina's Personal Pages</a></li>
+<li><a href="~ibeleva/wedding/" hreflang="bg">Sotirov's Wedding Album</a></li>
+</ul></li></ul>
+
+<h3>Hosted applications</h3>
+<ul class="inline">
+<li><a href="apps/calc/mcalc/" hreflang="en">Morgage calculator</a></li>
+<li><a href="apps/calc/icalc/" hreflang="en">Interest calculator</a></li>
+</ul>
+</div>
+
+<div id="copyright">
+<hr />
+<p>Copyright &copy; 2004-2006 <a href="mailto:Georgi Sotirov &lt;gdsotirov@dir.bg&gt;">George
+D. Sotirov</a><br />All right reserved</p>
+</div>
+
+<p class="align-center">
+<p>
+&nbsp;<a href="http://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Valid XHTML 1.0 icon]" height="31" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" />
+</a>&nbsp;
+<img alt="[Valid XHTML 1.0 icon]" height="31" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>&nbsp;
+<!-- Valid CSS -->
+<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" />
+</a>&nbsp;
+<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" /></a>&nbsp;
+<!-- WAI WCAG Conformance -->
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance">
+height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" />
+</a>&nbsp;
+height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>&nbsp;
+<!-- WebXact -->
+<img alt="[Verification of Level AA through WebXact]" height="31" src="/img/webxact" title="Verification of Level AA through WebXact" width="88" />
+</a>&nbsp;
+<img alt="[Verification of Level AA through WebXact]" height="31" src="/img/webxact" title="Verification of Level AA through WebXact" width="88" /></a>&nbsp;
+<!-- UTF-8 Encoded -->
+<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" />
+</a>&nbsp;
+</p>
+</p></map>
+</div>
+<div id="powered_by">
+<p>&nbsp;<a href="http://www.kernel.org/" hreflang="en">
+<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" />
+</a>&nbsp;<a href="http://www.apache.org/" hreflang="en">
+<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" />
+</a>&nbsp;<a href="http://www.php.net/" hreflang="en">
+<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" />
+</a>&nbsp;<a href="http://www.mysql.com/" hreflang="en">
+<a href="http://www.mysql.com/" hreflang="en">
+</p>
+</p></map>
+</div>
+
+</body>
+
+</html>
+
