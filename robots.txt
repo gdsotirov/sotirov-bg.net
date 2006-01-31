@@ -1,7 +1,7 @@
 User-agent: *
-Disallow: /bugzilla
-Disallow: /cgi-bin
-Disallow: /cvsweb
-Disallow: /gallery
-Disallow: /errordocs
-Disallow: /stats
+Disallow: /bugzilla/
+Disallow: /cgi-bin/
+Disallow: /cvsweb/
+Disallow: /gallery/
+Disallow: /errordocs/
+Disallow: /stats/
