@@ -1,3 +1,6 @@
+# Robots Exclusions file for sotirov-bg.net
+# $Id: robots.txt,v 1.3 2006/01/31 20:01:52 gsotirov Exp $
+
 User-agent: *
 Disallow: /bugzilla/
 Disallow: /cgi-bin/
