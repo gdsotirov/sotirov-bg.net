@@ -1,6 +1,7 @@
 <?php
   /* System Utilities Script 0.2.1
    * Written by George D. Sotirov <gdsotirov@dir.bg>
+   * $Id: sysutil.php,v 1.2 2006/01/31 20:11:05 gsotirov Exp $
    */
   // Internationalization array
   $i18n_arr = array(
