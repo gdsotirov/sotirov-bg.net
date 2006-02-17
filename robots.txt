@@ -1,15 +1,15 @@
 # Robots Exclusions file for sotirov-bg.net
-# $Id: robots.txt,v 1.4 2006/01/31 20:11:33 gsotirov Exp $
+# $Id: robots.txt,v 1.5 2006/02/17 20:27:38 gsotirov Exp $
 
 User-agent: *
 Disallow: /apps/dt/
 Disallow: /apps/fetch/
+Disallow: /apps/shcmd/
 Disallow: /bugzilla/
 Disallow: /bwbar/
 Disallow: /cgi-bin/
 Disallow: /cvsweb/
 Disallow: /gallery/
 Disallow: /errordocs/
-Disallow: /shcmd/
 Disallow: /stats/
 Disallow: /webcam/
