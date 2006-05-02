@@ -1,7 +1,7 @@
 /* Sotirov.net Default Screen and Print Styles
  *
  * Written by George D. Sotirov <gdsotirov@dir.bg>
- * $Id: default.css,v 1.1 2005/12/19 18:47:12 gsotirov Exp $
+ * $Id: default.css,v 1.2 2006/05/02 19:30:14 gsotirov Exp $
  * This stylesheet conforms to the CSS 2.1 Specification from W3 Organization.
  * http://http://www.w3.org/TR/CSS21/
  *
@@ -68,7 +68,7 @@
     border-bottom: 1px solid #000;
   }
 
-  div#powered_by {
+  div#poweredby {
     display: none;
   }
 }
@@ -83,7 +83,7 @@
     border-bottom: thin dotted;
   }
 
-  div#copyright, div#conformance, div#generated, div#powered_by {
+  div#copyright, div#conformance, div#generated, div#poweredby {
     text-align: center;
   }
 
