@@ -13,7 +13,7 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.4 2006/05/02 19:40:52 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.5 2006/05/18 18:35:10 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
@@ -51,7 +51,7 @@
   if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
     if ( mysql_select_db("sotirov_net", $news_c) ) {
       $query = "SELECT news.id, news.title, news.body, news.author, news.posted,";
-      $query .= " news.modified, users.name, users.first_name, users.email";
+      $query .= " news.updated, users.name, users.first_name, users.email";
       $query .= " FROM news, users";
       $query .= " WHERE news.posted <> '0000-00-00 00:00:00' AND news.author = users.id";
       $query .= " ORDER BY news.posted DESC";
@@ -62,11 +62,9 @@
           print("<h3>".$item['title']."</h3>\n");
           $user_name = $item['first_name']." ".$item['name'];
           print("<p class=\"italic\">Posted by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
-          $datetime = $item['posted'];
-          print(" at $datetime&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
-          if ( strtotime($item['modified']) > strtotime($item['posted']) ) {
-            $modified = $item['modified'];
-            print(", changed on $modified&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          print(" at ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
+          if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
+            print(", changed on ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
           }
           print("</p>\n");
           print("<div class=\"body\">\n");

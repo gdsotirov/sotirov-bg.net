@@ -13,7 +13,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.4 2006/05/02 19:40:52 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.5 2006/05/18 18:35:10 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
@@ -51,7 +51,7 @@
   if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
     if ( mysql_select_db("sotirov_net", $news_c) ) {
       $query = "SELECT news_bg.id, news_bg.title, news_bg.body, news_bg.author, news_bg.posted,";
-      $query .= " news_bg.modified, users.name, users.first_name, users.email";
+      $query .= " news_bg.updated, users.name, users.first_name, users.email";
       $query .= " FROM news_bg, users";
       $query .= " WHERE news_bg.posted <> '0000-00-00 00:00:00' AND news_bg.author = users.id";
       $query .= " ORDER BY news_bg.posted DESC";
@@ -62,11 +62,9 @@
           print("<h3>".$item['title']."</h3>\n");
           $user_name = $item['first_name']." ".$item['name'];
           print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
-          $posted = $item['posted'];
-          print(" на $posted&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
-          if ( strtotime($item['modified']) > strtotime($item['posted']) ) {
-            $modified = $item['modified'];
-            print(", променено на $modified&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          print(" на ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+          if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
+            print(", променено на ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
           }
           print("</p>\n");
           print("<div class=\"body\">\n");
