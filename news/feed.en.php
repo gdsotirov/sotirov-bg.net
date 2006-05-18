@@ -3,8 +3,8 @@
   include("feedcreator.class.php");
 
   $rss = new UniversalFeedCreator();
-  $rss->title = "Sotirov.net Новини";
-  $rss->description = "Новини от Sotirov.net";
+  $rss->title = "Sotirov-BG.Net News";
+  $rss->description = "News from Sotirov-BG.Net";
   $rss->link = "http://gsotirov79.ddns.homelan.bg/news";
   $rss->syndicationURL = "http://gsotirov79.ddns.homelan.bg".$_SERVER['PHP_SELF'];
 
@@ -15,6 +15,7 @@
       $query .= " FROM news, users";
       $query .= " WHERE news.author = users.id";
       $query .= " ORDER BY news.posted DESC";
+      $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
         while ($data = mysql_fetch_object($res)) {

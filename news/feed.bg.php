@@ -15,6 +15,7 @@
       $query .= " FROM news_bg, users";
       $query .= " WHERE news_bg.author = users.id";
       $query .= " ORDER BY news_bg.posted DESC";
+      $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
         while ($data = mysql_fetch_object($res)) {
