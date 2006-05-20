@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.9 2006/05/20 23:34:20 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.10 2006/05/20 23:37:22 gsotirov Exp $
 #
 
 use strict;
@@ -126,12 +126,12 @@ elsif ( $format eq "rss" ) {
                 pubDate        => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
                 lastBuildDate  => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
                 generator      => "Perl $]",
-                managingEditor => $feed_editor_name." (".$feed_editor_email.")",
-                webMaster      => $feed_master_name." (".$feed_master_email.")",
+                managingEditor => $feed_editor_email." (".$feed_editor_name.")",
+                webMaster      => $feed_master_email." (".$feed_master_name.")",
                 dc => {
                   date         => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"),
-                  publisher    => $feed_editor_name." (".$feed_editor_email.")",
-                  creator      => $feed_master_name." (".$feed_master_email.")"
+                  publisher    => $feed_editor_email." (".$feed_editor_name.")",
+                  creator      => $feed_master_email." (".$feed_master_name.")"
                 },
                 syn => {
                   updatePeriod     => "daily",
