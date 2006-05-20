@@ -13,16 +13,17 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.5 2006/05/18 18:35:10 gsotirov Exp $" />
-<link rel="icon" href="img/sotirov_net" />
-<link rel="shortcut icon" href="img/sotirov_net" />
-<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
-<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
-<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
-<link rel="alternate" href="nfeed?f=rss&amp;ver=0.91" title="Sotirov.net News (RSS 0.91)" type="application/rss+xml" />
-<link rel="alternate" href="nfeed?f=rss&amp;ver=1.0" title="Sotirov.net News (RSS 1.0)" type="application/rdf+xml" />
-<link rel="alternate" href="nfeed?f=rss&amp;ver=2.0" title="Sotirov.net News (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="nfeed?f=atom" title="Sotirov.net News (Atom 0.3)" type="application/atom+xml" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.6 2006/05/20 21:28:12 gsotirov Exp $" />
+<link rel="icon" href="/img/sotirov_net" />
+<link rel="shortcut icon" href="/img/sotirov_net" />
+<link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="/style/speech.css" media="aural" type="text/css" />
+<link rel="stylesheet" href="/style/tty.css" media="tty" type="text/css" />
+<link rel="alternate" href="feed?f=rss&amp;ver=0.9" title="Sotirov.net News (RSS 0.9)" type="application/rdf+xml" />
+<link rel="alternate" href="feed?f=rss&amp;ver=0.91" title="Sotirov.net News (RSS 0.91)" type="application/rss+xml" />
+<link rel="alternate" href="feed?f=rss&amp;ver=1.0" title="Sotirov.net News (RSS 1.0)" type="application/rdf+xml" />
+<link rel="alternate" href="feed?f=rss&amp;ver=2.0" title="Sotirov.net News (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="feed?f=atom" title="Sotirov.net News (Atom 0.3)" type="application/atom+xml" />
 <link rel="up" href="news" title="Up" />
 </head>
 
@@ -39,11 +40,12 @@
 <p class="navigation">
 [&nbsp;<a href="index">Home</a>&nbsp;|
 &nbsp;<a href="#copyright">Copyright</a>&nbsp;]<br />
-[&nbsp;<a href="news.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]<br />
-[&nbsp;<a href="nfeed?f=rss&amp;ver=0.91" type="application/rss+xml">RSS 0.91 Feed</a>&nbsp;|
-&nbsp;<a href="nfeed?f=rss&amp;ver=1.0" type="application/rdf+xml">RSS 1.0 Feed</a>&nbsp;|
-&nbsp;<a href="nfeed?f=rss&amp;ver=2.0" type="application/rss+xml">RSS 2.0 Feed</a>&nbsp;|
-&nbsp;<a href="nfeed?f=atom" type="application/atom+xml">Atom Feed</a>&nbsp;]
+[&nbsp;<a href="index" hreflang="bg" lang="bg">Български</a>&nbsp;]<br />
+[&nbsp;<a href="feed?f=rss&amp;ver=0.9" type="application/rdf+xml">RSS 0.9 Feed</a>&nbsp;|
+&nbsp;<a href="feed?f=rss&amp;ver=0.91" type="application/rss+xml">RSS 0.91 Feed</a>&nbsp;|
+&nbsp;<a href="feed?f=rss&amp;ver=1.0" type="application/rdf+xml">RSS 1.0 Feed</a>&nbsp;|
+&nbsp;<a href="feed?f=rss&amp;ver=2.0" type="application/rss+xml">RSS 2.0 Feed</a>&nbsp;|
+&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Feed</a>&nbsp;]
 </p>
 </div>
 
@@ -97,33 +99,33 @@ All right reserved</p>
 <div id="conformance">
 <map id="conformancebar">
 <p>
-<img alt="[Valid XHTML 1.0 icon]" height="31" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>&nbsp;
+<img alt="[Valid XHTML 1.0 icon]" height="31" src="/img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>&nbsp;
 <a href="http://validator.w3.org/check?uri=referer" hreflang="en">
 <a href="http://jigsaw.w3.org/css-validator/validator?uri=gsotirov79.ddns.homelan.bg&amp;usermedium=all" hreflang="en">
-<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" /></a>&nbsp;
+<img alt="[Valid CSS icon]" height="31" src="/img/valid-css" title="Valid CSS!" width="88" /></a>&nbsp;
 <!-- Valid RSS 2.0 -->
 <a href="http://feedvalidator.org/check.cgi?url=http://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed?f=rss&amp;v=2.0"><img src="/img/valid-rss" alt="[Valid RSS]" title="Validate my RSS feed" /></a>&nbsp;
 <!-- WAI WCAG Conformance -->
-height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>&nbsp;
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance">
 <!-- WebXact -->
 <a href="http://webxact.watchfire.com/submit.aspx?SCANURL=http://gsotirov79.ddns.homelan.bg/index&amp;GL=wcag1-aa" hreflang="en">
 <img alt="[Verification of Level AA through WebXact]" height="31" src="/img/webxact" title="Verification of Level AA through WebXact" width="88" /></a>&nbsp;
 <img alt="[Level Double-A conformance icon, W3C-WAI Web Content Accessibility Guidelines 1.0]"
 height="31" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>&nbsp;
-<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>&nbsp;
+<img alt="[Encoded in UTF-8 icon]" height="31" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>&nbsp;
 <a href="http://www.unicode.org/" hreflang="en">
 <img alt="[Encoded in UTF-8]" height="31" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>&nbsp;
 </p></map>
 </div>
 
 <div id="poweredby">
-<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" /></a>&nbsp;
+<map id="poweredbybar">
 <p><a href="http://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" /></a>&nbsp;
+<img alt="[Powered by Linux]" height="31" src="/img/linux_pb" title="Powered by Linux" width="88" /></a>&nbsp;
 <a href="http://www.apache.org/" hreflang="en">
-<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" /></a>&nbsp;
+<img alt="[Powered by Apache]" height="31" src="/img/apache_pb" title="Powered by Apache" width="88" /></a>&nbsp;
 <a href="http://www.php.net/" hreflang="en">
-<img alt="[Works with MySQL]" height="31" src="img/mysql_pb" title="Works with MySQL" width="88" /></a>
+<img alt="[Powered by PHP]" height="31" src="/img/php_pb" title="Powered by PHP" width="88" /></a>&nbsp;
 <a href="http://www.mysql.com/" hreflang="en">
 <img alt="[Works with MySQL]" height="31" src="/img/mysql_pb" title="Works with MySQL" width="88" /></a>
 </p></map>
