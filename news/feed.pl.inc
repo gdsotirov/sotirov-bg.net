@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.4 2006/05/20 22:05:44 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.5 2006/05/20 22:08:24 gsotirov Exp $
 #
 
 use strict;
@@ -48,6 +48,8 @@ sub fetch_data {
 
   return @res;
 }
+
+my $lang = Date::Language->new('English');
 
 #
 # Generate Atom feeds
@@ -96,7 +98,6 @@ elsif ( $format eq "rss" ) {
 
   my ($row_count, $res) = fetch_data;
 
-  my $lang = Date::Language->new('English');
   my $rss = new XML::RSS (version => $version, encoding => 'utf-8');
 
   # Build the chanel
