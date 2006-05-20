@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.10 2006/05/20 23:37:22 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.11 2006/05/20 23:42:56 gsotirov Exp $
 #
 
 use strict;
@@ -150,11 +150,11 @@ elsif ( $format eq "rss" ) {
   for ( my $i = 0; $i < $row_count; ++$i ) {
     my $title = $res->[$i]->{'title'};
     # Strips the html tags for this verion
-    if ( $version eq "0.9" ) {
+    if ( $version eq "0.9" or $version eq "0.91" ) {
       $title =~ s/<[^<]+>//g;
     }
     $rss->add_item(title       => $title,
-                   link        => "http://gsotirov79.ddns.homelan.bg/news#newsid_".$res->[$i]->{'id'},
+                   link        => $feed_link."#newsid_".$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
                    description => $res->[$i]->{'body'},
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}.")",
