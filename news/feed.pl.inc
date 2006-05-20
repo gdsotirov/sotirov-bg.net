@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.7 2006/05/20 22:40:34 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.8 2006/05/20 23:22:46 gsotirov Exp $
 #
 
 use strict;
@@ -81,6 +81,7 @@ if ( $format eq "atom" ) {
   for ( my $i = 0; $i < $row_count; ++$i ) {
     my $entry = XML::Atom::Syndication::Entry->new;
     my $title = XML::Atom::Syndication::Text->new(Name => 'title');
+    $title->type("html");
     $title->body($res->[$i]->{'title'});
     $entry->title($title);
     my $link = XML::Atom::Syndication::Link->new;
@@ -147,7 +148,12 @@ elsif ( $format eq "rss" ) {
 
   # Build entires
   for ( my $i = 0; $i < $row_count; ++$i ) {
-    $rss->add_item(title       => $res->[$i]->{'title'},
+    my $title = $res->[$i]->{'title'};
+    if ( $version eq "0.9" ) {
+      $title =~ s/<[^<]+>//g;
+    }
+    $rss->add_item(title       => $title,
+                   link        => "http://gsotirov79.ddns.homelan.bg/news#newsid_".$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
                    description => $res->[$i]->{'body'},
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}.")",
