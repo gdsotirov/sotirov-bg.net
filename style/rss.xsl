@@ -78,7 +78,7 @@ You are looking at an RSS feed.  It has been rendered as HTML using an XSL style
 To see the underlying XML tags please select the "View Source" command in your browser.
 </i>
 </p>
-<xsl:attribute name="style">color: #909595;</xsl:attribute>
+<HR/>
 <table>
 <xsl:attribute name="border">0</xsl:attribute>
 
