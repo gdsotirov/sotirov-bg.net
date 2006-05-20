@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.5 2006/05/20 22:08:24 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.6 2006/05/20 22:35:47 gsotirov Exp $
 #
 
 use strict;
@@ -13,6 +13,7 @@ use Date::Format;
 use XML::Twig;
 use XML::RSS;
 use XML::Atom::Syndication::Feed;
+use XML::Atom::Syndication::Link;
 use XML::Atom::Syndication::Entry;
 use XML::Atom::Syndication::Text;
 use XML::Atom::Syndication::Content;
@@ -59,9 +60,18 @@ if ( $format eq "atom" ) {
 
   my $atom = XML::Atom::Syndication::Feed->new;
   $atom->title($feed_title);
-  $atom->link($feed_link);
+  my $link = XML::Atom::Syndication::Link->new;
+  $link->href($feed_link);
+  $link->rel("alternate");
+  $link->type("text/html");
+  $atom->link($link);
+  #my $slf = XML::Atom::Syndication::Link->new;
+  #$slf->href($feed_self."?f=".$format);
+  #$slf->rel("self");
+  #$slf->type("application/atom+xml");
+  #$atom->elem($slf);
   $atom->id;
-  $atom->updated ($lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"));
+  $atom->updated ($lang->time2str("%Y-%m-%ST%TZ", str2time($res->[0]->{'updated'}), "GMT"));
   my $author = XML::Atom::Syndication::Person->new(Name => 'author');
   $author->name($feed_author_name);
   $author->uri($feed_author_uri);
@@ -73,13 +83,19 @@ if ( $format eq "atom" ) {
     my $title = XML::Atom::Syndication::Text->new(Name => 'title');
     $title->body($res->[$i]->{'title'});
     $entry->title($title);
-    $entry->link($feed_entry_base.$res->[$i]->{'id'});
+    my $link = XML::Atom::Syndication::Link->new;
+    $link->href($feed_entry_base.$res->[$i]->{'id'});
+    $link->rel("alternate");
+    $link->type("text/html");
+    $entry->link($link);
     my $author = XML::Atom::Syndication::Person->new(Name => 'author');
     $author->name($res->[$i]->{'first_name'}." ".$res->[$i]->{'name'});
     $author->email($res->[$i]->{'email'});
     $entry->author($author);
-    $entry->content($res->[$i]->{'body'});
-    $entry->updated($lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'updated'}), "GMT"));
+    my $content = XML::Atom::Syndication::Content->new($res->[$i]->{'body'});
+    $content->type("text/html");
+    $entry->content($content);
+    $entry->updated($lang->time2str("%Y-%m-%ST%TZ", str2time($res->[$i]->{'updated'}), "GMT"));
     $atom->add_entry($entry);
   }
 
