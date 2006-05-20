@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.1 2006/05/20 18:02:41 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.2 2006/05/20 18:53:58 gsotirov Exp $
 #
 
 use strict;
@@ -146,8 +146,10 @@ elsif ( $format eq "rss" ) {
   $twig->set_pretty_print('indented');
   $twig->parse($rss->as_string);
   if ( $version eq "0.91" or $version eq "2.0" ) {
-  $twig->add_stylesheet(xsl => "/style/rss.xsl");
-  $twig->add_stylesheet(css => "/style/rss.css");
+    $twig->add_stylesheet(xsl => "/style/rss.".$feed_lang_id.".xsl");
+    $twig->add_stylesheet(xsl => "/style/rss.xsl");
+  }
+  print $twig->sprint;
 }
 else {
   print $q->header(-location => '/news');
