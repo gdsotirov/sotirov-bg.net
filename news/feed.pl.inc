@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.3 2006/05/20 19:24:44 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.4 2006/05/20 22:05:44 gsotirov Exp $
 #
 
 use strict;
@@ -59,6 +59,7 @@ if ( $format eq "atom" ) {
   $atom->title($feed_title);
   $atom->link($feed_link);
   $atom->id;
+  $atom->updated ($lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"));
   my $author = XML::Atom::Syndication::Person->new(Name => 'author');
   $author->name($feed_author_name);
   $author->uri($feed_author_uri);
@@ -76,7 +77,7 @@ if ( $format eq "atom" ) {
     $author->email($res->[$i]->{'email'});
     $entry->author($author);
     $entry->content($res->[$i]->{'body'});
-    $entry->updated($res->[$i]->{'updated'});
+    $entry->updated($lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'updated'}), "GMT"));
     $atom->add_entry($entry);
   }
 
@@ -110,12 +111,12 @@ elsif ( $format eq "rss" ) {
                 managingEditor => $feed_editor_email." (".$feed_editor_name.")",
                 webMaster      => $feed_master_email." (".$feed_master_name.")",
                 dc => {
-                  date         => $lang->time2str("%Y-%m-%ST%T %z", str2time($res->[0]->{'updated'}), "GMT"),
+                  date         => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"),
                   publisher    => $feed_editor_name." (".$feed_editor_email.")",
                   creator      => $feed_master_name." (".$feed_master_email.")"
                 },
                 syn => {
-                  updatePeriod     => "dayly",
+                  updatePeriod     => "daily",
                   updateFrequency  => "1",
                   updateBase       => "2004-12-01T00:00+00:00"
                 });
@@ -131,12 +132,13 @@ elsif ( $format eq "rss" ) {
   for ( my $i = 0; $i < $row_count; ++$i ) {
     $rss->add_item(title       => $res->[$i]->{'title'},
                    content     => "application/xhtml+xml",
+                   description => $res->[$i]->{'body'},
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
                    dc => {
                      format   => "text/html",
                      date     => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'posted'}), "GMT"),
-                     date     => $lang->time2str("%Y-%m-%ST%T %z", str2time($res->[$i]->{'posted'}), "GMT"),
+                     source   => $feed_link,
                      creator  => $res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}." (".$res->[$i]->{'email'}.")"
                    });
   }
