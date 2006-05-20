@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.6 2006/05/20 22:35:47 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.7 2006/05/20 22:40:34 gsotirov Exp $
 #
 
 use strict;
@@ -61,9 +61,9 @@ if ( $format eq "atom" ) {
   my $atom = XML::Atom::Syndication::Feed->new;
   $atom->title($feed_title);
   my $link = XML::Atom::Syndication::Link->new;
-  $link->href($feed_link);
   $link->rel("alternate");
   $link->type("text/html");
+  $link->href($feed_link);
   $atom->link($link);
   #my $slf = XML::Atom::Syndication::Link->new;
   #$slf->href($feed_self."?f=".$format);
@@ -93,7 +93,7 @@ if ( $format eq "atom" ) {
     $author->email($res->[$i]->{'email'});
     $entry->author($author);
     my $content = XML::Atom::Syndication::Content->new($res->[$i]->{'body'});
-    $content->type("text/html");
+    $content->type("html");
     $entry->content($content);
     $entry->updated($lang->time2str("%Y-%m-%ST%TZ", str2time($res->[$i]->{'updated'}), "GMT"));
     $atom->add_entry($entry);
