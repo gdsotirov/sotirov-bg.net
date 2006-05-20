@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.8 2006/05/20 23:22:46 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.9 2006/05/20 23:34:20 gsotirov Exp $
 #
 
 use strict;
@@ -126,8 +126,8 @@ elsif ( $format eq "rss" ) {
                 pubDate        => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
                 lastBuildDate  => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
                 generator      => "Perl $]",
-                managingEditor => $feed_editor_email." (".$feed_editor_name.")",
-                webMaster      => $feed_master_email." (".$feed_master_name.")",
+                managingEditor => $feed_editor_name." (".$feed_editor_email.")",
+                webMaster      => $feed_master_name." (".$feed_master_email.")",
                 dc => {
                   date         => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"),
                   publisher    => $feed_editor_name." (".$feed_editor_email.")",
@@ -141,7 +141,7 @@ elsif ( $format eq "rss" ) {
   $rss->image(
     title  => "Sotirov-BG.Net",
     url    => "http://sotirov-bg.net/img/sotirov_net",
-    link   => "http://sotirov-bg.net/",
+    link   => $feed_link,
     dc => {
       creator  => "Georgi D. Sotirov <gdsotirov\@dir.bg>",
     });
@@ -149,6 +149,7 @@ elsif ( $format eq "rss" ) {
   # Build entires
   for ( my $i = 0; $i < $row_count; ++$i ) {
     my $title = $res->[$i]->{'title'};
+    # Strips the html tags for this verion
     if ( $version eq "0.9" ) {
       $title =~ s/<[^<]+>//g;
     }
