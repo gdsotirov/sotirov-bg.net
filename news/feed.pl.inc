@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.16 2006/05/21 14:04:54 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.17 2006/05/21 14:24:04 gsotirov Exp $
 #
 
 use strict;
@@ -71,7 +71,7 @@ if ( $format eq "atom" ) {
   #$slf->type("application/atom+xml");
   #$atom->elem($slf);
   $atom->id;
-  $atom->updated ($lang->time2str("%Y-%m-%ST%TZ", str2time($res->[0]->{'updated'}), "GMT"));
+  $atom->updated ($lang->time2str("%Y-%m-%dT%TZ", str2time($res->[0]->{'updated'}), "GMT"));
   my $author = XML::Atom::Syndication::Person->new(Name => 'author');
   $author->name($feed_author_name);
   $author->uri($feed_author_uri);
@@ -96,7 +96,7 @@ if ( $format eq "atom" ) {
     my $content = XML::Atom::Syndication::Content->new($res->[$i]->{'body'});
     $content->type("html");
     $entry->content($content);
-    $entry->updated($lang->time2str("%Y-%m-%ST%TZ", str2time($res->[$i]->{'updated'}), "GMT"));
+    $entry->updated($lang->time2str("%Y-%m-%dT%TZ", str2time($res->[$i]->{'updated'}), "GMT"));
     $atom->add_entry($entry);
   }
 
@@ -121,7 +121,7 @@ elsif ( $format eq "rss" ) {
   my $rss = new XML::RSS (version => $version, encoding => 'utf-8');
 
   # Build the chanel
-  my $dc_date = $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT");
+  my $dc_date = time2str("%Y-%m-%dT%T%z", str2time($res->[0]->{'updated'}), "GMT");
   # Format the time zone, so to be valid W3C Date and Time foramt
   $dc_date =~ s/([+-])([0-9]{2})([0-9]{2})/$1$2:$3/;
   $rss->channel(title          => $feed_title,
@@ -159,7 +159,7 @@ elsif ( $format eq "rss" ) {
     if ( $version eq "0.9" or $version eq "0.91" ) {
       $title =~ s/<[^<]+>//g;
     }
-    my $dc_date = $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'posted'}), "GMT");
+    my $dc_date = time2str("%Y-%m-%dT%T%z", str2time($res->[$i]->{'posted'}), "GMT");
     # Format the time zone, so to be valid W3C Date and Time foramt
     $dc_date =~ s/([+-])([0-9]{2})([0-9]{2})/$1$2:$3/;
     $rss->add_item(title       => $title,
