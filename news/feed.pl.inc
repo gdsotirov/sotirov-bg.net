@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.11 2006/05/20 23:42:56 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.12 2006/05/21 09:49:53 gsotirov Exp $
 #
 
 use strict;
@@ -105,7 +105,9 @@ if ( $format eq "atom" ) {
   $twig->parse($atom->as_xml);
   $twig->add_stylesheet(css => "/style/atom.css");
   $twig->set_pretty_print('indented');
+  use bytes;
   print $twig->sprint;
+  no bytes;
 }
 #
 # Generate RSS 0.9, 0.91, 1.0 and 2.0 feeds
@@ -175,7 +177,9 @@ elsif ( $format eq "rss" ) {
     $twig->add_stylesheet(xsl => "/style/rss.".$feed_lang_id.".xsl");
     $twig->add_stylesheet(css => "/style/rss.css");
   }
+  use bytes;
   print $twig->sprint;
+  no bytes;
 }
 else {
   print $q->header(-location => '/news');
