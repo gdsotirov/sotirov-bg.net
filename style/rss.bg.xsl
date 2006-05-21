@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- Written by Georgi D. Sotirov <gdsotirov@dir.bg> -->
-<!-- $Id: rss.bg.xsl,v 1.3 2006/05/21 10:16:14 gsotirov Exp $ -->
+<!-- $Id: rss.bg.xsl,v 1.4 2006/05/21 10:45:41 gsotirov Exp $ -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="html" />
@@ -11,25 +11,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title><xsl:value-of select="/rss/channel/title" /></title>
 <script type="text/javascript"><![CDATA[
-function sr(s, f, r) {
-  var ret = s;
-  var start = ret.indexOf(f);
-  while ( start >= 0 ) {
-    ret = ret.substring(0, start) + r + ret.substring(start + f.length, ret.length);
-    start = ret.indexOf(f, start + r.length);
-  }
-  return ret;
-}
-
 function trans() {
   var i, desc, text;
   for( i = 1; i; i++) {
+    titl = document.getElementById("t_" + i);
     desc = document.getElementById("d_" + i);
-    if ( desc == null ) break;
-    text = unescape(desc.innerHTML);
-    text = sr(text, "&gt;", ">");
-    text = sr(text, "&lt;", "<");
-    desc.innerHTML = text;
+    if ( titl != null ) {
+      text = unescape(titl.innerHTML);
+      text = text.replace(/&gt;/gi, ">");
+      text = text.replace(/&lt;/gi, "<");
+      text = text.replace(/<[^<]+>/g, "");
+      titl.innerHTML = text;
+    }
+    else break;
+    if ( desc != null ) {
+      text = unescape(desc.innerHTML);
+      text = text.replace(/&gt;/gi, ">");
+      text = text.replace(/&lt;/gi, "<");
+      desc.innerHTML = text;
+    }
+    else break;
   }
 }]]>
 </script>
@@ -94,6 +95,7 @@ title="Extensible Markup Language">XML</abbr> код, моля изберете 
     </xsl:otherwise>
   </xsl:choose>
   <h3>Заглавие: <a><xsl:attribute name="href"><xsl:value-of select="link" /></xsl:attribute>
+  <xsl:attribute name="id">t_<xsl:value-of select="position()" /></xsl:attribute>
   <xsl:value-of select="title" /></a></h3>
   <p>
   <xsl:attribute name="style">font-weight: small; font-style: italic;</xsl:attribute>
