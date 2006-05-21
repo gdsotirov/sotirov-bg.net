@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.15 2006/05/21 12:08:21 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.16 2006/05/21 14:04:54 gsotirov Exp $
 #
 
 use strict;
@@ -121,6 +121,9 @@ elsif ( $format eq "rss" ) {
   my $rss = new XML::RSS (version => $version, encoding => 'utf-8');
 
   # Build the chanel
+  my $dc_date = $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT");
+  # Format the time zone, so to be valid W3C Date and Time foramt
+  $dc_date =~ s/([+-])([0-9]{2})([0-9]{2})/$1$2:$3/;
   $rss->channel(title          => $feed_title,
                 link           => $feed_link,
                 language       => $feed_lang_id,
@@ -132,7 +135,7 @@ elsif ( $format eq "rss" ) {
                 managingEditor => $feed_editor_email." (".$feed_editor_name.")",
                 webMaster      => $feed_master_email." (".$feed_master_name.")",
                 dc => {
-                  date         => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[0]->{'updated'}), "GMT"),
+                  date         => $dc_date,
                   publisher    => $feed_editor_email." (".$feed_editor_name.")",
                   creator      => $feed_master_email." (".$feed_master_name.")"
                 },
@@ -152,19 +155,23 @@ elsif ( $format eq "rss" ) {
   # Build entires
   for ( my $i = 0; $i < $row_count; ++$i ) {
     my $title = $res->[$i]->{'title'};
-    # Strips the html tags for this verion
+    # Strips the html tags for this version
     if ( $version eq "0.9" or $version eq "0.91" ) {
       $title =~ s/<[^<]+>//g;
     }
+    my $dc_date = $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'posted'}), "GMT");
+    # Format the time zone, so to be valid W3C Date and Time foramt
+    $dc_date =~ s/([+-])([0-9]{2})([0-9]{2})/$1$2:$3/;
     $rss->add_item(title       => $title,
                    link        => $feed_link."#newsid_".$res->[$i]->{'id'},
+                   permaLink   => $feed_link."#newsid_".$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
                    description => $res->[$i]->{'body'},
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
                    dc => {
                      format   => "text/html",
-                     date     => $lang->time2str("%Y-%m-%ST%T%z", str2time($res->[$i]->{'posted'}), "GMT"),
+                     date     => $dc_date,
                      source   => $feed_link,
                      creator  => $res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}." (".$res->[$i]->{'email'}.")"
                    });
