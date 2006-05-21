@@ -1,0 +1,32 @@
+/* News styles
+ * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+ * $Id: news.css,v 1.1 2006/05/21 20:11:25 gsotirov Exp $
+ */
+
+@media screen {
+  map#nav_gen li {
+    display: inline;
+  }
+
+  div#navigation ul {
+    list-style-image: none;
+    list-style-type: none;
+    margin-left: 0.3em;
+  }
+
+  div#sidebar {
+    float: right;
+    width: 12em;
+  }
+
+  div#sidebar map {
+    border: 2px solid #aaa;
+    margin-bottom: 1em;
+  }
+
+  div#sidebar h2 {
+    background-color: #ddd;
+    border-bottom: 2px solid #aaa;
+    margin-top: 0;
+  }
+}

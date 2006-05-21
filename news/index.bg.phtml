@@ -9,14 +9,15 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Sotirov.Net - News</title>
+<title>Sotirov-BG.Net - Новини</title>
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
-<meta name="description" content="Новинарска страница на Sotirov.Net" />
+<meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.10 2006/05/21 16:13:36 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.11 2006/05/21 20:11:25 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
-<link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default style" type="text/css" />
+<link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
+<link rel="stylesheet" href="news.css" media="screen, print" title="Подразбрано" type="text/css" />
 <link rel="stylesheet" href="/style/speech.css" media="aural" type="text/css" />
 <link rel="stylesheet" href="/style/tty.css" media="tty" type="text/css" />
 <link rel="alternate" type="text/html" href="index.en.phtml" hreflang="en" lang="en" title="Sotirov-BG.Net News" />
@@ -34,34 +35,53 @@
 </div>
 
 <div id="header">
-<h1>Новини от Sotirov.net</h1>
+<h1>Новини от Sotirov-BG.Net</h1>
 </div>
 
 <div id="navigation">
-<p class="navigation">
-[&nbsp;<a href="../">Начало</a>&nbsp;|
-&nbsp;<a href="#copyright">Авторски права</a>&nbsp;]<br />
-[&nbsp;<a href="index.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]<br />
-[&nbsp;<a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Feed</a>&nbsp;|
-&nbsp;<a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Feed</a>&nbsp;|
-&nbsp;<a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a>&nbsp;|
-&nbsp;<a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a>&nbsp;|
-&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Feed</a>&nbsp;]
-</p>
+<map id="nav_gen">
+<ul>
+<li><a href="../">Начало</a></li>
+<li><a href="#copyright">Авторски права</a></li>
+</ul></map>
+<div id="sidebar">
+<map id="nav_lang">
+<h2>Език</h2>
+<ul>
+<li><a href="index.en.phtml" hreflang="en" lang="en">English</a></li>
+</ul></map>
+<map id="nav_alt">
+<h2>Обединяване</h2>
+<ul>
+<li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Feed</a></li>
+<li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Feed</a></li>
+<li><a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
+<li><a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
+<li><a href="feed?f=atom" type="application/atom+xml">Atom Feed</a></li>
+</ul></map>
+</div>
 </div>
 
+<div id="content">
 <?php
+  $news_id = $_REQUEST['id'];
   if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
     if ( mysql_select_db("sotirov_net", $news_c) ) {
-      $query = "SELECT news_bg.id, news_bg.title, news_bg.body, news_bg.author, news_bg.posted,";
-      $query .= " news_bg.updated, users.name, users.first_name, users.email";
-      $query .= " FROM news_bg, users";
-      $query .= " WHERE news_bg.posted <> '0000-00-00 00:00:00' AND news_bg.author = users.id";
-      $query .= " ORDER BY news_bg.posted DESC";
+      $query = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted,";
+      $query .= " nws.updated, usr.name, usr.first_name, usr.email";
+      $query .= " FROM news_bg AS nws, users AS usr";
+      if ( isset($news_id) ) {
+        $query .= " WHERE nws.id = $news_id AND nws.posted <> '0000-00-00 00:00:00'";
+        $query .= " AND nws.author = usr.id";
+      }
+      else {
+        $query .= " WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id";
+        $query .= " ORDER BY nws.posted DESC";
+      }
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
         while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          print("<div id=\"newsid_".$item['id']."\" class=\"clear\">\n");
+          print("<div id=\"newsid_".$item['id']."\">\n");
           print("<h3>".$item['title']."</h3>\n");
           $user_name = $item['first_name']." ".$item['name'];
           print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
@@ -76,8 +96,12 @@
           print("</div>\n\n");
         }
       }
-      else
-        print("<p>Новините не са достъпни в момента.</p>\n");
+      else {
+        if ( isset($news_id) )
+          print("<p>Няма такава новина.</p>");
+        else
+          print("<p>Новините не са достъпни в момента.</p>\n");
+      }
       mysql_free_result($res);
     }
     else
@@ -87,8 +111,9 @@
   else
     print("<p>Новините не са достъпни в момента.</p>\n");
 ?>
+</div>
 
-<div id="copyright">
+<div id="copyright" class="clear">
 <hr />
 <p>Автор &copy; 2004-2006 <a href="mailto:gdsotirov@dir.bg">Георги Д. Сотиров</a><br />
 Всички права запазени</p>
