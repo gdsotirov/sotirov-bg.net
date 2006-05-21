@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.14 2006/05/21 11:46:42 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.15 2006/05/21 12:08:21 gsotirov Exp $
 #
 
 use strict;
@@ -100,7 +100,7 @@ if ( $format eq "atom" ) {
     $atom->add_entry($entry);
   }
 
-  my $twig = new XML::Twig(keep_encoding => 1);
+  my $twig = new XML::Twig;
   $twig->set_indent(" "x2);
   $twig->parse($atom->as_xml);
   $twig->add_stylesheet(css => "/style/atom.css");
@@ -170,7 +170,7 @@ elsif ( $format eq "rss" ) {
                    });
   }
 
-  my $twig = new XML::Twig(keep_encoding => 1);
+  my $twig = new XML::Twig;
   $twig->set_indent(" "x2);
   $twig->set_pretty_print('indented');
   $twig->parse($rss->as_string);
