@@ -10,10 +10,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Sotirov-BG.Net - News</title>
-<meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
+<meta name="author" content="Georgi D. Sotirov"/>
 <meta name="description" content="Sotirov-BG.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.10 2006/05/21 20:11:25 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.11 2006/05/21 20:15:16 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -81,7 +81,7 @@
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
         while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          print("<div id=\"newsid_".$item['id']."\" class=\"clear\">\n");
+          print("<div id=\"newsid_".$item['id']."\">\n");
           print("<h3>".$item['title']."</h3>\n");
           $user_name = $item['first_name']." ".$item['name'];
           print("<p class=\"italic\">Posted by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
