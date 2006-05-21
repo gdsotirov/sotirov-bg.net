@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- Written by Georgi D. Sotirov <gdsotirov@dir.bg> -->
-<!-- $Id: rss.bg.xsl,v 1.2 2006/05/20 21:06:44 gsotirov Exp $ -->
+<!-- $Id: rss.bg.xsl,v 1.3 2006/05/21 10:16:14 gsotirov Exp $ -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:output method="html" />
@@ -78,6 +78,10 @@ title="Extensible Markup Language">XML</abbr> код, моля изберете 
 
 <hr />
 
+<xsl:variable name="ver" >
+  <xsl:value-of select="../@version" />
+</xsl:variable>
+
 <div>
 <xsl:for-each select="item">
 <div>
@@ -94,7 +98,9 @@ title="Extensible Markup Language">XML</abbr> код, моля изберете 
   <p>
   <xsl:attribute name="style">font-weight: small; font-style: italic;</xsl:attribute>
   <xsl:value-of select="position()" /> от <xsl:value-of select="count(/rss/channel/item)" />
-  (Публикувано на <xsl:value-of select="pubDate" />)</p>
+  <xsl:choose>
+    <xsl:when test="$ver = '2.0'"> (Публикувано на <xsl:value-of select="pubDate" />)</xsl:when>
+  </xsl:choose></p>
   <p>
   <xsl:attribute name="id">d_<xsl:value-of select="position()" /></xsl:attribute>
   <xsl:value-of disable-output-escaping="yes" select="description" /></p>
