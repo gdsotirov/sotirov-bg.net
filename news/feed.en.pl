@@ -2,7 +2,7 @@
 # This script is intended to localize the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.en.pl,v 1.3 2006/05/22 20:35:06 gsotirov Exp $
+# $Id: feed.en.pl,v 1.4 2006/05/24 14:04:40 gsotirov Exp $
 #
 
 use strict;
@@ -14,8 +14,9 @@ my $news_db = "news";
 my $feed_lang_id = "en";
 my $feed_title = "Sotirov-BG.Net News";
 my $feed_desc = "News from Sotirov-BG.Net";
-my $feed_link = "http://sotirov-bg.net/news";
+my $feed_link = "http://sotirov-bg.net/news/";
 my $feed_self = "http://sotirov-bg.net/news/feed";
+my $feed_icon = "http://sotirov-bg.net/img/sotirov_net";
 my $feed_copy = "Copyright (c) 2004-2006 Georgi D. Sotirov";
 my $feed_author_name = "Georgi D. Sotirov";
 my $feed_author_uri = "http://sotirov-bg.net/~gsotirov/";
