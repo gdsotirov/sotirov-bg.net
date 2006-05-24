@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.19 2006/05/24 16:00:28 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.20 2006/05/24 16:47:17 gsotirov Exp $
 #
 
 use strict;
@@ -20,7 +20,7 @@ use XML::Atom::Syndication::Entry;
 use XML::Atom::Syndication::Text;
 use XML::Atom::Syndication::Content;
 
-my $server_root = "http://sotirov-bg.net/";
+my $server_root = "http://gsotirov79.ddns.homelan.bg/";
 
 my $q = new CGI;
 my $format = lc $q->param('f');
