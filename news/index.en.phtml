@@ -1,6 +1,8 @@
 <?php
   $I18N_LANG = 'en';
   print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+
+  include '../../news.php.inc';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -13,7 +15,7 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.14 2006/05/24 17:01:17 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.15 2006/06/11 21:03:06 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -28,7 +30,29 @@
 <link rel="alternate" href="feed?f=rss&amp;v=0.9" title="Sotirov.net News (RSS 0.9)" type="application/rdf+xml" />
 <link rel="up" href="news" title="Up" />
 </head>
+<?php
+  function get_month($number) {
+    switch ($number) {
+      case  1: return 'January';
+      case  2: return 'February';
+      case  3: return 'March';
+      case  4: return 'April';
+      case  5: return 'May';
+      case  6: return 'June';
+      case  7: return 'July';
+      case  8: return 'August';
+      case  9: return 'September';
+      case 10: return 'October';
+      case 11: return 'November';
+      case 12: return 'December';
+    }
+  }
 
+  if ( !$news_c = mysql_connect($news_host, $news_user, $news_pass) )
+    $error = CANNOT_CONNECT;
+  if ( !mysql_select_db($news_db, $news_c) )
+    $error = CANNOT_SEL_DB;
+?>
 <body>
 <div id="header">
 <h1>Sotirov-BG.Net News</h1>
@@ -49,62 +73,127 @@
 <map id="nav_alt">
 <h2>Syndication</h2>
 <ul>
-<li><img alt="Feed:" src="/icons/feed-icon-16x16"/>&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Feed</a></li>
-<li><img alt="Feed:" src="/icons/feed-icon-16x16"/>&nbsp;<a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
+<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Feed</a></li>
+<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
 </ul>
 <ul>
 <li><a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
 <li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Feed</a></li>
 <li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Feed</a></li>
 </ul></map>
+<map id="nav_arch">
+<h2>Archive</h2>
+<ul>
+<li><a href="/news/">Last 10</a></li>
+<li>&nbsp;</li>
+<?php
+  if ( !isset($error) ) {
+    $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
+    $query .= "FROM news AS nws ";
+    $query .= "GROUP BY Month(nws.posted), Year(nws.posted) ";
+    $query .= "ORDER BY Year(nws.posted) DESC, Month(nws.posted) DESC";
+
+    $res = mysql_query($query, $news_c);
+    if ( mysql_num_rows($res) > 0 ) {
+      while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        $link = "?m=".$item['Month']."&y=".$item['Year'];
+        $name = get_month($item['Month']).", ".$item['Year'];
+        print("<li><a href=\"$link\">$name</a><li>\n");
+      }
+    }
+    mysql_free_result($res);
+  }
+?>
+</ul>
+</map>
+<div id="search">
+<h2>Search</h2>
+<form method="GET" action="indexn.bg.phtml">
+<input name="q" maxlength="255" type="text" size="15" />
+<input name="search" type="submit" value="Търсене" />
+</form>
+</div>
 </div>
 </div>
 
 <div id="content">
 <?php
-  $news_id = $_REQUEST['id'];
-  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
-    if ( mysql_select_db("sotirov_net", $news_c) ) {
-      $query = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted,";
-      $query .= " nws.updated, usr.name, usr.first_name, usr.email";
-      $query .= " FROM news AS nws, users AS usr";
-      if ( isset($news_id) ) {
-        $query .= " WHERE nws.id = $news_id AND nws.posted <> '0000-00-00 00:00:00'";
-        $query .= " AND nws.author = usr.id";
-      }
-      else {
-        $query .= " WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id";
-        $query .= " ORDER BY nws.posted DESC";
-      }
-      $res = mysql_query($query, $news_c);
-      if ( mysql_num_rows($res) > 0 ) {
-        while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          print("<div id=\"newsid_".$item['id']."\">\n");
-          print("<h3>".$item['title']."</h3>\n");
-          $user_name = $item['first_name']." ".$item['name'];
-          print("<p class=\"italic\">Posted by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
-          print(" at ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
-          if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
-            print(", changed on ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
-          }
-          print("</p>\n");
-          print("<div class=\"body\">\n");
-          print($item['body']);
-          print("</div>\n");
-          print("</div>\n\n");
-        if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
-        print("</div>\n");
-      else {
-        if ( isset($news_id) )
-          print("<p>No such news.</p>");
+if ( isset($_REQUEST['id']) )
+    $news_id = $_REQUEST['id'];
+  if ( isset($_REQUEST['q']) )
+    $q = $_REQUEST['q'];
+  if ( isset($_REQUEST['m']) )
+    $month = $_REQUEST['m'];
+  if ( isset($_REQUEST['y']) )
+    $year = $_REQUEST['y'];
+
+  if ( !isset($error) ) {
+    $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
+    $query .= "nws.updated, usr.name, usr.first_name, usr.email ";
+    $query .= "FROM news AS nws, users AS usr ";
+    // Search by ID
+    if ( isset($news_id) ) {
+      $query .= "WHERE nws.id = $news_id AND nws.posted <> '0000-00-00 00:00:00' ";
+      $query .= "AND nws.author = usr.id ";
+    }
+    // Search by month, year (archive)
+    elseif ( isset($month) || isset($year) ) {
+      $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
+      if ( isset($month) ) {
+        $query .= "AND Month(nws.posted) = $month ";
         if ( isset($year) )
-          print("<p>News currently not available.</p>\n");
+          $query .= "AND Year(nws.posted) = $year ";
         else
-      mysql_free_result($res);
+          $query .= "AND Year(nws.posted) = ".date('Y');
+      }
       else
-    else
-      print("<p>News currently not available.</p>\n");
-    mysql_close($news_c);
+        $query .= "WHERE Year(nws.posted) = $year ";
+      $query .= "ORDER BY nws.posted DESC";
+    }
+    // Search by string in the text
+    elseif ( isset($q) ) {
+      $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
+      $query .= "AND (nws.title LIKE '%$q%' OR nws.body LIKE '%$q%')";
+    }
+    // Default - show last ten news
+    else {
+      $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
+      $query .= "ORDER BY nws.posted DESC";
+    }
+    $res = mysql_query($query, $news_c);
+    if ( mysql_num_rows($res) > 0 ) {
+      while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        print("<div id=\"newsid_".$item['id']."\">\n");
+        print("<h3>".$item['title']."</h3>\n");
+        $user_name = $item['first_name']." ".$item['name'];
+        print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
+        print(" на ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+        print("<a href=\"mailto:$mail_to\">$user_name</a>");
+          print(", променено на ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+        if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
+          print(", changed at ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
+        }
+        print("</p>\n");
+        print("<div class=\"body\">\n");
+        print($item['body']);
+        print("</div>\n");
+        print("</div>\n\n");
+      }
+    }
+    else {
+      if ( isset($news_id) )
+        print("<p>No such news.</p>\n");
+      elseif ( isset($month) or isset($year) ) {
+        print("<p>There are no news from ".get_month($month));
+        if ( isset($year) )
+          print(", $year.</p>\n");
+        else
+          print(date('Y')."</p>\n");
+      }
+      elseif ( isset($q) )
+        print("<p>Searched string '$q' didn't match any news.</p>");
+      else
+        print("<p>News currently not available.</p>\n");
     }
     mysql_free_result($res);
   }
@@ -156,6 +245,8 @@ height="31" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conf
 </p></map>
 </div>
 
+</body>
+<?php
   mysql_close($news_c);
 ?>
 </html>
