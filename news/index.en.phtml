@@ -3,6 +3,7 @@
   print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
 
   include '../../news.php.inc';
+  include 'nutil.php.inc';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -15,7 +16,7 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.15 2006/06/11 21:03:06 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.16 2006/06/12 18:54:08 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -61,7 +62,8 @@
 <div id="navigation">
 <map id="nav_gen">
 <ul>
-<li><a href="../">Home</a></li>
+<li><a href="/">Home</a></li>
+<li><a href="/news/">Last news</a></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul></map>
 <div id="sidebar">
@@ -84,8 +86,6 @@
 <map id="nav_arch">
 <h2>Archive</h2>
 <ul>
-<li><a href="/news/">Last 10</a></li>
-<li>&nbsp;</li>
 <?php
   if ( !isset($error) ) {
     $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
@@ -96,9 +96,9 @@
     $res = mysql_query($query, $news_c);
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-        $link = "?m=".$item['Month']."&y=".$item['Year'];
+        $link = "?m=".$item['Month']."&amp;y=".$item['Year'];
         $name = get_month($item['Month']).", ".$item['Year'];
-        print("<li><a href=\"$link\">$name</a><li>\n");
+        print("<li><a href=\"$link\">$name</a></li>\n");
       }
     }
     mysql_free_result($res);
@@ -108,9 +108,10 @@
 </map>
 <div id="search">
 <h2>Search</h2>
-<form method="GET" action="indexn.bg.phtml">
-<input name="q" maxlength="255" type="text" size="15" />
-<input name="search" type="submit" value="Търсене" />
+<p>Search in titles and text of the news</p>
+<form method="get" action="indexn.bg.phtml">
+<p><input name="q" maxlength="255" type="text" size="15" />
+<input name="search" type="submit" value="Search" /></p>
 </form>
 </div>
 </div>
@@ -166,10 +167,10 @@ if ( isset($_REQUEST['id']) )
         print("<div id=\"newsid_".$item['id']."\">\n");
         print("<h3>".$item['title']."</h3>\n");
         $user_name = $item['first_name']." ".$item['name'];
-        print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
-        print(" на ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+        print("<p class=\"italic\">Published by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
+        print("<p class=\"italic\">Published by ");
         print("<a href=\"mailto:$mail_to\">$user_name</a>");
-          print(", променено на ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time - Източно Европейско Време\">EET</abbr>");
+        print(" at ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
         if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
           print(", changed at ".$item['updated']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");
         }
