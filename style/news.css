@@ -1,6 +1,6 @@
 /* News styles
  * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
- * $Id: news.css,v 1.4 2006/06/11 21:02:45 gsotirov Exp $
+ * $Id: news.css,v 1.5 2006/06/12 18:54:39 gsotirov Exp $
  */
 
 @media screen {
@@ -37,6 +37,11 @@
     margin-bottom: 1em;
   }
 
+  div#sidebar input[type=text] {
+    background-color: inherit;
+    border: 1px solid #aaa;
+  }
+
   div#sidebar h2 {
     background-color: #ddd;
     border-bottom: 2px solid #aaa;
@@ -44,7 +49,7 @@
     margin: 0;
   }
 
-  div#sidebar ul, div#sidebar form {
+  div#sidebar ul, div#sidebar form, div#sidebar p {
     padding: 0.5em;
     margin: 0;
   }
@@ -57,5 +62,9 @@
 
   map#nav_gen li {
     display: inline;
+  }
+
+  .mark {
+     background-color: #ff0;
   }
 }
