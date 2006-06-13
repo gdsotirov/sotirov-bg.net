@@ -1,6 +1,7 @@
 <?php
   function mark_text($query, &$text) {
     if ( isset($query) )
-      $text = preg_replace("/($query)/", '<span class="mark">$1</span>', $text);
+      $text = preg_replace("/(>[^><]*)($query)([^<]*<)/", '$1<span class="mark">$2</span>$3', $text);
+
   }
 ?>
