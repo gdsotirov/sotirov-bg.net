@@ -16,7 +16,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.16 2006/06/12 19:00:41 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.17 2006/06/13 16:20:49 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -155,6 +155,7 @@
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
       $query .= "AND (nws.title LIKE '%$q%' OR nws.body LIKE '%$q%')";
+      $query .= "ORDER BY nws.posted DESC";
     }
     // Default - show last ten news
     else {
