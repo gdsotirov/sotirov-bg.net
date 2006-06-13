@@ -16,7 +16,7 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.18 2006/06/13 16:20:49 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.19 2006/06/13 18:21:19 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -130,7 +130,7 @@ if ( isset($_REQUEST['id']) )
 
   if ( !isset($error) ) {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
-    $query .= "nws.updated, usr.name, usr.first_name, usr.email ";
+    $query .= "nws.updated, usr.name, usr.firstname, usr.email ";
     $query .= "FROM news AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
@@ -167,7 +167,7 @@ if ( isset($_REQUEST['id']) )
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
         print("<h3>".$item['title']."</h3>\n");
-        $user_name = $item['first_name']." ".$item['name'];
+        $user_name = $item['firstname']." ".$item['name'];
         print("<p class=\"italic\">Published by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
         print("<p class=\"italic\">Published by ");
         print("<a href=\"mailto:$mail_to\">$user_name</a>");

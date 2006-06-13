@@ -16,7 +16,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.17 2006/06/13 16:20:49 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.18 2006/06/13 18:21:19 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -130,7 +130,7 @@
 
   if ( !isset($error) ) {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
-    $query .= "nws.updated, usr.name, usr.first_name, usr.email ";
+    $query .= "nws.updated, usr.name, usr.firstname, usr.email ";
     $query .= "FROM news_bg AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
@@ -168,7 +168,7 @@
         print("<div id=\"newsid_".$item['id']."\">\n");
         mark_text($q, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
-        $user_name = $item['first_name']." ".$item['name'];
+        $user_name = $item['firstname']." ".$item['name'];
         print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
         print(" на ".$item['posted']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr>");
         if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
