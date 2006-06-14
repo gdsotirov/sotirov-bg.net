@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.21 2006/05/25 22:21:32 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.22 2006/06/14 08:32:15 gsotirov Exp $
 #
 
 use strict;
@@ -32,7 +32,7 @@ sub fetch_data {
   my $dbh = DBI->connect($dsn, $news_user, $news_pass, {'RaiseError' => 1});
 
   my $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted,";
-  $query .= " nws.updated, usr.name, usr.first_name, usr.email";
+  $query .= " nws.updated, usr.name, usr.firstname, usr.email";
   $query .= " FROM ".$news_db." AS nws, users AS usr";
   $query .= " WHERE nws.author = usr.id";
   $query .= " ORDER BY nws.posted DESC";
@@ -102,7 +102,7 @@ if ( $format eq "atom" ) {
     $link->type("text/html");
     $entry->link($link);
     my $author = XML::Atom::Syndication::Person->new(Name => 'author');
-    $author->name($res->[$i]->{'first_name'}." ".$res->[$i]->{'name'});
+    $author->name($res->[$i]->{'firstname'}." ".$res->[$i]->{'name'});
     $author->email($res->[$i]->{'email'});
     $entry->author($author);
     my $content = XML::Atom::Syndication::Content->new($res->[$i]->{'body'});
@@ -180,13 +180,13 @@ elsif ( $format eq "rss" ) {
                    permaLink   => $feed_entry_base.$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
                    description => $res->[$i]->{'body'},
-                   author      => $res->[$i]->{'email'}." (".$res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}.")",
+                   author      => $res->[$i]->{'email'}." (".$res->[$i]->{'firstname'}." ".$res->[$i]->{'name'}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
                    dc => {
                      format   => "text/html",
                      date     => $dc_date,
                      source   => $feed_link,
-                     creator  => $res->[$i]->{'first_name'}." ".$res->[$i]->{'name'}." (".$res->[$i]->{'email'}.")"
+                     creator  => $res->[$i]->{'firstname'}." ".$res->[$i]->{'name'}." (".$res->[$i]->{'email'}.")"
                    });
   }
 
