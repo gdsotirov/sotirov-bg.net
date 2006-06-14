@@ -1,6 +1,7 @@
 <?php
   header("Content-type: application/xml");
   include("feedcreator.class.php");
+  include("../../news.php.inc");
 
   $rss = new UniversalFeedCreator();
   $rss->title = "Sotirov-BG.Net News";
@@ -8,14 +9,14 @@
   $rss->link = "http://gsotirov79.ddns.homelan.bg/news";
   $rss->syndicationURL = "http://gsotirov79.ddns.homelan.bg".$_SERVER['PHP_SELF'];
 
-  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
+  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db("sotirov_net", $news_c) ) {
-      $query  = "SELECT news.id, news.title, news.body, news.author, news.posted,";
-      $query .= " users.name, users.first_name, users.email";
-      $query .= " FROM news, users";
-      $query .= " WHERE news.author = users.id";
-      $query .= " ORDER BY news.posted DESC";
-      $query .= " LIMIT 10";
+      $query  = "SELECT news.id, news.title, news.body, news.author, news.posted, ";
+      $query .= "users.name, users.firstname, users.email ";
+      $query .= "FROM news, users ";
+      $query .= "WHERE news.author = users.id ";
+      $query .= "ORDER BY news.posted DESC";
+      $query .= "LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
         while ($data = mysql_fetch_object($res)) {
