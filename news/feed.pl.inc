@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.22 2006/06/14 08:32:15 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.23 2006/06/14 20:34:29 gsotirov Exp $
 #
 
 use strict;
@@ -31,12 +31,12 @@ sub fetch_data {
   my $dsn = "DBI:mysql:database=sotirov_net;host=localhost;port=3306";
   my $dbh = DBI->connect($dsn, $news_user, $news_pass, {'RaiseError' => 1});
 
-  my $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted,";
-  $query .= " nws.updated, usr.name, usr.firstname, usr.email";
-  $query .= " FROM ".$news_db." AS nws, users AS usr";
-  $query .= " WHERE nws.author = usr.id";
-  $query .= " ORDER BY nws.posted DESC";
-  $query .= " LIMIT 10";
+  my $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
+  $query .= "nws.updated, usr.$item_author_name_field, usr.$item_author_fname_field, usr.email ";
+  $query .= "FROM ".$news_db." AS nws, users AS usr ";
+  $query .= "WHERE nws.author = usr.id ";
+  $query .= "ORDER BY nws.posted DESC ";
+  $query .= "LIMIT 10";
   my $sth = $dbh->prepare ($query);
   if ( !$sth ) {
     die "Error:".$dbh->errstr."\n";
