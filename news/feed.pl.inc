@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.23 2006/06/14 20:34:29 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.24 2006/06/14 20:50:32 gsotirov Exp $
 #
 
 use strict;
@@ -102,7 +102,7 @@ if ( $format eq "atom" ) {
     $link->type("text/html");
     $entry->link($link);
     my $author = XML::Atom::Syndication::Person->new(Name => 'author');
-    $author->name($res->[$i]->{'firstname'}." ".$res->[$i]->{'name'});
+    $author->name($res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field});
     $author->email($res->[$i]->{'email'});
     $entry->author($author);
     my $content = XML::Atom::Syndication::Content->new($res->[$i]->{'body'});
@@ -180,13 +180,13 @@ elsif ( $format eq "rss" ) {
                    permaLink   => $feed_entry_base.$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
                    description => $res->[$i]->{'body'},
-                   author      => $res->[$i]->{'email'}." (".$res->[$i]->{'firstname'}." ".$res->[$i]->{'name'}.")",
+                   author      => $res->[$i]->{'email'}." (".$res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
                    dc => {
                      format   => "text/html",
                      date     => $dc_date,
                      source   => $feed_link,
-                     creator  => $res->[$i]->{'firstname'}." ".$res->[$i]->{'name'}." (".$res->[$i]->{'email'}.")"
+                     creator  => $res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}." (".$res->[$i]->{'email'}.")"
                    });
   }
 
