@@ -2,7 +2,7 @@
 # This script is intended to localize the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.bg.pl,v 1.5 2006/05/24 16:47:17 gsotirov Exp $
+# $Id: feed.bg.pl,v 1.6 2006/06/14 20:33:22 gsotirov Exp $
 #
 
 use strict;
@@ -27,6 +27,8 @@ my $feed_master_name = 'Георги Д. Сотиров';
 my $feed_master_email = 'gsotirov@dir.bg';
 # The URL to prpend to each entry link
 my $feed_entry_base = "$feed_link?id=";
+my $item_author_name_field = "name_$feed_lang_id";
+my $item_author_fname_field = "firstname_$feed_lang_id";
 
 include "feed.pl.inc";
 
