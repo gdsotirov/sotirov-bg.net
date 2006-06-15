@@ -1,4 +1,4 @@
-`sotirov_net`.CREATE DATABASE `sotirov_net` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE `sotirov_net` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 DROP TABLE IF EXISTS `sotirov_net`.`news`;
 CREATE TABLE  `sotirov_net`.`news` (
@@ -54,7 +54,9 @@ DROP TABLE IF EXISTS `sotirov_net`.`users`;
 CREATE TABLE  `sotirov_net`.`users` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(60) NOT NULL default '',
+  `name_bg` varchar(60) NOT NULL default '',
   `firstname` varchar(60) NOT NULL default '',
+  `firstname_bg` varchar(60) NOT NULL default '',
   `email` varchar(256) NOT NULL default '',
   `registered` timestamp NOT NULL default '0000-00-00 00:00:00',
   `nickname` varchar(30) default NULL,
@@ -63,5 +65,7 @@ CREATE TABLE  `sotirov_net`.`users` (
   `posts` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `name_idx` (`name`),
-  KEY `fname_idx` (`firstname`)
+  KEY `fname_idx` (`firstname`),
+  KEY `name_bg_idx` (`name_bg`),
+  KEY `firstname_bg_idx` (`firstname_bg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Users table';
