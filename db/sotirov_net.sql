@@ -33,22 +33,43 @@ CREATE TABLE  `sotirov_net`.`slackpack` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(128) NOT NULL,
   `version` varchar(20) NOT NULL,
-  `arch` varchar(8) NOT NULL,
+  `arch` char(8) character set latin1 collate latin1_general_ci NOT NULL default '',
   `build` varchar(10) NOT NULL,
   `filename` varchar(256) NOT NULL default '',
-  `url` varchar(256) NOT NULL default '',
+  `url` varchar(1024) NOT NULL default '',
   `author` int(10) unsigned NOT NULL,
   `md5` char(32) NOT NULL default '',
   `sign` text NOT NULL,
   `size` int(10) unsigned NOT NULL default '0',
+  `date` date NOT NULL default '0000-00-00',
+  `time` time NOT NULL default '00:00:00',
+  `slackver` char(5) character set latin1 collate latin1_general_ci NOT NULL default '',
+  `desc` text NOT NULL,
   PRIMARY KEY  (`id`,`author`),
   KEY `author_key` (`author`),
   KEY `name_idx` (`name`),
   KEY `version_idx` (`version`),
   KEY `arch_idx` (`arch`),
-  KEY `build_idx` (`build`),
-  CONSTRAINT `author_key` FOREIGN KEY (`author`) REFERENCES `news` (`id`)
+  KEY `slackver_idx` (`slackver`),
+  CONSTRAINT `arch_key` FOREIGN KEY (`arch`) REFERENCES `slackarch` (`id`),
+  CONSTRAINT `author_key` FOREIGN KEY (`author`) REFERENCES `news` (`id`),
+  CONSTRAINT `slackver_key` FOREIGN KEY (`slackver`) REFERENCES `slackver` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Slackwrare Packages Register';
+
+DROP TABLE IF EXISTS `sotirov_net`.`slackarch`;
+CREATE TABLE  `sotirov_net`.`slackarch` (
+  `id` char(8) character set latin1 collate latin1_general_ci NOT NULL default '',
+  `name` varchar(40) character set latin1 NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `sotirov_net`.`slackver`;
+CREATE TABLE  `sotirov_net`.`slackver` (
+  `id` char(5) character set latin1 collate latin1_general_ci NOT NULL default '',
+  `name` varchar(60) NOT NULL default '',
+  `released` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `sotirov_net`.`users`;
 CREATE TABLE  `sotirov_net`.`users` (
