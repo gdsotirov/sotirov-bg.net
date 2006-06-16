@@ -1,0 +1,30 @@
+@media print, screen {
+  div.row {
+    clear: both;
+    margin: 1em 0;
+  }
+
+  div.row span.label, div.row span.input {
+    float: left;
+    margin: 0.2em;
+    padding: 0.1em;
+  }
+
+  div.row span.label {
+    clear: left;
+    text-align: right;
+    width: 10em;
+  }
+
+  fieldset {
+    border: 1px solid #000;
+    margin: 0.5em 0;
+  }
+
+  legend {
+    font-size: large;
+    font-style: italic;
+    font-weight: bold;
+    padding: 0.1em 0.2em;
+  }
+}
