@@ -2,6 +2,7 @@
   $I18N_LANG = 'bg';
   include 'sysutil.php';
   print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+  include '../news.php.inc';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -14,7 +15,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov.net - Домашният сървър на Георги Сотиров" />
 <meta name="keywords" content="sotirov.net, Георги Сотиров" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.12 2006/05/22 20:33:08 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.13 2006/06/19 19:14:53 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="Стил по подразбиране" type="text/css" />
@@ -54,8 +55,8 @@ href="#copyright">Авторски права</a>&nbsp;]
 <h2>Новини</h2>
 <p>Заглавия на 10-те последни новини.</p>
 <p><?php
-  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
-    if ( mysql_select_db($db_db, $news_c) ) {
+  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
+    if ( mysql_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, posted";
       $query .= " FROM news_bg WHERE posted <> '0000-00-00 00:00:00'";
       $query .= " ORDER BY posted DESC";

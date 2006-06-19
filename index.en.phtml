@@ -14,8 +14,8 @@
 <title>Welcome to Sotirov-BG.Net</title>
 <meta name="author" content="George D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov.Net - The home server of Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.12 2006/05/22 20:33:08 gsotirov Exp $" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.12 2006/05/22 20:33:08 gsotirov Exp $" />
+<meta name="keywords" content="sotirov.net, Georgi Sotirov" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.13 2006/06/19 19:14:53 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
@@ -54,8 +54,8 @@ href="#copyright">Copyright</a>&nbsp;]
 <div id="news">
 <h2>News</h2>
 <p>Last ten news headers.</p>
-  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
-    if ( mysql_select_db($db_db, $news_c) ) {
+<p><?php
+  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, posted";
       $query .= " FROM news WHERE posted <> '0000-00-00 00:00:00'";
