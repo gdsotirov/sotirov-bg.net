@@ -2,7 +2,7 @@
 # This script is intended to localize the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.en.pl,v 1.6 2006/06/14 20:33:47 gsotirov Exp $
+# $Id: feed.en.pl,v 1.7 2006/06/21 19:19:01 gsotirov Exp $
 #
 
 use strict;
@@ -14,12 +14,12 @@ my $news_db = "news";
 my $feed_lang_id = "en";
 my $feed_title = "Sotirov-BG.Net News";
 my $feed_desc = "News from Sotirov-BG.Net";
-my $feed_link = "http://gsotirov79.ddns.homelan.bg/news/";
-my $feed_self = "http://gsotirov79.ddns.homelan.bg/news/feed";
-my $feed_icon = "http://gsotirov79.ddns.homelan.bg/img/sotirov_net";
+my $feed_link = "http://".$ENV{SERVER_NAME}."/news/";
+my $feed_self = "http://".$ENV{SERVER_NAME}."/news/feed";
+my $feed_icon = "http://".$ENV{SERVER_NAME}."/img/sotirov_net";
 my $feed_copy = "Copyright (c) 2004-2006 Georgi D. Sotirov";
 my $feed_author_name = "Georgi D. Sotirov";
-my $feed_author_uri = "http://sotirov-bg.net/~gsotirov/";
+my $feed_author_uri = "http://".$ENV{SERVER_NAME}."/~gsotirov/";
 my $feed_author_email = 'gsotirov@dir.bg';
 my $feed_editor_name = 'Georgi D. Sotirov';
 my $feed_editor_email = 'gsotirov@dir.bg';
