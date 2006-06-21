@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.26 2006/06/21 19:18:47 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.27 2006/06/21 20:15:46 gsotirov Exp $
 #
 
 use strict;
@@ -157,7 +157,7 @@ elsif ( $format eq "rss" ) {
                 });
   $rss->image(
     title  => "Sotirov-BG.Net",
-    url    => "http://sotirov-bg.net/img/sotirov_net",
+    url    => "http://".$ENV{SERVER_NAME}."/img/sotirov_net",
     link   => $feed_link,
     dc => {
       creator  => "Georgi D. Sotirov <gdsotirov\@dir.bg>",
