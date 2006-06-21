@@ -1,6 +1,6 @@
 /* News styles
  * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
- * $Id: news.css,v 1.5 2006/06/12 18:54:39 gsotirov Exp $
+ * $Id: news.css,v 1.6 2006/06/21 19:10:46 gsotirov Exp $
  */
 
 @media screen {
@@ -65,6 +65,7 @@
   }
 
   .mark {
-     background-color: #ff0;
+    background-color: #ff0;
+    color: #000;
   }
 }
