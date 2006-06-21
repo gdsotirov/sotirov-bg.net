@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.25 2006/06/21 19:11:46 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.26 2006/06/21 19:18:47 gsotirov Exp $
 #
 
 use strict;
@@ -114,7 +114,7 @@ if ( $format eq "atom" ) {
   my $twig = new XML::Twig;
   $twig->set_indent(" "x2);
   $twig->parse($feed->as_xml);
-  $twig->add_stylesheet(css => $ENV{SERVER_NAME}."/style/atom.css");
+  $twig->add_stylesheet(css => "http://".$ENV{SERVER_NAME}."/style/atom.css");
   $twig->set_pretty_print('indented');
   use bytes;
   print $twig->sprint;
@@ -193,8 +193,8 @@ elsif ( $format eq "rss" ) {
   $twig->set_pretty_print('indented');
   $twig->parse($rss->as_string);
   if ( $version eq "0.91" or $version eq "2.0" ) {
-    $twig->add_stylesheet(xsl => $ENV{SERVER_NAME}."/style/rss.".$feed_lang_id.".xsl");
-    $twig->add_stylesheet(css => $ENV{SERVER_NAME}."/style/rss.css");
+    $twig->add_stylesheet(xsl => "http://".$ENV{SERVER_NAME}."/style/rss.".$feed_lang_id.".xsl");
+    $twig->add_stylesheet(css => "http://".$ENV{SERVER_NAME}."/style/rss.css");
   }
   use bytes;
   print $twig->sprint;
