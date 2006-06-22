@@ -16,7 +16,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.20 2006/06/22 17:55:34 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.20.2.1 2006/06/22 18:06:36 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -121,8 +121,10 @@
 <?php
   if ( isset($_REQUEST['id']) )
     $news_id = $_REQUEST['id'];
-  if ( isset($_REQUEST['q']) )
+  if ( isset($_REQUEST['q']) ) {
     $q = $_REQUEST['q'];
+    $q_tokens = preg_split("/[[^\w\d]+/", $q, 10);
+  }
   if ( isset($_REQUEST['m']) )
     $month = $_REQUEST['m'];
   if ( isset($_REQUEST['y']) )
@@ -151,10 +153,12 @@
         $query .= "WHERE Year(nws.posted) = $year ";
       $query .= "ORDER BY nws.posted DESC";
     }
-    // Search by string in the text
+    // Search by token in the text
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
-      $query .= "AND (nws.title LIKE '%$q%' OR nws.body LIKE '%$q%')";
+      while ( $token = each($q_tokens) ) {
+        $query .= "OR (nws.title LIKE '%$token%' OR nws.body LIKE '%$token%') ";
+      }
       $query .= "ORDER BY nws.posted DESC";
     }
     // Default - show last ten news
@@ -166,7 +170,8 @@
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
-        mark_text($q, $item['title']);
+        if ( isset($q) )
+          mark_text($q_tokens, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
         print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
@@ -176,7 +181,8 @@
         }
         print("</p>\n");
         print("<div class=\"body\">\n");
-        mark_text($q, $item['body']);
+        if ( isset($q) )
+          mark_text($q_tokens, $item['body']);
         print($item['body']);
         print("</div>\n");
         print("</div>\n\n");
