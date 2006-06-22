@@ -6,10 +6,10 @@
   $rss = new UniversalFeedCreator();
   $rss->title = "Sotirov-BG.Net News";
   $rss->description = "News from Sotirov-BG.Net";
-  $rss->link = "http://gsotirov79.ddns.homelan.bg/news";
-  $rss->syndicationURL = "http://gsotirov79.ddns.homelan.bg".$_SERVER['PHP_SELF'];
+  $rss->link = "http://".$_SERVER['SERVER_NAME']."/news";
+  $rss->syndicationURL = "http://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
-  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
+  if ( $news_c = mysql_connect($db_host, $db_user, $db_pass) ) {
     if ( mysql_select_db("sotirov_net", $news_c) ) {
       $query  = "SELECT news.id, news.title, news.body, news.author, news.posted, ";
       $query .= "users.name, users.firstname, users.email ";
@@ -22,10 +22,10 @@
         while ($data = mysql_fetch_object($res)) {
           $item = new FeedItem();
           $item->title = $data->title;
-          $item->link = "http://gsotirov79.ddns.homelan.bg/news#newsid_".$data->id;
+          $item->link = "http://".$_SERVER['SERVER_NAME']."/news/?id=".$data->id;
           $item->description = $data->body;
           $item->date = strtotime($data->posted);
-          $item->source = "http://gsotirov79.ddns.homelan.bg/news";
+          $item->source = "http://".$_SERVER['SERVER_NAME']."/news/";
           $item->author = $data->email." (".$data->first_name." ".$data->name.")";
           $item->authorEmail = $data->email;
 
