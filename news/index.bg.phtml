@@ -16,7 +16,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.20 2006/06/22 17:55:34 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.21 2006/07/10 17:45:53 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -60,32 +60,35 @@
 </div>
 
 <div id="navigation">
-<map id="nav_gen">
-<ul>
+<div id="nav_gen">
+<map><ul>
 <li><a href="/">Начало</a></li>
 <li><a href="/news/">Последни новини</a></li>
 <li><a href="#copyright">Авторски права</a></li>
-</ul></map>
+</ul></map></div>
+
 <div id="sidebar">
-<map id="nav_lang">
+<div id="nav_lang">
 <h2>Език</h2>
-<ul>
+<map><ul>
 <li><a href="index.en.phtml" hreflang="en" lang="en">English</a></li>
-</ul></map>
-<map id="nav_alt">
+</ul></map></div>
+
+<div id="nav_alt">
 <h2>Обединяване</h2>
-<ul>
+<map><ul>
 <li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Емисия</a></li>
 <li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Емисия</a></li>
+<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Емисия</a></li>
 </ul>
 <ul>
-<li><a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Емисия</a></li>
 <li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Емисия</a></li>
 <li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Емисия</a></li>
-</ul></map>
-<map id="nav_arch">
+</ul></map></div>
+
+<div id="nav_arch">
 <h2>Архив</h2>
-<ul>
+<map><ul>
 <?php
   if ( !isset($error) ) {
     $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
@@ -104,8 +107,8 @@
     mysql_free_result($res);
   }
 ?>
-</ul>
-</map>
+</ul></map></div>
+
 <div id="search">
 <h2>Търсене</h2>
 <p>Търсене в заглавия и текст на новините</p>
@@ -113,9 +116,7 @@
 <p><input id="q" name="q" maxlength="255" type="text" size="15" />&nbsp;<br />
 <input type="submit" value="Търсене" /></p>
 </form>
-</div>
-</div>
-</div>
+</div></div></div>
 
 <div id="content">
 <?php

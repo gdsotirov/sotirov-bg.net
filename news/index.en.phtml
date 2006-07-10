@@ -16,7 +16,7 @@
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net News Page" />
 <meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.20 2006/06/22 17:55:34 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.21 2006/07/10 17:45:53 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -60,32 +60,35 @@
 </div>
 
 <div id="navigation">
-<map id="nav_gen">
-<ul>
+<div id="nav_gen">
+<map><ul>
 <li><a href="/">Home</a></li>
 <li><a href="/news/">Last news</a></li>
 <li><a href="#copyright">Copyright</a></li>
 </ul></map>
+
 <div id="sidebar">
-<map id="nav_lang">
+<div id="nav_lang">
 <h2>Language</h2>
-<ul>
+<map><ul>
 <li><a href="index.bg.phtml" hreflang="bg" lang="bg">Български</a></li>
-</ul></map>
-<map id="nav_alt">
+</ul></map></div>
+
+<div id="nav_alt">
 <h2>Syndication</h2>
-<ul>
+<map><ul>
 <li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed?f=atom" type="application/atom+xml">Atom Feed</a></li>
 <li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
+<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
 </ul>
 <ul>
-<li><a href="feed?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
 <li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Feed</a></li>
 <li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Feed</a></li>
-</ul></map>
-<map id="nav_arch">
+</ul></map></div>
+
+<div id="nav_arch">
 <h2>Archive</h2>
-<ul>
+<map><ul>
 <?php
   if ( !isset($error) ) {
     $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
@@ -104,8 +107,8 @@
     mysql_free_result($res);
   }
 ?>
-</ul>
-</map>
+</ul></map></div>
+
 <div id="search">
 <h2>Search</h2>
 <p>Search in titles and text of the news</p>
@@ -113,9 +116,7 @@
 <p><input id="q" name="q" maxlength="255" type="text" size="15" />
 <input name="search" type="submit" value="Search" /></p>
 </form>
-</div>
-</div>
-</div>
+</div></div></div>
 
 <div id="content">
 <?php
