@@ -16,7 +16,7 @@
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
 <meta name="keywords" content="Георги Сотиров, сървър, новини" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.25 2006/07/17 19:46:06 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.26 2006/07/17 21:08:54 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -131,7 +131,8 @@
 
   if ( !isset($error) ) {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
-    $query .= "nws.updated, usr.name_bg, usr.firstname_bg, usr.email ";
+    $query .= "nws.updated, usr.name, usr.firstname, ";
+    $query .= "usr.name_bg, usr.firstname_bg, usr.email ";
     $query .= "FROM news_bg AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
@@ -169,8 +170,11 @@
         print("<div id=\"newsid_".$item['id']."\">\n");
         mark_text($q, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
+        $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
-        print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name%20%3C".$item['email']."%3E\">$user_name</a>");
+        print("<p class=\"italic\">Публикувано от ");
+        print("<a href=\"mailto:".$mail_to."\">");
+        print($user_name."</a>");
         print(" на ".$item['posted']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr>");
         if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
           print(", променено на ".$item['updated']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr>");
