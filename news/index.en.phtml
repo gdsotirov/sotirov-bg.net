@@ -15,8 +15,8 @@
 <title>Sotirov-BG.Net - News</title>
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net News Page" />
-<meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.24 2006/07/11 19:19:37 gsotirov Exp $" />
+<meta name="keywords" content="Georgi Sotirov, server, news" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.25 2006/07/17 19:46:06 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Default" type="text/css" />
@@ -168,8 +168,8 @@ if ( isset($_REQUEST['id']) )
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
         print("<h3>".$item['title']."</h3>\n");
+        $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname']." ".$item['name'];
-        print("<p class=\"italic\">Published by <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
         print("<p class=\"italic\">Published by ");
         print("<a href=\"mailto:$mail_to\">$user_name</a>");
         print(" at ".$item['posted']."&nbsp;<abbr title=\"Eastern European Time\">EET</abbr>");

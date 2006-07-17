@@ -15,8 +15,8 @@
 <title>Sotirov-BG.Net - Новини</title>
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Новинарска страница на Sotirov-BG.Net" />
-<meta name="keywords" content="sotirov.net, Georgi Sotirov" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.24 2006/07/11 19:19:37 gsotirov Exp $" />
+<meta name="keywords" content="Георги Сотиров, сървър, новини" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.25 2006/07/17 19:46:06 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" href="/style/default.css" media="screen, print" title="Подразбрано" type="text/css" />
@@ -170,7 +170,7 @@
         mark_text($q, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
-        print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name &lt;".$item['email']."&gt;\">$user_name</a>");
+        print("<p class=\"italic\">Публикувано от <a href=\"mailto:$user_name%20%3C".$item['email']."%3E\">$user_name</a>");
         print(" на ".$item['posted']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr>");
         if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
           print(", променено на ".$item['updated']."&nbsp;<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr>");
