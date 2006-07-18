@@ -12,17 +12,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Sotirov-BG.Net - Information, Status, Statistics</title>
 <meta name="author" content="George D. Sotirov, gdsotirov@dir.bg" />
-<meta name="description" content="Sotirov.Net - Server information" />
-<meta name="keywords" content="Sotirov" />
-<meta name="CVS" content="$Id: iss.en.phtml,v 1.9 2006/07/11 19:08:44 gsotirov Exp $" />
+<meta name="description" content="Sotirov-BG.Net - Server information" />
+<meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages" />
+<meta name="robots" content="NOINDEX, FOLLOW" />
 <meta name="robots" content="NOARCHIVE" />
+<meta name="CVS" content="$Id: iss.en.phtml,v 1.10 2006/07/18 09:40:39 gsotirov Exp $" />>
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
-<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default style" type="text/css" />
-<link rel="stylesheet" href="style/speech.css" media="aural" type="text/css" />
-<link rel="stylesheet" href="style/tty.css" media="tty" type="text/css" />
+<link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="style/default.css" />
+<link rel="stylesheet" media="aural" title="Default" type="text/css" href="style/speech.css" />
+<link rel="stylesheet" media="tty" title="Default" type="text/css" href="style/tty.css" />
 <link rel="alternate" type="text/html" href="iss.bg.phtml" hreflang="bg" lang="bg" title="Sotirov.Net - Информация за сървъра" />
-
 <link rel="top" href="index" title="Home" />
 <link rel="up" href="iss" title="Up" />
 </head>
@@ -53,22 +53,22 @@ title="The server himself" width="320" />
 <div id="server_info_status_stats">
 <h2>General info</h2>
 <pre><?php
-  printf("<i><abbr title=\"Operating System\">OS</abbr></i>           %s\n", os_info());
-  printf("<i>Kernel</i>       %s\n", kernel_info());
-  printf("<i>Distribution</i> %s\n", slack_ver());
-  printf("<i>Machine</i>      %s\n", mach_info());
-  printf("<i><abbr title=\"Central Processing Unit\">CPU</abbr></i>          %s\n", cpu_info());
+  printf("<i><abbr title=\"Operating System\">OS</abbr></i>:           %s\n", os_info());
+  printf("<i>Kernel</i>:       %s\n", kernel_info());
+  printf("<i>Distribution</i>: %s\n", slack_ver());
+  printf("<i>Machine</i>:      %s\n", mach_info());
+  printf("<i><abbr title=\"Central Processing Unit\">CPU</abbr></i>:          %s\n", cpu_info());
 ?>
 </pre>
 <h2>Server status</h2>
 <pre><?php
   $sysup = sysup();
-  printf("<i>Up since</i>     %s\n", $sysup[0]);
-  printf("<i>Up time</i>      %s\n", $sysup[1]);
-  printf("<i>Load average</i> %s\n", loadavg());
+  printf("<i>Up since</i>:     %s\n", $sysup[0]);
+  printf("<i>Up time</i>:      %s\n", $sysup[1]);
+  printf("<i>Load average</i>: %s\n", loadavg());
   $meminfo = meminfo();
-  printf("<i>Memory</i>       %s\n", $meminfo[0]);
-  printf("<i>Swap</i>         %s\n", $meminfo[1]);
+  printf("<i>Memory</i>:       %s\n", $meminfo[0]);
+  printf("<i>Swap</i>:         %s\n", $meminfo[1]);
 ?>
 </pre>
 <h2>Bandwith utilization</h2>
@@ -107,28 +107,28 @@ width="16" /></li>
 <p>
 <!-- Valid XHTML 1.0 -->
 <a href="http://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Valid XHTML 1.0 icon]" height="31" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>&nbsp;
+<img alt="[Valid XHTML 1.0 icon]" height="31" longdesc="http://validator.w3.org/" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>
 <!-- Valid CSS -->
 <a href="http://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" /></a>&nbsp;
+<img alt="[Valid CSS icon]" height="31" longdesc="http://jigsaw.w3.org/" src="img/valid-css" title="Valid CSS!" width="88" /></a>
 <!-- WAI WCAG Conformance -->
-<a href="http://www.w3.org/WAI/WCAG1AA-Conformance/">
-<img alt="[Level Triple-A conformance icon, W3C-WAI Web Content Accessibility Guidelines 1.0]"
-height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Triple-A Conformance" width="88" /></a>&nbsp;
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance">
+<img alt="[Level Double-A conformance icon]"
+height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="http://www.unicode.org/" hreflang="en">
-<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>&nbsp;
+<img alt="[Encoded in UTF-8 icon]" height="31" longdesc="http://www.unicode.org/" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>
 </p></map>
 </div>
 
 <div id="poweredby">
 <map id="poweredbybar">
 <p><a href="http://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" /></a>&nbsp;
+<img alt="[Powered by Linux]" height="31" longdesc="http://www.kernel.org/" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
 <a href="http://www.apache.org/" hreflang="en">
-<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" /></a>&nbsp;
+<img alt="[Powered by Apache]" height="31" longdesc="http://www.apache.org/" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
 <a href="http://www.php.net/" hreflang="en">
-<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" /></a>&nbsp;
+<img alt="[Powered by PHP]" height="31" longdesc="http://www.php.net/" src="img/php_pb" title="Powered by PHP" width="88" /></a>
 </p></map>
 </div>
 
