@@ -18,7 +18,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.27 2006/07/18 09:40:39 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.28 2006/07/18 19:39:44 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
@@ -31,7 +31,7 @@
 <link rel="alternate" href="feed?f=rss&amp;v=1.0" title="Новини от Sotirov-BG.Net (RSS 1.0)" type="application/rdf+xml" />
 <link rel="alternate" href="feed?f=rss&amp;v=0.91" title="Новини от Sotirov-BG.Net (RSS 0.91)" type="application/rss+xml" />
 <link rel="alternate" href="feed?f=rss&amp;v=0.9" title="Новини от Sotirov-BG.Net (RSS 0.9)" type="application/rdf+xml" />
-<link rel="up" href="news" title="Up" />
+<link rel="start" href="../" title="Начало" />
 </head>
 <?php
   function get_month($number) {
@@ -115,7 +115,7 @@
 <h2>Търсене</h2>
 <p>Търсене в заглавия и текст на новините</p>
 <form action="?"  id="newsSearch" method="get">
-<p><input alt="Текст за търсене" id="q" name="q" maxlength="255" type="text" size="15" />&nbsp;<br />
+<p><label for="q">Запитване:&nbsp;<input alt="Текст за търсене" id="q" name="q" maxlength="255" size="15" type="text" value="Текст за търсене" /></label><br />
 <input type="submit" value="Търсене" /></p>
 </form>
 </div></div></div>

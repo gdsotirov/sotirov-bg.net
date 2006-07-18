@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.26 2006/07/18 09:40:39 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.27 2006/07/18 19:39:44 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -31,7 +31,7 @@
 <link rel="alternate" href="feed?f=rss&amp;v=1.0" title="Sotirov-BG.Net News (RSS 1.0)" type="application/rdf+xml" />
 <link rel="alternate" href="feed?f=rss&amp;v=0.91" title="Sotirov-BG.Net News (RSS 0.91)" type="application/rss+xml" />
 <link rel="alternate" href="feed?f=rss&amp;v=0.9" title="Sotirov-BG.Net News (RSS 0.9)" type="application/rdf+xml" />
-<link rel="up" href="news" title="Up" />
+<link rel="start" href="../" title="Home" />
 </head>
 <?php
   function get_month($number) {
@@ -115,7 +115,7 @@
 <h2>Search</h2>
 <p>Search in titles and text of the news</p>
 <form action="?" id="newsSearch" method="get">
-<p><input alt="Text to be searched" id="q" name="q" maxlength="255" type="text" size="15" />
+<p><label for="q">Query:&nbsp;<input alt="Text to search" id="q" name="q" maxlength="255" size="15" type="text" value="Text to search" /></label><br />
 <input name="search" type="submit" value="Search" /></p>
 </form>
 </div></div></div>
