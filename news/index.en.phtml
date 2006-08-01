@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.27 2006/07/18 19:39:44 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.28 2006/08/01 21:28:18 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -157,7 +157,8 @@ if ( isset($_REQUEST['id']) )
     // Search by string in the text
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
-      $query .= "AND (nws.title LIKE '%$q%' OR nws.body LIKE '%$q%')";
+      $safe_q = mysql_real_escape_string($q, $news_c);
+      $query .= "AND (nws.title LIKE '%$safe_q%' OR nws.body LIKE '%$safe_q%')";
       $query .= "ORDER BY nws.posted DESC";
     }
     // Default - show last ten news
