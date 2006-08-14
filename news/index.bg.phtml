@@ -18,7 +18,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.29 2006/08/01 21:28:18 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.30 2006/08/14 19:24:51 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
@@ -200,8 +200,10 @@
         else
           print(date('Y')."</p>\n");
       }
-      elseif ( isset($q) )
-        print("<p>Търсеният от вас низ '$q' не съвпадна с никакви новини.</p>");
+      elseif ( isset($q) ) {
+        $q_html = htmlentities($q);
+        print("<p>Търсеният от вас низ '$q_html' не съвпадна с никакви новини.</p>");
+      }
       else
         print("<p>Новините не са достъпни в момента.</p>\n");
     }
