@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.30 2006/08/28 05:44:23 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.31 2006/08/28 21:11:30 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -153,17 +153,20 @@
     // Search by month, year (archive)
     elseif ( isset($month) || isset($year) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
-      if ( isset($month) && is_numeric($month) && (int)$month >= 1 && (int)$month <= 12 )
-        $query .= "AND Month(nws.posted) = $month ";
-      else {
-        print("<p class=\"error\">Invalid month number '".htmlentities($month)."'!</p>\n");
-        $query .= "AND Month(nws.posted) = ".date('n')." ";
+      if ( isset($month) ) {
+        if ( is_numeric($month) && (int)$month >= 1 && (int)$month <= 12 )
+          $query .= "AND Month(nws.posted) = $month ";
+        else {
+          print("<p class=\"error\">Invalid month number '".htmlentities($month)."'!</p>\n");
+          unset($month);
+        }
       }
       if ( isset($year) && is_numeric($year) && (int)$year >= 2004 && (int)$year <= date('Y') )
         $query .= "AND Year(nws.posted) = $year ";
       else {
         print("<p class=\"error\">Invalid year '".htmlentities($year)."'!</p>\n");
-        $query .= "AND Year(nws.posted) = ".date('Y')." ";
+        $year = date('Y');
+        $query .= "AND Year(nws.posted) = $year ";
       }
       $query .= "ORDER BY nws.posted DESC";
     }
@@ -207,15 +210,13 @@
       if ( isset($news_id) )
         print("<p>No such news.</p>\n");
       elseif ( isset($month) or isset($year) ) {
-        print("<p>There are no news from ".get_month($month));
-        if ( isset($year) )
-          print(", $year.</p>\n");
-        else
-          print(date('Y')."</p>\n");
+        print("<p>There are no news from ");
+        if ( isset($month) )
+         print(get_month($month).", ");
+        print("$year</p>\n");
       }
       elseif ( isset($q) ) {
-        $q_html = htmlentities($q);
-        print("<p>Searched string '$q_html' didn't match any news.</p>");
+        print("<p>Searched string '".htmlentities($q)."' didn't match any news.</p>");
       }
       else
         print("<p>News currently not available.</p>\n");
