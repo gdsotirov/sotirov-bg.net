@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.29 2006/08/14 19:24:53 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.30 2006/08/28 05:44:23 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -122,36 +122,49 @@
 
 <div id="content">
 <?php
-if ( isset($_REQUEST['id']) )
-    $news_id = $_REQUEST['id'];
-  if ( isset($_REQUEST['q']) )
-    $q = $_REQUEST['q'];
-  if ( isset($_REQUEST['m']) )
-    $month = $_REQUEST['m'];
-  if ( isset($_REQUEST['y']) )
-    $year = $_REQUEST['y'];
+  if ( isset($error) )
+    print("<p>News currently not available.</p>\n");
+  else {
+    if ( isset($_REQUEST['id']) )
+      $news_id = $_REQUEST['id'];
+    if ( isset($_REQUEST['q']) )
+      $q = $_REQUEST['q'];
+    if ( isset($_REQUEST['m']) )
+      $month = $_REQUEST['m'];
+    if ( isset($_REQUEST['y']) )
+      $year = $_REQUEST['y'];
 
-  if ( !isset($error) ) {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
     $query .= "nws.updated, usr.name, usr.firstname, usr.email ";
     $query .= "FROM news AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
-      $query .= "WHERE nws.id = $news_id AND nws.posted <> '0000-00-00 00:00:00' ";
-      $query .= "AND nws.author = usr.id ";
+      if ( is_numeric($news_id) ) {
+        $query .= "WHERE nws.id = ".(int)$news_id." AND nws.posted <> '0000-00-00 00:00:00' ";
+        $query .= "AND nws.author = usr.id ";
+      }
+      else {
+        print("<p class=\"error\">Invalid news identificator '".htmlentities($news_id)."'!</p>\n");
+        $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
+        $query .= "ORDER BY nws.posted DESC ";
+        $query .= "LIMIT 10";
+      }
     }
     // Search by month, year (archive)
     elseif ( isset($month) || isset($year) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
-      if ( isset($month) ) {
+      if ( isset($month) && is_numeric($month) && (int)$month >= 1 && (int)$month <= 12 )
         $query .= "AND Month(nws.posted) = $month ";
-        if ( isset($year) )
-          $query .= "AND Year(nws.posted) = $year ";
-        else
-          $query .= "AND Year(nws.posted) = ".date('Y');
+      else {
+        print("<p class=\"error\">Invalid month number '".htmlentities($month)."'!</p>\n");
+        $query .= "AND Month(nws.posted) = ".date('n')." ";
       }
-      else
-        $query .= "WHERE Year(nws.posted) = $year ";
+      if ( isset($year) && is_numeric($year) && (int)$year >= 2004 && (int)$year <= date('Y') )
+        $query .= "AND Year(nws.posted) = $year ";
+      else {
+        print("<p class=\"error\">Invalid year '".htmlentities($year)."'!</p>\n");
+        $query .= "AND Year(nws.posted) = ".date('Y')." ";
+      }
       $query .= "ORDER BY nws.posted DESC";
     }
     // Search by string in the text
@@ -164,12 +177,15 @@ if ( isset($_REQUEST['id']) )
     // Default - show last ten news
     else {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
-      $query .= "ORDER BY nws.posted DESC";
+      $query .= "ORDER BY nws.posted DESC ";
+      $query .= "LIMIT 10";
     }
+
     $res = mysql_query($query, $news_c);
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
+        mark_text($q, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
         $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname']." ".$item['name'];
@@ -181,6 +197,7 @@ if ( isset($_REQUEST['id']) )
         }
         print("</p>\n");
         print("<div class=\"body\">\n");
+        mark_text($q, $item['body']);
         print($item['body']);
         print("</div>\n");
         print("</div>\n\n");
@@ -205,8 +222,6 @@ if ( isset($_REQUEST['id']) )
     }
     mysql_free_result($res);
   }
-  else
-    print("<p>News currently not available.</p>\n");
 ?>
 </div>
 
