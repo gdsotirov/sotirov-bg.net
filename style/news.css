@@ -1,6 +1,6 @@
 /* News styles
  * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
- * $Id: news.css,v 1.7 2006/07/10 17:45:53 gsotirov Exp $
+ * $Id: news.css,v 1.8 2006/09/19 21:53:47 gsotirov Exp $
  */
 
 @media screen {
@@ -73,8 +73,28 @@
     text-indent: 1em;
   }
 
-  .mark {
-    background-color: #ff0;
+  .token1 {
+    background-color: #ff6;
+    color: #000;
+  }
+
+  .token2 {
+    background-color: #aff;
+    color: #000;
+  }
+
+  .token3 {
+    background-color: #9f9;
+    color: #000;
+  }
+
+  .token4 {
+    background-color: #f99;
+    color: #000;
+  }
+
+  .token5 {
+    background-color: #f6f;
     color: #000;
   }
 }
