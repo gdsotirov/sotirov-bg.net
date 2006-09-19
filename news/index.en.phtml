@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.31 2006/08/28 21:11:30 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.32 2006/09/19 21:43:28 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -115,7 +115,7 @@
 <h2>Search</h2>
 <p>Search in titles and text of the news</p>
 <form action="?" id="newsSearch" method="get">
-<p><label for="q">Query:&nbsp;<input alt="Text to search" id="q" name="q" maxlength="255" size="15" type="text" value="Text to search" /></label><br />
+<p><label for="q">Query:&nbsp;<input alt="Text to search" id="q" name="q" maxlength="255" size="15" type="text" /></label><br />
 <input name="search" type="submit" value="Search" /></p>
 </form>
 </div></div></div>
@@ -123,7 +123,7 @@
 <div id="content">
 <?php
   if ( isset($error) )
-    print("<p>News currently not available.</p>\n");
+    print("<p class=\"error\">News currently not available.</p>\n");
   else {
     if ( isset($_REQUEST['id']) )
       $news_id = $_REQUEST['id'];
@@ -208,18 +208,18 @@
     }
     else {
       if ( isset($news_id) )
-        print("<p>No such news.</p>\n");
+        print("<p class=\"error\">No such news.</p>\n");
       elseif ( isset($month) or isset($year) ) {
-        print("<p>There are no news from ");
+        print("<p class=\"error\">There are no news from ");
         if ( isset($month) )
          print(get_month($month).", ");
         print("$year</p>\n");
       }
       elseif ( isset($q) ) {
-        print("<p>Searched string '".htmlentities($q)."' didn't match any news.</p>");
+        print("<p class=\"info\">Searched string '".htmlentities($q)."' didn't match any news.</p>");
       }
       else
-        print("<p>News currently not available.</p>\n");
+        print("<p class=\"error\">News currently not available.</p>\n");
     }
     mysql_free_result($res);
   }
