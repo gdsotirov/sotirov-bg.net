@@ -1,11 +1,12 @@
 /* News styles
  * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
- * $Id: news.css,v 1.8 2006/09/19 21:53:47 gsotirov Exp $
+ * $Id: news.css,v 1.9 2006/09/21 16:00:10 gsotirov Exp $
  */
 
 @media screen {
   div#content {
     margin-right: 14em;
+    padding-left: 1em;
   }
 
   div#header {
@@ -64,13 +65,13 @@
     display: inline;
   }
 
-  div.body {
-    margin-left: 1em;
-  }
-
   div.body p {
     text-align: justify;
     text-indent: 1em;
+  }
+
+  h3 {
+    border-bottom: 1px solid #aaa;
   }
 
   .token1 {
