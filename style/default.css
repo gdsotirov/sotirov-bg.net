@@ -1,7 +1,7 @@
 /* Sotirov.net Default Screen and Print Styles
  *
  * Written by George D. Sotirov <gdsotirov@dir.bg>
- * $Id: default.css,v 1.4 2006/09/21 16:00:10 gsotirov Exp $
+ * $Id: default.css,v 1.5 2006/09/24 18:48:54 gsotirov Exp $
  * This stylesheet conforms to the CSS 2.1 Specification from W3 Organization.
  * http://http://www.w3.org/TR/CSS21/
  *
@@ -91,6 +91,11 @@
     color: #ccc;
     background-color: inherit;
     font-size: xx-small;
+  }
+
+  div#server_info_status_stats pre,
+  div#server_info_status_stats p {
+    padding-left: 2em;
   }
 
   div.clear {
