@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: sotirov_net
 -- ------------------------------------------------------
--- Server version	5.0.22-log
+-- Server version	5.0.26-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -22,7 +22,7 @@
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(255) NOT NULL default '',
+  `title` varchar(100) NOT NULL default '',
   `body` text NOT NULL,
   `author` int(10) unsigned NOT NULL,
   `posted` timestamp NOT NULL default '0000-00-00 00:00:00',
@@ -30,17 +30,55 @@ CREATE TABLE `news` (
   `updated` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`,`author`),
   KEY `author_key` (`author`),
-  KEY `title_idx` (`title`)
+  KEY `title_idx` (`title`),
+  KEY `time_idx` (`posted`,`created`,`updated`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='News archive';
 
 --
--- Table structure for table `news_bg`
+-- Definition of trigger `news_insbf`
 --
 
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `sotirov_net`.`news_insbf` BEFORE INSERT ON `news` FOR EACH ROW BEGIN
+  SET NEW.created = NOW();
+
+  UPDATE users
+     SET posts = posts + 1
+   WHERE id = NEW.author;
+END $$
+
+DELIMITER ;
+
+--
+-- Definition of trigger `news_updbf`
+--
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `sotirov_net`.`news_updbf` BEFORE UPDATE ON `news` FOR EACH ROW BEGIN
+  SET NEW.updated = NOW();
+
+  IF OLD.author <> NEW.author THEN
+    UPDATE users
+       SET posts = posts + 1
+     WHERE id = NEW.author;
+
+    UPDATE users
+       SET posts = posts - 1
+     WHERE id = OLD.author;
+  END IF;
+END $$
+
+DELIMITER ;
+
+--
+-- Table structure for table `news`
+--
 DROP TABLE IF EXISTS `news_bg`;
 CREATE TABLE `news_bg` (
   `id` int(10) unsigned NOT NULL auto_increment,
-  `title` varchar(255) NOT NULL default '',
+  `title` varchar(100) NOT NULL default '',
   `body` text NOT NULL,
   `author` int(10) unsigned NOT NULL,
   `posted` timestamp NOT NULL default '0000-00-00 00:00:00',
@@ -48,13 +86,37 @@ CREATE TABLE `news_bg` (
   `updated` timestamp NOT NULL default '0000-00-00 00:00:00',
   PRIMARY KEY  (`id`,`author`),
   KEY `author_key` (`author`),
-  KEY `title_idx` (`title`)
+  KEY `title_idx` (`title`),
+  KEY `time_idx` (`posted`,`created`,`updated`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='News archive in Bulgarian';
+
+--
+-- Definition of trigger `news_bg_insbf`
+--
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `sotirov_net`.`news_bg_insbf` BEFORE INSERT ON `news_bg` FOR EACH ROW BEGIN
+  SET NEW.created = NOW();
+END $$
+
+DELIMITER ;
+
+--
+-- Definition of trigger `news_bg_updbf`
+--
+
+DELIMITER $$
+
+CREATE DEFINER = `root`@`localhost` TRIGGER  `sotirov_net`.`news_bg_updbf` BEFORE UPDATE ON `news_bg` FOR EACH ROW BEGIN
+  SET NEW.updated = NOW();
+END $$
+
+DELIMITER ;
 
 --
 -- Table structure for table `users`
 --
-
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL auto_increment,
@@ -83,4 +145,3 @@ CREATE TABLE `users` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
