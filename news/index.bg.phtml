@@ -18,7 +18,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.36 2006/09/21 16:00:10 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.37 2006/11/13 20:57:01 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
@@ -129,7 +129,7 @@
       $news_id = $_REQUEST['id'];
     if ( isset($_REQUEST['q']) ) {
       $q = $_REQUEST['q'];
-      $q_tokens = preg_split("/\s+/", $q, 5);
+      $safe_tokens = tokenize($q, 5);
     }
     if ( isset($_REQUEST['m']) )
       $month = $_REQUEST['m'];
@@ -176,13 +176,12 @@
     // Search by tokens in the text
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id AND (";
-      while ( list($idx, $token) = each($q_tokens) ) {
-        $safe_token = strip_tags($token);
-        $safe_token = mysql_real_escape_string($safe_token, $news_c);
+      while ( list($idx, $token) = each($safe_tokens) ) {
+        $sql_token = mysql_real_escape_string($token, $news_c);
         if ( $idx > 0 )
-          $query .= "AND (nws.title LIKE '%$safe_token%' OR nws.body LIKE '%$safe_token%') ";
+          $query .= "AND (nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
         else
-          $query .= "(nws.title LIKE '%$safe_token%' OR nws.body LIKE '%$safe_token%') ";
+          $query .= "(nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
       }
       $query .= ") ";
       $query .= "ORDER BY nws.posted DESC";
@@ -199,7 +198,7 @@
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
         if ( isset($q) )
-          mark_text($q_tokens, $item['title']);
+          mark_text($safe_tokens, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
         $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
@@ -213,7 +212,7 @@
         print("</p>\n");
         print("<div class=\"body\">\n");
         if ( isset($q) )
-          mark_text($q_tokens, $item['body']);
+          mark_text($safe_tokens, $item['body']);
         print($item['body']);
         print("</div>\n");
         print("</div>\n\n");
