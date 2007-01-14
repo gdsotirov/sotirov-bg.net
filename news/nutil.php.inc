@@ -1,14 +1,26 @@
 <?php
-  /**
-   * Function which will mark in color tokens in (X)HTML text
-   * @param $tokens List of tokens to be marked
-   * @param &$text The text to be marked
-   */
-  function mark_text($tokens, &$text) {
+  $words;
+
+  function mark_token_text($tokens, &$text) {
     while ( list($idx, $token) = each($tokens) ) {
       $safe_token = preg_replace(array('/\./', '/\-/'), array('\.', '\-'), $token);
-      $text = preg_replace("/(>[^><]*)($safe_token)([^<]*<)/mui", "$1<span class=\"token".++$idx."\">$2</span>$3", $text);
+      $text = preg_replace("/($safe_token)/ui",
+                           "<span class=\"token".++$idx."\">$1</span>",
+                           $text);
     }
+  }
+
+  function mark_token_html($tokens, &$text) {
+    global $words;
+    $words = $tokens;
+    $text = preg_replace_callback("/>([^<]+?)</", //"mark_callback"
+                                  create_function(
+                                  '$matches',
+                                  'global $words;
+                                   mark_token_text($words, $matches[1]);
+                                   return ">".$matches[1]."<";'
+                                  ),
+                                  $text);
   }
 
   /**

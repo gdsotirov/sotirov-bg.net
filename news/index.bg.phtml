@@ -18,7 +18,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.38 2006/11/13 21:49:44 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.39 2007/01/14 15:38:04 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
@@ -198,7 +198,7 @@
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div id=\"newsid_".$item['id']."\">\n");
         if ( isset($q) )
-          mark_text($safe_tokens, $item['title']);
+          mark_token_text($safe_tokens, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
         $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
@@ -212,7 +212,7 @@
         print("</p>\n");
         print("<div class=\"body\">\n");
         if ( isset($q) )
-          mark_text($safe_tokens, $item['body']);
+          mark_token_html($safe_tokens, $item['body']);
         print($item['body']);
         print("</div>\n");
         print("</div>\n\n");
