@@ -31,6 +31,6 @@
    */
    function tokenize($str, $count = 5) {
      $str = strip_tags($str);
-     return preg_split("/[^_a-zA-Z0-9\-\.]+/", $str, $count);
+     return preg_split("/[^_a-zA-Zа-яА-Я0-9\-\.]+/u", $str, $count);
    }
 ?>
