@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.27 2006/06/21 20:15:46 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.28 2007/03/28 07:57:08 gsotirov Exp $
 #
 
 use strict;
@@ -29,12 +29,20 @@ sub fetch_data {
   my $dsn = "DBI:mysql:database=sotirov_net;host=localhost;port=3306";
   my $dbh = DBI->connect($dsn, $news_user, $news_pass, {'RaiseError' => 1});
 
-  my $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
-  $query .= "nws.updated, usr.$item_author_name_field, usr.$item_author_fname_field, usr.email ";
-  $query .= "FROM ".$news_db." AS nws, users AS usr ";
-  $query .= "WHERE nws.author = usr.id ";
-  $query .= "ORDER BY nws.posted DESC ";
-  $query .= "LIMIT 10";
+  my $query  = "SELECT nws.id,\n";
+     $query .= "       nws.title,\n";
+     $query .= "       nws.body,\n";
+     $query .= "       nws.author,\n";
+     $query .= "       nws.posted,\n";
+     $query .= "       nws.updated,\n";
+     $query .= "       usr.$item_author_name_field,\n";
+     $query .= "       usr.$item_author_fname_field,\n";
+     $query .= "       usr.email\n";
+     $query .= "  FROM $news_db AS nws,\n";
+     $query .= "       users    AS usr \n";
+     $query .= " WHERE nws.author = usr.id\n";
+     $query .= " ORDER BY nws.posted DESC\n";
+     $query .= " LIMIT 10";
   my $sth = $dbh->prepare ($query);
   if ( !$sth ) {
     die "Error:".$dbh->errstr."\n";
@@ -45,6 +53,8 @@ sub fetch_data {
 
   # No problem fetching all the rows here since we get only 10 as maximum
   my @res = ($sth->rows, $sth->fetchall_arrayref({}));
+
+  $sth->finish;
   $dbh->disconnect;
 
   return @res;
