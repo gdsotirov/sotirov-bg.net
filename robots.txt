@@ -1,5 +1,5 @@
 # Robots Exclusions file for sotirov-bg.net
-# $Id: robots.txt,v 1.6 2007/03/27 12:02:25 gsotirov Exp $
+# $Id: robots.txt,v 1.7 2007/03/29 19:22:07 gsotirov Exp $
 
 User-agent: *
 Disallow: /bugzilla/
@@ -9,4 +9,5 @@ Disallow: /cvsweb/
 Disallow: /gallery/
 Disallow: /errordocs/
 Disallow: /stats/
+Disallow: /viewvc/
 Disallow: /webcam/
