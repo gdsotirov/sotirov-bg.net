@@ -17,7 +17,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.24 2007/01/28 12:46:44 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.25 2007/06/01 20:50:00 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="style/default.css" />
@@ -35,7 +35,8 @@
 
 <div id="nosoftwarepatents">
 <p class="align-center">
-<a href="http://www.nosoftwarepatents.com/"><b>No software patents!</b></a></p>
+<a href="http://www.nosoftwarepatents.com/"><img alt="No software patents!" height="90"
+title="No software patents!" src="img/nosoftwarepatents" width="390" /></a></p>
 </div>
 
 <div id="navigation">
@@ -54,7 +55,6 @@ href="#copyright">Copyright</a>&nbsp;]
 
 <div id="news">
 <h2>News</h2>
-<p>Last ten news headers.</p>
 <p><?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
@@ -64,6 +64,7 @@ href="#copyright">Copyright</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
+        print("<p>Last ten news headers.</p>\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<b>".$news['posted']."&nbsp;");
           print("<abbr title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
@@ -119,7 +120,7 @@ with <abbr title="Uinterruptible Power Supply">UPS</abbr>. The speeds are as fol
 <li>George Sotirov<br />
 <ul>
 <li><a href="~gsotirov/">George's Personal Pages</a></li>
-<li><a href="http://<?php echo $_SERVER['SERVER_NAME']?>/slackpack/">Slackware packages</a></li>
+<li><a href="slackpack/">Slackware packages</a></li>
 </ul></li>
 <li>Ivelina Beleva-Sotirova<br />
 <ul>
@@ -129,8 +130,8 @@ with <abbr title="Uinterruptible Power Supply">UPS</abbr>. The speeds are as fol
 
 <h3>Hosted applications</h3>
 <ul class="inline">
-<li><a href="bugzilla">Sotirov-BG.Net Bugzilla</a></li>
-<li><a href="cgi-bin/cvsweb/index.cgi/">Sotirov-BG.Net CVS Repository</a></li>
+<li><a href="bugzilla/">Sotirov-BG.Net Bugzilla</a></li>
+<li><a href="viewvc/">Sotirov-BG.Net CVS Repository</a></li>
 <li><a href="apps/calc/mcalc/" hreflang="en">Morgage calculator</a></li>
 <li><a href="apps/calc/icalc/" hreflang="en">Interest calculator</a></li>
 </ul>

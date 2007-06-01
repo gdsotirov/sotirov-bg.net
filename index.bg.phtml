@@ -17,7 +17,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.25 2007/01/28 12:46:44 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.26 2007/06/01 20:50:00 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="По подразбиране" type="text/css" />
@@ -35,8 +35,8 @@
 
 <div id="nosoftwarepatents">
 <p class="align-center">
-<a href="http://www.nosoftwarepatents.com/bg/m/intro/index.html">
-<b>Не на софтуерните патенти!</b></a></p>
+<a href="http://www.nosoftwarepatents.com/"><img alt="Не на софтуерните патенти!" height="90"
+title="Не на софтуерните патенти!" src="img/nosoftwarepatents" width="390" /></a></p>
 </div>
 
 <div id="navigation">
@@ -54,7 +54,6 @@ href="#copyright">Авторски права</a>&nbsp;]
 
 <div id="news">
 <h2>Новини</h2>
-<p>Заглавия на 10-те последни новини.</p>
 <p><?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
@@ -64,6 +63,7 @@ href="#copyright">Авторски права</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
+        print("<p>Заглавия на 10-те последни новини.</p>\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<b>".$news['posted']."&nbsp;");
           print("<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
@@ -119,7 +119,7 @@ title="World Wide Web Consortium - Консорциум на Световнат�
 <li>Георги Сотиров<br />
 <ul>
 <li><a href="~gsotirov/" hreflang="bg">Лични страници на Георги</a></li>
-<li><a href="http://<?php echo $_SERVER['SERVER_NAME']?>/slackpack/">Пакети за Slackware</a></li>
+<li><a href="slackpack/">Пакети за Slackware</a></li>
 </ul></li>
 <li>Ивелина Белева-Сотирова
 <ul>
@@ -129,8 +129,8 @@ title="World Wide Web Consortium - Консорциум на Световнат�
 
 <h3>Стопанисвани приложения</h3>
 <ul class="inline">
-<li><a href="bugzilla">Sotirov-BG.Net Bugzilla</a></li>
-<li><a href="cgi-bin/cvsweb/index.cgi/">Sotirov-BG.Net CVS хранилище</a></li>
+<li><a href="bugzilla/">Sotirov-BG.Net Bugzilla</a></li>
+<li><a href="viewvc/">Sotirov-BG.Net CVS хранилище</a></li>
 <li><a href="apps/calc/mcalc/" hreflang="bg">Ипотечен калкулатор</a></li>
 <li><a href="apps/calc/icalc/" hreflang="bg">Лихвен калкулатор</a></li>
 </ul>
