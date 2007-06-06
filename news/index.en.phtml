@@ -18,7 +18,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages, news" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.39 2007/01/28 12:46:44 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.40 2007/06/06 18:45:27 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="/style/default.css" />
@@ -195,7 +195,7 @@
     $res = mysql_query($query, $news_c);
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-        print("<div id=\"newsid_".$item['id']."\">\n");
+        print("<div class=\"news\" id=\"newsid_".$item['id']."\">\n");
         if ( isset($q) )
           mark_token_text($safe_tokens, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
