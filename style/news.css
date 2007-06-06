@@ -1,6 +1,6 @@
 /* News styles
  * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
- * $Id: news.css,v 1.9 2006/09/21 16:00:10 gsotirov Exp $
+ * $Id: news.css,v 1.10 2007/06/06 18:44:17 gsotirov Exp $
  */
 
 @media screen {
@@ -65,9 +65,18 @@
     display: inline;
   }
 
+  div.news {
+    clear: left;
+  }
+
   div.body p {
     text-align: justify;
     text-indent: 1em;
+  }
+
+  div.body p.img_left {
+    float: left;
+    margin: 0 1em 1em 0;
   }
 
   h3 {
