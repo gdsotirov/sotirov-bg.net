@@ -1,7 +1,7 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.28 2007/03/28 07:57:08 gsotirov Exp $
+# $Id: feed.pl.inc,v 1.29 2007/07/08 15:37:39 gsotirov Exp $
 #
 
 use strict;
@@ -26,7 +26,7 @@ my $format = lc $q->param('f');
 # Function    : fetch_data
 # Description : Fetch the data for the feed
 sub fetch_data {
-  my $dsn = "DBI:mysql:database=sotirov_net;host=localhost;port=3306";
+  my $dsn = "DBI:mysql:database=sotirov_net;host=localhost;port=3306;mysql_socket=/var/mysql/mysqld.sock";
   my $dbh = DBI->connect($dsn, $news_user, $news_pass, {'RaiseError' => 1});
 
   my $query  = "SELECT nws.id,\n";
