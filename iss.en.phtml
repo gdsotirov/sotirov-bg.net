@@ -16,7 +16,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages" />
 <meta name="robots" content="NOINDEX, FOLLOW" />
 <meta name="robots" content="NOARCHIVE" />
-<meta name="CVS" content="$Id: iss.en.phtml,v 1.12 2006/10/24 19:18:45 gsotirov Exp $" />
+<meta name="CVS" content="$Id: iss.en.phtml,v 1.13 2007/07/08 15:35:37 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="style/default.css" />
@@ -82,7 +82,9 @@ src="img/server" title="The server himself" width="320" />
   printf("%6.2f %s", $cur_bw, hr_bandw($unit));
 ?> of <?php printf("%6.2f %s", $max_bw, hr_bandw($unit));
 ?> used<br />
-<img alt="Използван капацитет" height="6" src="bwbar/bwbar.png" width="602" />
+<img alt="Използван капацитет" height="6"
+     longdesc="http://www.kernel.org/pub/software/web/bwbar/"
+     src="bwbar/bwbar.png" width="400" />
 </p>
 <h2>Statistics</h2>
 <ul>
