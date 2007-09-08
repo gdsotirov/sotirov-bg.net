@@ -4,8 +4,8 @@
   include("../../news.php.inc");
 
   $rss = new UniversalFeedCreator();
-  $rss->title = "Sotirov.net Новини";
-  $rss->description = "Новини от Sotirov.net";
+  $rss->title = "Sotirov-BG.Net Новини";
+  $rss->description = "Новини от Sotirov-BG.Net";
   $rss->link = "http://".$_SERVER['SERVER_NAME']."/news";
   $rss->syndicationURL = "http://".$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
 
