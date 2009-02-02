@@ -5,7 +5,7 @@
         http://www.google.com/schemas/sitemap/0.84/sitemap.xsd">
 <url>
  <loc>http://sotirov-bg.net/</loc>
- <lastmod>2006-11-21</lastmod>
+ <lastmod>2009-02-02</lastmod>
  <changefreq>weekly</changefreq>
  <priority>1.0</priority>
 </url>
@@ -23,7 +23,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/slackpack/</loc>
-  <lastmod>2007-01-28</lastmod>
+  <lastmod>2009-01-01</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.0</priority>
 </url>
