@@ -1,9 +1,14 @@
 <?php
   /* System Utilities Script 0.2.1
+   * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.3 2007/09/08 12:32:29 gsotirov Exp $
+   * $Id: sysutil.php,v 1.4 2009/02/02 17:50:44 gsotirov Exp $
    */
-  // Internationalization array
+
+  /**
+   * @add Internationalization array is used for messages in different
+   *      languages
+   */
   $i18n_arr = array(
     'en' => array(
       'day' => "day",
@@ -36,6 +41,12 @@
         "mbps" => "<abbr title=\"Mega bits per second\">Mbps</abbr>",
         "gbps" => "<abbr title=\"Giga bits per second\">Gbps</abbr>",
         "tbps" => "<abbr title=\"Tera bits per second\">Tbps</abbr>"
+      ),
+      'ups' => array(
+        "CHRG" => "AC power",
+        "DISCHRG" => "Battery",
+        "RB" => "Replace battery",
+        "LB" => "Low battery"
       )
     ),
     'bg' => array(
@@ -69,13 +80,20 @@
         "mbps" => "<abbr title=\"Мега бита за секунда\">Мбзс</abbr>",
         "gbps" => "<abbr title=\"Гига бита за секунда\">Гбзс</abbr>",
         "tbps" => "<abbr title=\"Тера бита за секунда\">Тбзс</abbr>"
+      ),
+      'ups' => array(
+        "CHRG" => "Мрежово захранване",
+        "DISCHRG" => "Батерия",
+        "RB" => "Смяна на батерия",
+        "LB" => "Слаба батерия"
       )
     )
   );
 
-  /* Function   : i18n_msg
-   * Description: get internationalized message based on the $I18N_LANG
-   *              variable and a message identifier.
+  /**
+   * @func i18n_msg
+   * @desc get internationalized message based on the $I18N_LANG
+   *       variable and a message identifier
    */
   function i18n_msg($msg_id) {
     global $I18N_LANG;
@@ -90,8 +108,9 @@
     }
   }
 
-  /* Function   : format_unit
-   * Description: human readable unit format
+  /**
+   * @func format_unit
+   * @desc human readable unit format
    */
   function format_unit($unit, $format, $single_str_id, $multiple_str_id) {
     $single_str = i18n_msg($single_str_id);
@@ -105,9 +124,10 @@
       return sprintf("$format %s ", $unit, $single_str);
   }
 
-  /* Function   : uptime
-   * Description: format uptime string
-   * Parameters : diff - difference in seconds
+  /**
+   * @func uptime
+   * @desc provides formatted uptime string
+   * @param diff difference in seconds
    */
   function uptime($diff) {
     $days = floor($diff/60/60/24);
@@ -122,8 +142,9 @@
     return sprintf(i18n_msg('uptime_msg'), $days_str, $hours_str, $minutes_str, $diff);
   }
 
-  /* Function   : loadavg
-   * Description: get system load average
+  /**
+   * @func loadavg
+   * @desc get system load average
    */
   function loadavg() {
     $la = shell_exec("cat /proc/loadavg");
@@ -132,8 +153,9 @@
     return sprintf(i18n_msg('la_msg'), $la_arr[0], $la_arr[1], $la_arr[2], $p_arr[0], $p_arr[1]);
   }
 
-  /* Function   : sysup
-   * Description: get system up since and up time
+  /**
+   * @func sysup
+   * @desc get system up since and up time
    */
   function sysup() {
     $up_arr = preg_split("/\s+/", trim(shell_exec("cat /proc/stat | grep -w btime")));
@@ -143,8 +165,9 @@
     return array($upsince_str, uptime($uptime));
   }
 
-  /* Function   : hr_mem
-   * Description: Human readable memory format
+  /**
+   * @func hr_mem
+   * @desc Human readable memory format
    */
   function hr_mem($mem_in_bytes) {
     if ( !settype($mem_in_bytes, "float") )
@@ -158,8 +181,10 @@
     return sprintf("%3.2f %s", $mem_in_bytes, $unit_arr[$unit]);
   }
 
-  /* Function   : hr_bandw
-   * Description: human readable bandwidth unit format
+  /**
+   * @func hr_bandw
+   * @desc human readable bandwidth unit format
+   * @param unit_id Identifier of the result unit
    */
   function hr_bandw($unit_id) {
     $unit_id_lower = strtolower($unit_id);
@@ -167,73 +192,97 @@
     return $unit_arr[$unit_id_lower];
   }
 
+  /**
+   * @func meminfo
+   * @desc provides associative array with memory info
+   */
   function meminfo() {
     $MAJMIN = trim(shell_exec("uname -r | awk -F. '{ print $1\".\"$2 }'"));
+
     if ($MAJMIN == "2.6") {
       $mi = trim(shell_exec("cat /proc/meminfo"));
+
       $mi_raw_arr = split("\n", $mi);
+
       for ($i = 0; $i < sizeof($mi_raw_arr); ++$i) {
         $info = preg_split("/\s+/", trim($mi_raw_arr[$i]));
         $mi_arr[trim($info[0], ":")] = $info[1];
       }
-      $pm_free  = $mi_arr['MemFree'];
-      $pm_total = $mi_arr['MemTotal'];
-      $vm_free  = $mi_arr['SwapFree'];
-      $vm_total = $mi_arr['SwapTotal'];
-      //echo "pm_free = $pm_free, pm_total = $pm_total, vm_free = $vm_free, vm_total = $vm_total\n";
-
-      $pm_str = sprintf(i18n_msg('mem_msg'), hr_mem($pm_free*1024), hr_mem($pm_total*1024));
-      $vm_str = sprintf(i18n_msg('mem_msg'), hr_mem($vm_free*1024), hr_mem($vm_total*1024));
     }
     else if ($MAJMIN == "2.4") {
       $mi = shell_exec("cat /proc/meminfo");
       $mi_arr = split("\n", $mi);
       $pm_arr = preg_split("/\s+/", $mi_arr[1]);
       $vm_arr = preg_split("/\s+/", $mi_arr[2]);
-      $pm_total = $pm_arr[1];
-      //$pm_used = $pm_arr[2];
-      $pm_free = $pm_arr[3];
-      //$pm_shared = $pm_arr[4];
-      //$pm_buffers = $pm_arr[5];
-      //$pm_cached = $pm_arr[6];
-      $vm_total = $vm_arr[1];
-      //$vm_used = $vm_arr[2];
-      $vm_free = $vm_arr[3];
-      $pm_str = sprintf(i18n_msg('mem_msg'), hr_mem($pm_free), hr_mem($pm_total));
-      $vm_str = sprintf(i18n_msg('mem_msg'), hr_mem($vm_free), hr_mem($vm_total));
+
+      $mi_arr['MemFree']   = $pm_arr[1];
+      $mi_arr['MemTotal']  = $pm_arr[3];
+      $mi_arr['SwapFree']  = $vm_arr[1];
+      $mi_arr['SwapTotal'] = $vm_arr[3];
     }
     else {
-      $pm_str = "?";
-      $vm_str = "?";
+      $mi_arr['MemFree']   = 'n/a';
+      $mi_arr['MemTotal']  = 'n/a';
+      $mi_arr['SwapFree']  = 'n/a';
+      $mi_arr['SwapTotal'] = 'n/a';
     }
 
-    return array($pm_str, $vm_str);
+    return $mi_arr;
   }
 
   function os_info() {
     $os = shell_exec("uname -o");
+
     return sprintf("%s", trim($os));
   }
 
   function kernel_info() {
     $kernel = shell_exec("uname -s");
     $kernel_rel = shell_exec("uname -r");
+
     return sprintf("%s %s", trim($kernel), trim($kernel_rel));
   }
 
   function mach_info() {
     $machine = shell_exec("uname -m");
+
     return sprintf("%s", trim($machine));
   }
 
   function cpu_info () {
     $cpu_ln = shell_exec("cat /proc/cpuinfo | grep 'model name'");
     $cpu_arr = preg_split("/:/", $cpu_ln);
+
     return sprintf("%s", trim($cpu_arr[1]));
   }
 
   function slack_ver() {
     $slack_ver = shell_exec("cat /etc/slackware-version");
+
     return sprintf("%s", trim($slack_ver));
   }
+
+  /**
+   * @func ups_charge
+   * @desc The function reads the battery charge of NUT controlled UPS
+   * @param name The name of the UPS device
+   */
+  function ups_charge($name) {
+    $ups_charge = shell_exec("upsc $name | grep 'battery.charge:' | awk -F: '{ print $2 }'");
+
+    return sprintf("%s", trim($ups_charge));
+  }
+
+  /**
+   * @func ups_charge
+   * @desc The function reads the battery charge of NUT controlled UPS
+   * @param name The name of the UPS device
+   */
+  function ups_power($name) {
+    $ups_pwr = shell_exec("upsc mgeups | grep 'ups.status:' | awk -F: '{ print $2 }' | awk '{ print $2 }'");
+    $unit_arr = i18n_msg('ups');
+
+    return sprintf("%s", $unit_arr[trim($ups_pwr)]);
+  }
+
 ?>
