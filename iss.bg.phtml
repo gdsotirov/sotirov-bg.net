@@ -16,7 +16,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници" />
 <meta name="robots" content="NOINDEX, FOLLOW" />
 <meta name="robots" content="NOARCHIVE" />
-<meta name="CVS" content="$Id: iss.bg.phtml,v 1.17 2007/08/05 16:01:34 gsotirov Exp $" />
+<meta name="CVS" content="$Id: iss.bg.phtml,v 1.18 2009/02/02 18:15:27 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбиране" type="text/css" href="style/default.css" />
@@ -39,7 +39,8 @@ href="iss.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]
 </p>
 </div>
 
-<p>Тази информация се предоставя главно с цел системно наблюдение.</p>
+<p>Страницата предоставя обща информация и състояние на сървъра. Статистиките
+са достъпни само за администратори.</p>
 
 <div id="info_status_stats">
 <div id="server_himself">
@@ -60,10 +61,25 @@ src="img/server" title="Самият сървър" width="320" /></div>
   $sysup = sysup();
   printf("<i>Работещ от</i>:         %s\n", $sysup[0]);
   printf("<i>Време на работа</i>:    %s\n", $sysup[1]);
+  printf("<i>Захранване</i>:         %s\n", ups_power('mgeups'));
+  printf("<i>Заряд батерия</i>:      %s %%\n", ups_charge('mgeups'));
   printf("<i>Средно натоварване</i>: %s\n", loadavg());
-  $meminfo = meminfo();
-  printf("<i>Памет</i>:              %s\n", $meminfo[0]);
-  printf("<i>Виртуална памет</i>:    %s\n", $meminfo[1]);
+
+  $mi_arr = meminfo();
+
+  $pm_free  = $mi_arr['MemFree'];
+  $pm_total = $mi_arr['MemTotal'];
+  $vm_free  = $mi_arr['SwapFree'];
+  $vm_total = $mi_arr['SwapTotal'];
+
+  printf("<i>Памет</i>:              %s\n",
+         sprintf(i18n_msg('mem_msg'),
+                 hr_mem($pm_free*1024),
+                 hr_mem($pm_total*1024)));
+  printf("<i>Виртуална памет</i>:    %s\n",
+         sprintf(i18n_msg('mem_msg'),
+                 hr_mem($vm_free*1024),
+                 hr_mem($vm_total*1024)));
 ?>
 </pre>
 <h2>Използван капацитет</h2>

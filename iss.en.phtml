@@ -16,7 +16,7 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages" />
 <meta name="robots" content="NOINDEX, FOLLOW" />
 <meta name="robots" content="NOARCHIVE" />
-<meta name="CVS" content="$Id: iss.en.phtml,v 1.16 2007/09/08 12:30:27 gsotirov Exp $" />
+<meta name="CVS" content="$Id: iss.en.phtml,v 1.17 2009/02/02 18:15:27 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="style/default.css" />
@@ -40,8 +40,8 @@ href="iss.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]
 </div>
 
 <div>
-<p>This information is provided solely for the purpose of system
-monitoring.</p>
+<p>This page provides general information and server status. The statistics
+are available only to administrators.</p>
 </div>
 
 <div id="info_status_stats">
@@ -62,12 +62,27 @@ src="img/server" title="The server himself" width="320" />
 <h2>Server status</h2>
 <pre><?php
   $sysup = sysup();
-  printf("<i>Up since</i>:     %s\n", $sysup[0]);
-  printf("<i>Up time</i>:      %s\n", $sysup[1]);
-  printf("<i>Load average</i>: %s\n", loadavg());
-  $meminfo = meminfo();
-  printf("<i>Memory</i>:       %s\n", $meminfo[0]);
-  printf("<i>Swap</i>:         %s\n", $meminfo[1]);
+  printf("<i>Up since</i>:       %s\n", $sysup[0]);
+  printf("<i>Up time</i>:        %s\n", $sysup[1]);
+  printf("<i>Power</i>:          %s\n", ups_power('mgeups'));
+  printf("<i>Battery charge</i>: %s %%\n", ups_charge('mgeups'));
+  printf("<i>Load average</i>:   %s\n", loadavg());
+
+  $mi_arr = meminfo();
+
+  $pm_free  = $mi_arr['MemFree'];
+  $pm_total = $mi_arr['MemTotal'];
+  $vm_free  = $mi_arr['SwapFree'];
+  $vm_total = $mi_arr['SwapTotal'];
+
+  printf("<i>Memory</i>:         %s\n",
+         sprintf(i18n_msg('mem_msg'),
+                 hr_mem($pm_free*1024),
+                 hr_mem($pm_total*1024)));
+  printf("<i>Swap</i>:           %s\n",
+         sprintf(i18n_msg('mem_msg'),
+                 hr_mem($vm_free*1024),
+                 hr_mem($vm_total*1024)));
 ?>
 </pre>
 <h2>Bandwith utilization</h2>
