@@ -1,11 +1,12 @@
 apps
+bginfo
 bugzilla
 bwbar
 cgi-bin
-cvsweb
 errordocs
 gallery
 google*.html
+lxr
 nut
 slackpack
 stats
