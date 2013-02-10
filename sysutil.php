@@ -2,7 +2,7 @@
   /* System Utilities Script 0.2.1
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.4 2009/02/02 17:50:44 gsotirov Exp $
+   * $Id: sysutil.php,v 1.5 2013/02/10 15:23:40 gsotirov Exp $
    */
 
   /**
@@ -199,17 +199,7 @@
   function meminfo() {
     $MAJMIN = trim(shell_exec("uname -r | awk -F. '{ print $1\".\"$2 }'"));
 
-    if ($MAJMIN == "2.6") {
-      $mi = trim(shell_exec("cat /proc/meminfo"));
-
-      $mi_raw_arr = split("\n", $mi);
-
-      for ($i = 0; $i < sizeof($mi_raw_arr); ++$i) {
-        $info = preg_split("/\s+/", trim($mi_raw_arr[$i]));
-        $mi_arr[trim($info[0], ":")] = $info[1];
-      }
-    }
-    else if ($MAJMIN == "2.4") {
+    if ($MAJMIN == "2.4") {
       $mi = shell_exec("cat /proc/meminfo");
       $mi_arr = split("\n", $mi);
       $pm_arr = preg_split("/\s+/", $mi_arr[1]);
@@ -221,10 +211,14 @@
       $mi_arr['SwapTotal'] = $vm_arr[3];
     }
     else {
-      $mi_arr['MemFree']   = 'n/a';
-      $mi_arr['MemTotal']  = 'n/a';
-      $mi_arr['SwapFree']  = 'n/a';
-      $mi_arr['SwapTotal'] = 'n/a';
+      $mi = trim(shell_exec("cat /proc/meminfo"));
+
+      $mi_raw_arr = split("\n", $mi);
+
+      for ($i = 0; $i < sizeof($mi_raw_arr); ++$i) {
+        $info = preg_split("/\s+/", trim($mi_raw_arr[$i]));
+        $mi_arr[trim($info[0], ":")] = $info[1];
+      }
     }
 
     return $mi_arr;
