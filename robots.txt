@@ -1,9 +1,8 @@
 # Robots Exclusions file for sotirov-bg.net
-# $Id: robots.txt,v 1.8 2012/04/06 04:57:34 gsotirov Exp $
+# $Id: robots.txt,v 1.9 2017/01/06 17:42:57 gsotirov Exp $
 
 User-agent: *
 Disallow: /bginfo/
-Disallow: /bugzilla/
 Disallow: /bwbar/
 Disallow: /cgi-bin/
 Disallow: /gallery/
