@@ -17,15 +17,16 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.32 2015/09/14 21:05:19 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.33 2017/01/07 09:34:11 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="По подразбиране" type="text/css" />
 <link rel="stylesheet" href="style/speech.css" media="aural" title="По подразбиране" type="text/css" />
 <link rel="stylesheet" href="style/tty.css" media="tty" title="По подразбиране" type="text/css" />
-<link rel="alternate" type="text/html" href="index.en.phtml" hreflang="en" lang="en" title="Sotirov-BG.Net - The home server of Georgi Sotirov" />
-<link rel="alternate" href="news/feed?f=rss&amp;v=2.0" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="news/feed?f=atom" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
+<link rel="alternate" type="text/html" href="index.en" hreflang="en" lang="en" title="Sotirov-BG.Net - The home server of Georgi Sotirov" />
+<link rel="alternate" type="text/html" href="index.bg" hreflang="bg" lang="bg" title="Sotirov-BG.Net - Домашният сървър на Георги Сотиров" />
+<link rel="alternate" href="news/feed.bg?f=rss&amp;v=2.0" hreflang="bg" lang="bg" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="news/feed.bg?f=atom" hreflang="bg" lang="bg" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
 </head>
 
 <body>
@@ -33,22 +34,16 @@
 <h1>Добре дошли в Sotirov-BG.Net</h1>
 </div>
 
-<div id="nosoftwarepatents">
-<p class="align-center">
-<a href="http://www.nosoftwarepatents.com/"><img alt="Не на софтуерните патенти!" height="90"
-title="Не на софтуерните патенти!" src="img/nosoftwarepatents" width="390" /></a></p>
-</div>
-
 <div id="navigation">
 <p class="navigation">
-[&nbsp;<a href="#news">Новини</a>&nbsp;|&nbsp;<a
-href="#about">Относно</a>&nbsp;|&nbsp;<a
-href="#avail">Достъпност</a>&nbsp;|&nbsp;<a
-href="#content">Съдържание</a>&nbsp;|&nbsp;<a
-href="iss"><abbr title="Информация, Състояние, Статистики">ИСС</abbr></a>&nbsp;|&nbsp;<a
-href="#copyright">Авторски права</a>&nbsp;]
+[&nbsp;<a href="#news" hreflang="bg">Новини</a>&nbsp;|&nbsp;<a
+href="#about" hreflang="bg">Относно</a>&nbsp;|&nbsp;<a
+href="#avail" hreflang="bg">Достъпност</a>&nbsp;|&nbsp;<a
+href="#content" hreflang="bg">Съдържание</a>&nbsp;|&nbsp;<a
+href="/iss.bg" hreflang="bg"><abbr title="Информация, Състояние, Статистики">ИСС</abbr></a>&nbsp;|&nbsp;<a
+href="#copyright" hreflang="bg">Авторски права</a>&nbsp;]
 <br />
-[&nbsp;<a href="index.en.phtml" hreflang="en" lang="en">English</a>&nbsp;]
+[&nbsp;<a href="index.en" hreflang="en" lang="en">English</a>&nbsp;]
 </p>
 </div>
 
@@ -63,11 +58,11 @@ href="#copyright">Авторски права</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
-        print("<p>Заглавия на 10-те последни новини.</p>\n");
+        print("Заглавия на 10-те последни новини.<br/><br/>\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<b>".$news['posted']."&nbsp;");
           print("<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
-          print("<a href=\"news?id=".$news['id']."\">");
+          print("<a href=\"/news/index.bg?id=".$news['id']."\" hreflang=\"bg\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
           print("$title</a><br />\n");
         }
@@ -83,7 +78,13 @@ href="#copyright">Авторски права</a>&nbsp;]
   else
     print("Новините не са достъпни в момента.\n");
 ?></p>
-<p><a href="news/">Архив</a>&nbsp;|&nbsp;<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;<a href="news/feed?f=atom">Atom емисия</a>&nbsp;|&nbsp;<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;<a href="news/feed?f=rss&amp;v=2.0"><acronym lang="en" title="Really Simple Syndication">RSS</acronym>&nbsp;емисия</a></p>
+<p>
+<a href="news/index.bg">Архив</a>&nbsp;|&nbsp;
+<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
+<a href="news/feed.bg?f=atom" hreflang="bg">Atom емисия</a>&nbsp;|&nbsp;
+<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
+<a href="news/feed.bg?f=rss&amp;v=2.0" hreflang="bg"><acronym lang="en" title="Really Simple Syndication">RSS</acronym>&nbsp;емисия</a>
+</p>
 </div>
 
 <div id="about">
@@ -95,16 +96,15 @@ href="#copyright">Авторски права</a>&nbsp;]
 намиращо се на този сървър в момента е под <strong>постоянна
 разработка</strong>.</p>
 <p class="text_p">Всички станици на този сървър са издържани в публичните
-стандарти на <a href="http://www.w3.org/"><abbr
-title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr></a>
+стандарти на <a href="http://www.w3.org/" hreflang="en"><abbr title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr></a>
 и са създадени така, че да са възможно
 най-достъпни за едно по-добро и по-качествено Интернет изживяване.</p>
 </div>
 
 <div id="avail">
 <h2>Достъпност</h2>
-<p class="text_p">Този сървър разполага със висока по скорост <abbr title="Local
-Area Network" lang="en">LAN</abbr> връзка. Максималните негарантирани скорости
+<p class="text_p">Този сървър разполага със висока по скорост <abbr
+title="Local Area Network" lang="en">LAN</abbr> връзка. Максималните негарантирани скорости
 са както следва:</p>
 <ul class="inline">
 <li>за целия свят - до 40 <abbr title="Mega бита за секунда">Mбзс</abbr> (1 <abbr title="Мега Байта за секунда">МБзс</abbr>)</li>
@@ -118,17 +118,17 @@ Area Network" lang="en">LAN</abbr> връзка. Максималните нег
 <h2>Съдържание</h2>
 <h3>Стопанисвани страници</h3>
 <ul class="inline">
-<li><a href="~gsotirov/" hreflang="bg">Лични страници на Георги</a></li>
-<li><a href="~ibeleva/" hreflang="bg">Лични страници на Ивелина</a></li>
-<li><a href="slackpack/">SlackPack (Пакети за Slackware)</a></li>
+<li><a href="/~gsotirov/index.bg" hreflang="bg">Лични страници на Георги</a></li>
+<li><a href="/~ibeleva/index.bg" hreflang="bg">Лични страници на Ивелина</a></li>
+<li><a href="/slackpack/" hreflang="bg">SlackPack (Пакети за Slackware)</a></li>
 </ul>
 
 <h3>Стопанисвани приложения</h3>
 <ul class="inline">
-<li><a href="bugzilla/">Sotirov-BG.Net Bugzilla</a></li>
-<li><a href="viewvc/">Sotirov-BG.Net CVS хранилище</a></li>
-<li><a href="apps/calc/mcalc/" hreflang="bg">Ипотечен калкулатор</a></li>
-<li><a href="apps/calc/icalc/" hreflang="bg">Лихвен калкулатор</a></li>
+<li><a href="/bugzilla/" hreflang="en">Sotirov-BG.Net Bugzilla</a></li>
+<li><a href="/viewvc/" hreflang="en">Sotirov-BG.Net CVS хранилище</a></li>
+<li><a href="/apps/calc/mcalc/index.bg" hreflang="bg">Ипотечен калкулатор</a></li>
+<li><a href="/apps/calc/icalc/index.bg" hreflang="bg">Лихвен калкулатор</a></li>
 </ul>
 </div>
 
@@ -149,7 +149,8 @@ Area Network" lang="en">LAN</abbr> връзка. Максималните нег
 <img alt="[Икона Валиден CSS]" height="31" longdesc="http://jigsaw.w3.org/" src="img/valid-css" title="Валиден CSS!" width="88" /></a>
 <!-- WAI WCAG Conformance -->
 <a href="http://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
-<img alt="[Икона за съответствие с ниво двойно А]" height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
+<img alt="[Икона за съответствие с ниво двойно А]"
+height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="http://www.unicode.org/" hreflang="en">
 <img alt="[Икона Кодирано в UTF-8]" height="31" longdesc="http://www.unicode.org/" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
@@ -158,8 +159,8 @@ Area Network" lang="en">LAN</abbr> връзка. Максималните нег
 
 <div id="poweredby">
 <map id="poweredbybar">
-<p><a href="http://www.kernel.org/" hreflang="en">
-<img alt="[Работи с мощта на Linux]" height="31" longdesc="http://www.kernel.org/" src="img/linux_pb" title="Работи с мощта на Linux" width="88" /></a>
+<p><a href="https://www.kernel.org/" hreflang="en">
+<img alt="[Работи с мощта на Linux]" height="31" longdesc="https://www.kernel.org/" src="img/linux_pb" title="Работи с мощта на Linux" width="88" /></a>
 <a href="http://www.apache.org/" hreflang="en">
 <img alt="[Работи с мощта на Apache]" height="31" longdesc="http://www.apache.org/" src="img/apache_pb" title="Работи с мощта на Apache" width="88" /></a>
 <a href="http://www.mysql.com/" hreflang="en">
@@ -171,3 +172,4 @@ Area Network" lang="en">LAN</abbr> връзка. Максималните нег
 
 </body>
 </html>
+

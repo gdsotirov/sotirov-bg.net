@@ -17,15 +17,16 @@
 <meta name="keywords" content="Georgi Sotirov, Sotirov, server, projects, pages" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.en.phtml,v 1.31 2015/09/14 21:05:20 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.en.phtml,v 1.32 2017/01/07 09:34:11 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
-<link rel="stylesheet" media="screen, print" title="Default" type="text/css" href="style/default.css" />
-<link rel="stylesheet" media="aural" title="Default" type="text/css" href="style/speech.css" />
-<link rel="stylesheet" media="tty" title="Default" type="text/css" href="style/tty.css" />
-<link rel="alternate" type="text/html" href="index.bg.phtml" hreflang="bg" lang="bg" title="Sotirov-BG.Net - Домашният сървър на Георги Сотиров" />
-<link rel="alternate" href="news/feed?f=rss&amp;v=2.0" title="Sotirov-BG.Net News (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="news/feed?f=atom" title="Sotirov-BG.Net News (Atom)" type="application/atom+xml" />
+<link rel="stylesheet" href="style/default.css" media="screen, print" title="Default" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="aural" title="Default" type="text/css" />
+<link rel="stylesheet" href="style/tty.css" media="tty" title="Default" type="text/css" />
+<link rel="alternate" type="text/html" href="index.bg" hreflang="bg" lang="bg" title="Sotirov-BG.Net - Домашният сървър на Георги Сотиров" />
+<link rel="alternate" type="text/html" href="index.en" hreflang="en" lang="en" title="Sotirov-BG.Net - The home server of Georgi Sotirov" />
+<link rel="alternate" href="news/feed.en?f=rss&amp;v=2.0" hreflang="en" lang="en" title="Sotirov-BG.Net News (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="news/feed.en?f=atom" hreflang="en" lang="en" title="Sotirov-BG.Net News (Atom)" type="application/atom+xml" />
 </head>
 
 <body>
@@ -33,23 +34,16 @@
 <h1>Welcome to Sotirov-BG.Net</h1>
 </div>
 
-<div id="nosoftwarepatents">
-<p class="align-center">
-<a href="http://www.nosoftwarepatents.com/"><img alt="No software patents!" height="90"
-title="No software patents!" src="img/nosoftwarepatents" width="390" /></a></p>
-</div>
-
 <div id="navigation">
 <p class="navigation">
-[&nbsp;
-<a href="#news">News</a>&nbsp;|&nbsp;<a
-href="#about">About</a>&nbsp;|&nbsp;<a
-href="#avail">Availability</a>&nbsp;|&nbsp;<a
-href="#content">Content</a>&nbsp;|&nbsp;<a
-href="iss"><abbr title="Iformation, Status, Statistics">ISS</abbr></a>&nbsp;|&nbsp;<a
-href="#copyright">Copyright</a>&nbsp;]
+[&nbsp;<a href="#news" hreflang="en">News</a>&nbsp;|&nbsp;<a
+href="#about" hreflang="en">About</a>&nbsp;|&nbsp;<a
+href="#avail" hreflang="en">Availability</a>&nbsp;|&nbsp;<a
+href="#content" hreflang="en">Content</a>&nbsp;|&nbsp;<a
+href="/iss.en" hreflang="en"><abbr title="Iformation, Status, Statistics">ISS</abbr></a>&nbsp;|&nbsp;<a
+href="#copyright" hreflang="en">Copyright</a>&nbsp;]
 <br />
-[&nbsp;<a href="index.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]
+[&nbsp;<a href="index.bg" hreflang="bg" lang="bg">Български</a>&nbsp;]
 </p>
 </div>
 
@@ -64,11 +58,11 @@ href="#copyright">Copyright</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
-        print("<p>Last ten news headers.</p>\n");
+        print("Last ten news headers.<br/><br/>\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<b>".$news['posted']."&nbsp;");
           print("<abbr title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
-          print("<a href=\"news?id=".$news['id']."\">");
+          print("<a href=\"/news/index.en?id=".$news['id']."\" hreflang=\"en\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
           print("$title</a><br />\n");
         }
@@ -85,8 +79,12 @@ href="#copyright">Copyright</a>&nbsp;]
     print("News currently not available.\n");
 ?></p>
 <p>
-<a href="news/">Archive</a>&nbsp;|&nbsp;<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;<a href="news/feed?f=atom">Atom feed</a>&nbsp;|&nbsp;<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;<a
-href="news/feed?f=rss&amp;v=2.0"><acronym title="Really Simple Syndication">RSS</acronym>&nbsp;feed</a></p>
+<a href="news/index.en" hreflang="en">Archive</a>&nbsp;|&nbsp;
+<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
+<a href="news/feed.en?f=atom" hreflang="en">Atom feed</a>&nbsp;|&nbsp;
+<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
+<a href="news/feed.en?f=rss&amp;v=2.0" hreflang="en"><acronym title="Really Simple Syndication">RSS</acronym>&nbsp;feed</a>
+</p>
 </div>
 
 <div id="about">
@@ -95,11 +93,12 @@ href="news/feed?f=rss&amp;v=2.0"><acronym title="Really Simple Syndication">RSS<
 Georgi Sotirov</a>. Here you can find the most recent and actual information
 about me, to view and use the things that I made and in general to get familiar
 with my posibilities. Please, note that all of the content on this server is
-currentlly under <strong>constant development</strong>.</p>
-<p class="text_p">All pages on this server conform to the public standards of
-<a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a>
-and are created thus to be as accessable as possible for a better and more
-quality Internet experience.</p>
+currentlly under <strong>constant
+development</strong>.</p>
+<p class="text_p">All pages on this server conform to the public
+standards of <a href="http://www.w3.org/" hreflang="en"><abbr title="World Wide Web Consortium">W3C</abbr></a>
+and are created thus to be as accessable as possible
+for a better and more quality Internet experience.</p>
 </div>
 
 <div id="avail">
@@ -118,18 +117,18 @@ which in in the best case could support it for up to 40 minutes.</p>
 <div id="content">
 <h2>Content</h2>
 <h3>Hosted sites</h3>
-<ul>
-<li><a href="~gsotirov/">Georgi's Personal Pages</a></li>
-<li><a href="~ibeleva/">Ivelina's Personal Pages</a></li>
-<li><a href="slackpack/">SlackPack (Slackware Packages)</a></li>
+<ul class="inline">
+<li><a href="/~gsotirov/index.en" hreflang="en">Georgi's Personal Pages</a></li>
+<li><a href="/~ibeleva/index.en" hreflang="en">Ivelina's Personal Pages</a></li>
+<li><a href="/slackpack/" hreflang="en">SlackPack (Slackware Packages)</a></li>
 </ul>
 
 <h3>Hosted applications</h3>
 <ul class="inline">
-<li><a href="bugzilla/">Sotirov-BG.Net Bugzilla</a></li>
-<li><a href="viewvc/">Sotirov-BG.Net CVS Repository</a></li>
-<li><a href="apps/calc/mcalc/" hreflang="en">Morgage calculator</a></li>
-<li><a href="apps/calc/icalc/" hreflang="en">Interest calculator</a></li>
+<li><a href="/bugzilla/" hreflang="en">Sotirov-BG.Net Bugzilla</a></li>
+<li><a href="/viewvc/" hreflang="en">Sotirov-BG.Net CVS Repository</a></li>
+<li><a href="/apps/calc/mcalc/index.en" hreflang="en">Morgage calculator</a></li>
+<li><a href="/apps/calc/icalc/index.en" hreflang="en">Interest calculator</a></li>
 </ul>
 </div>
 
@@ -149,7 +148,7 @@ D. Sotirov</a><br />All right reserved</p>
 <a href="http://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
 <img alt="[Valid CSS icon]" height="31" longdesc="http://jigsaw.w3.org/" src="img/valid-css" title="Valid CSS!" width="88" /></a>
 <!-- WAI WCAG Conformance -->
-<a href="http://www.w3.org/WAI/WCAG1AA-Conformance">
+<a href="http://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
 <img alt="[Level Double-A conformance icon]"
 height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
 <!-- UTF-8 Encoded -->
@@ -160,8 +159,8 @@ height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="E
 
 <div id="poweredby">
 <map id="poweredbybar">
-<p><a href="http://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Linux]" height="31" longdesc="http://www.kernel.org/" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
+<p><a href="https://www.kernel.org/" hreflang="en">
+<img alt="[Powered by Linux]" height="31" longdesc="https://www.kernel.org/" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
 <a href="http://www.apache.org/" hreflang="en">
 <img alt="[Powered by Apache]" height="31" longdesc="http://www.apache.org/" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
 <a href="http://www.mysql.com/" hreflang="en">
@@ -172,6 +171,5 @@ height="31" longdesc="http://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="E
 </div>
 
 </body>
-
 </html>
 
