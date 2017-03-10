@@ -4,36 +4,7 @@
 
   include '../../news.php.inc';
   include 'nutil.php.inc';
-?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Sotirov-BG.Net - Новини</title>
-<meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
-<meta name="description" content="Sotirov-BG.Net - Новини" />
-<meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
-<meta name="robots" content="INDEX, FOLLOW" />
-<meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.43 2017/01/07 09:38:03 gsotirov Exp $" />
-<link rel="icon" href="/img/sotirov_net" />
-<link rel="shortcut icon" href="/img/sotirov_net" />
-<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
-<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/news.css" />
-<link rel="stylesheet" media="aural" title="По подразбиране" type="text/css" href="/style/speech.css" />
-<link rel="stylesheet" media="tty" title="По подразбиране" type="text/css" href="/style/tty.css" />
-<link rel="alternate" type="text/html" href="index.en.phtml" hreflang="en" lang="en" title="Sotirov-BG.Net News" />
-<link rel="alternate" href="feed?f=atom" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
-<link rel="alternate" href="feed?f=rss&amp;v=2.0" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="feed?f=rss&amp;v=1.0" title="Новини от Sotirov-BG.Net (RSS 1.0)" type="application/rdf+xml" />
-<link rel="alternate" href="feed?f=rss&amp;v=0.91" title="Новини от Sotirov-BG.Net (RSS 0.91)" type="application/rss+xml" />
-<link rel="alternate" href="feed?f=rss&amp;v=0.9" title="Новини от Sotirov-BG.Net (RSS 0.9)" type="application/rdf+xml" />
-<link rel="start" href="../" title="Начало" />
-</head>
-<?php
   function get_month($number) {
     switch ($number) {
       case  1: return 'Януари';
@@ -55,10 +26,83 @@
     $error = CANNOT_CONNECT;
   if ( !mysql_select_db($news_db, $news_c) )
     $error = CANNOT_SEL_DB;
+
+  if ( isset($_REQUEST['id']) ) {
+    $news_id = $_REQUEST['id'];
+    if ( isset($news_id) && is_numeric($news_id) ) {
+      $qtitle = "SELECT title from news_bg WHERE id = ".(int)$news_id.";";
+      $ntres = mysql_query($qtitle, $news_c);
+      $ntitle = mysql_result($ntres, 0);
+      mysql_free_result($ntres);
+    }
+  }
+  if ( isset($_REQUEST['q']) ) {
+    $q = $_REQUEST['q'];
+    $safe_tokens = tokenize($q, 5);
+  }
+  if ( isset($_REQUEST['m']) )
+    $month = $_REQUEST['m'];
+  if ( isset($_REQUEST['y']) )
+    $year = $_REQUEST['y'];
 ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<?php
+  if ( isset($news_id) && is_numeric($news_id) )
+    $page_title = "Sotirov-BG.Net - ".$ntitle;
+  elseif ( isset($month) || isset($year) ) {
+    if ( isset($month) )
+      $page_title = sprintf("Sotirov-BG.Net - Новини от %s, %4d", get_month($month), $year);
+    else
+      $page_title = sprintf("Sotirov-BG.Net - Новини за %4d г.", $year);
+  }
+  elseif ( isset($q) )
+    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", $q);
+  else
+    $page_title = "Sotirov-BG.Net - Новини";
+?>
+<title><?php echo $page_title ?></title>
+<meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
+<meta name="description" content="Sotirov-BG.Net - Новини" />
+<meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
+<meta name="robots" content="INDEX, FOLLOW" />
+<meta name="robots" content="ARCHIVE" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.44 2017/03/10 19:52:08 gsotirov Exp $" />
+<link rel="icon" href="/img/sotirov_net" />
+<link rel="shortcut icon" href="/img/sotirov_net" />
+<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
+<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/news.css" />
+<link rel="stylesheet" media="aural" title="По подразбиране" type="text/css" href="/style/speech.css" />
+<link rel="stylesheet" media="tty" title="По подразбиране" type="text/css" href="/style/tty.css" />
+<link rel="alternate" type="text/html" href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en" lang="en" title="<?php echo $page_title ?>" />
+<link rel="alternate" href="feed?f=atom" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
+<link rel="alternate" href="feed?f=rss&amp;v=2.0" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="feed?f=rss&amp;v=1.0" title="Новини от Sotirov-BG.Net (RSS 1.0)" type="application/rdf+xml" />
+<link rel="alternate" href="feed?f=rss&amp;v=0.91" title="Новини от Sotirov-BG.Net (RSS 0.91)" type="application/rss+xml" />
+<link rel="alternate" href="feed?f=rss&amp;v=0.9" title="Новини от Sotirov-BG.Net (RSS 0.9)" type="application/rdf+xml" />
+<link rel="start" href="../" title="Начало" />
+</head>
 <body>
 <div id="header">
-<h1>Новини от Sotirov-BG.Net</h1>
+<?php
+  if ( isset($news_id) && is_numeric($news_id) )
+    printf("<h1>Sotirov-BG.Net - %s</h1>", $ntitle);
+  elseif ( isset($month) || isset($year) ) {
+    if ( isset($month) )
+      printf("<h1>Новини от %s, %4d</h1>", get_month($month), $year);
+    else
+      printf("<h1>Новини за %4d г.</h1>", $year);
+  }
+  elseif ( isset($q) )
+    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", $q);
+  else
+    printf("<h1>Новини от Sotirov-BG.Net</h1>");
+?>
 </div>
 
 <div id="navigation">
@@ -73,7 +117,7 @@
 <div id="nav_lang">
 <h2>Език</h2>
 <map id="nav_lang_map"><ul>
-<li><a href="index.en.phtml" hreflang="en" lang="en">English</a></li>
+<li><a href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en" lang="en">English</a></li>
 </ul></map></div>
 
 <div id="nav_alt">
@@ -114,9 +158,9 @@
 <div id="search">
 <h2>Търсене</h2>
 <p>Търсене в заглавия и текст на новините</p>
-<form action="?"  id="newsSearch" method="get">
+<form action="?" id="newsSearch" method="get">
 <p><label for="q">Запитване:&nbsp;<input alt="Текст за търсене" id="q" name="q" maxlength="255" size="15" type="text" /></label><br />
-<input type="submit" value="Търсене" /></p>
+<input name="search" type="submit" value="Търсене" /></p>
 </form>
 </div></div></div>
 
@@ -125,20 +169,8 @@
   if ( isset($error) )
     print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
   else {
-    if ( isset($_REQUEST['id']) )
-      $news_id = $_REQUEST['id'];
-    if ( isset($_REQUEST['q']) ) {
-      $q = $_REQUEST['q'];
-      $safe_tokens = tokenize($q, 5);
-    }
-    if ( isset($_REQUEST['m']) )
-      $month = $_REQUEST['m'];
-    if ( isset($_REQUEST['y']) )
-      $year = $_REQUEST['y'];
-
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
-    $query .= "nws.updated, usr.name, usr.firstname, ";
-    $query .= "usr.name_bg, usr.firstname_bg, usr.email ";
+    $query .= "nws.updated, usr.name_bg, usr.firstname_bg, usr.email ";
     $query .= "FROM news_bg AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
