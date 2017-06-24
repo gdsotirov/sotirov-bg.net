@@ -2,7 +2,7 @@
   /* System Utilities Script 0.2.1
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.6 2017/06/23 05:10:15 gsotirov Exp $
+   * $Id: sysutil.php,v 1.7 2017/06/24 04:55:00 gsotirov Exp $
    */
 
   /**
@@ -245,7 +245,8 @@
 
   function cpu_info () {
     $cpu_ln = shell_exec("/usr/bin/cat /proc/cpuinfo | /usr/bin/grep 'model name'");
-    $cpu_arr = preg_split("/:/", $cpu_ln);
+    $cpu_split = explode("\n", $cpu_ln);
+    $cpu_arr = preg_split("/:/", $cpu_split[0]);
 
     return sprintf("%s", trim($cpu_arr[1]));
   }
