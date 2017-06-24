@@ -2,7 +2,7 @@
   /* System Utilities Script 0.2.1
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.7 2017/06/24 04:55:00 gsotirov Exp $
+   * $Id: sysutil.php,v 1.8 2017/06/24 05:05:19 gsotirov Exp $
    */
 
   /**
@@ -43,10 +43,12 @@
         "tbps" => "<abbr title=\"Tera bits per second\">Tbps</abbr>"
       ),
       'ups' => array(
-        "CHRG" => "AC power",
-        "DISCHRG" => "Battery",
+	"OL" => "On line (AC power)",
+	"OB" => "On battery (DC power)",
+        "LB" => "Low battery",
         "RB" => "Replace battery",
-        "LB" => "Low battery"
+        "CHRG" => "Charging battery",
+        "DISCHRG" => "Dischargin battery"
       )
     ),
     'bg' => array(
@@ -82,10 +84,12 @@
         "tbps" => "<abbr title=\"Тера бита за секунда\">Тбзс</abbr>"
       ),
       'ups' => array(
-        "CHRG" => "Мрежово захранване",
-        "DISCHRG" => "Батерия",
-        "RB" => "Смяна на батерия",
-        "LB" => "Слаба батерия"
+	"OL" => "На линия (мрежово захранване)",
+	"OB" => "На батерия (без мрежово зхранване)",
+        "LB" => "Слаба батерия",
+        "RB" => "Батерия за смяна",
+        "CHRG" => "Зарежда батерия",
+        "DISCHRG" => "Разрежда батерия"
       )
     )
   );
