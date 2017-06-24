@@ -1,8 +1,8 @@
 <?php
-  /* System Utilities Script 0.2.1
+  /* System Utilities Script 0.3.0
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.8 2017/06/24 05:05:19 gsotirov Exp $
+   * $Id: sysutil.php,v 1.9 2017/06/24 05:25:25 gsotirov Exp $
    */
 
   /**
@@ -36,11 +36,9 @@
         "<abbr title=\"Peta Bytes\">PB</abbr>"
       ),
       'bit_unit_arr' => array(
-        "bps" => "<abbr title=\"bits per second\">bps</abbr>",
-        "kbps" => "<abbr title=\"Kilo bits per second\">Kbps</abbr>",
-        "mbps" => "<abbr title=\"Mega bits per second\">Mbps</abbr>",
-        "gbps" => "<abbr title=\"Giga bits per second\">Gbps</abbr>",
-        "tbps" => "<abbr title=\"Tera bits per second\">Tbps</abbr>"
+        "kbit/s" => "<abbr title=\"Kilo bits per second\">Kbps</abbr>",
+        "Mbit/s" => "<abbr title=\"Mega bits per second\">Mbps</abbr>",
+        "Gbit/s" => "<abbr title=\"Giga bits per second\">Gbps</abbr>"
       ),
       'ups' => array(
 	"OL" => "On line (AC power)",
@@ -77,11 +75,9 @@
         "<abbr title=\"Пета Байта\">ПБ</abbr>"
       ),
       'bit_unit_arr' => array(
-        "bps" => "<abbr title=\"бита за секунда\">бзс</abbr>",
-        "kbps" => "<abbr title=\"Кило бита за секунда\">Кбзс</abbr>",
-        "mbps" => "<abbr title=\"Мега бита за секунда\">Мбзс</abbr>",
-        "gbps" => "<abbr title=\"Гига бита за секунда\">Гбзс</abbr>",
-        "tbps" => "<abbr title=\"Тера бита за секунда\">Тбзс</abbr>"
+        "kbit/s" => "<abbr title=\"Кило бита за секунда\">Кбзс</abbr>",
+        "Mbit/s" => "<abbr title=\"Мега бита за секунда\">Мбзс</abbr>",
+        "Gbit/s" => "<abbr title=\"Гига бита за секунда\">Гбзс</abbr>",
       ),
       'ups' => array(
 	"OL" => "На линия (мрежово захранване)",
