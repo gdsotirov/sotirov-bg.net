@@ -72,7 +72,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници, новини" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.44 2017/03/10 19:52:08 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.45 2017/06/28 17:42:29 gsotirov Exp $" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
 <link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
@@ -232,7 +232,7 @@
         if ( isset($q) )
           mark_token_text($safe_tokens, $item['title']);
         print("<h3>".$item['title']."</h3>\n");
-        $mail_to = $item['firstname']."%20".$item['name']."%20%3C".$item['email']."%3E";
+        $mail_to = $item['firstname_bg']."%20".$item['name_bg']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
         print("<p class=\"italic\">Публикувано от ");
         print("<a href=\"mailto:".$mail_to."\">");
