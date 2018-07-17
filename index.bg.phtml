@@ -3,6 +3,7 @@
   include 'sysutil.php';
   print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
   include '../news.php.inc';
+  $domain = "sotirov-bg.net";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -17,7 +18,7 @@
 <meta name="keywords" content="Георги Сотиров, Сотиров, сървър, проекти, страници" />
 <meta name="robots" content="INDEX, FOLLOW" />
 <meta name="robots" content="ARCHIVE" />
-<meta name="CVS" content="$Id: index.bg.phtml,v 1.35 2018/03/03 12:23:46 gsotirov Exp $" />
+<meta name="CVS" content="$Id: index.bg.phtml,v 1.36 2018/07/17 12:36:47 gsotirov Exp $" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
 <link rel="stylesheet" href="style/default.css" media="screen, print" title="По подразбиране" type="text/css" />
@@ -134,19 +135,19 @@ title="Local Area Network" lang="en">LAN</abbr> връзка. Максималн
 <h3>Огледала</h3>
 <ul class="inline">
 <li><a hreflang="en" href="http://slackware.com/">Slackware</a> - всички версии с изходен код (по
-<a href="ftp://<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/slackware/">
+<a href="ftp://<?php echo $domain ?>/pub/mirrors/slackware/">
   <abbr lang="en" title="File Transfer Protocol">FTP</abbr></a>,
-<a href="http://ftp.<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/slackware/">
+<a href="http://ftp.<?php echo $domain ?>/pub/mirrors/slackware/">
   <abbr lang="en" title="Hypertext Transfer Protocol">HTTP</abbr></a>,
-<a href="https://ftp.<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/slackware/">
+<a href="https://ftp.<?php echo $domain ?>/pub/mirrors/slackware/">
   <abbr lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
 <li><a hreflang="en" href="http://gnu.org/"><abbr title="Gnu's Not Unix">GNU</abbr></a> - всичко (по
-<a href="ftp://<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/gnu/">
+<a href="ftp://<?php echo $domain ?>/pub/mirrors/gnu/">
   <abbr lang="en" title="File Transfer Protocol">FTP</abbr></a>,
-<a href="http://ftp.<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/gnu/">
+<a href="http://ftp.<?php echo $domain ?>/pub/mirrors/gnu/">
   <abbr lang="en" title="Hypertext Transfer Protocol">HTTP</abbr></a>,
-<a href="https://ftp.<?php echo $_SERVER['HTTP_HOST'] ?>/pub/mirrors/gnu/">
+<a href="https://ftp.<?php echo $domain ?>/pub/mirrors/gnu/">
   <abbr lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
 </ul>
