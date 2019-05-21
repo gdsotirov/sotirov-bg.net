@@ -34,7 +34,7 @@ sub fetch_data {
      $query .= "       nws.body,\n";
      $query .= "       nws.author,\n";
      $query .= "       nws.posted,\n";
-     $query .= "       nws.updated,\n";
+     $query .= "       IFNULL(nws.updated, nws.posted) updated,\n";
      $query .= "       usr.$item_author_name_field,\n";
      $query .= "       usr.$item_author_fname_field,\n";
      $query .= "       usr.email\n";
@@ -203,8 +203,8 @@ elsif ( $format eq "rss" ) {
   $twig->set_pretty_print('indented');
   $twig->parse($rss->as_string);
   if ( $version eq "0.91" or $version eq "2.0" ) {
-    $twig->add_stylesheet(xsl => "http://".$ENV{SERVER_NAME}."/style/rss.".$feed_lang_id.".xsl");
-    $twig->add_stylesheet(css => "http://".$ENV{SERVER_NAME}."/style/rss.css");
+    $twig->add_stylesheet(xsl => "/style/rss.".$feed_lang_id.".xsl");
+    $twig->add_stylesheet(css => "/style/rss.css");
   }
   use bytes;
   print $twig->sprint;
