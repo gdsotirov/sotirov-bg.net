@@ -1,5 +1,5 @@
 <?php
-  $words;
+  global $words;
 
   function mark_token_text($tokens, &$text) {
     while ( list($idx, $token) = each($tokens) ) {
@@ -11,7 +11,6 @@
   }
 
   function mark_token_html($tokens, &$text) {
-    global $words;
     $words = $tokens;
     $text = preg_replace_callback("/>([^<]+?)</", //"mark_callback"
                                   create_function(
@@ -25,8 +24,8 @@
 
   /**
    * Function for tokenization of search string
-   * @param $str String that should be tokenized
-   * @param $count Extract count tokens from the string. Defaulting to 5
+   * @param str String that should be tokenized
+   * @param count Extract count tokens from the string. Defaulting to 5
    * @return Array with tokens extracted from the string
    */
    function tokenize($str, $count = 5) {
