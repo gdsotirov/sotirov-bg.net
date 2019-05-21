@@ -103,7 +103,7 @@
       return $i18n_arr[$I18N_LANG][$msg_id];
     }
     else {
-      error_log("l10n error: LANG: $lang, message:'$s'");
+      error_log("l10n error: LANG: $I18N_LANG, message:'$msg_id'");
       return "???";
     }
   }
