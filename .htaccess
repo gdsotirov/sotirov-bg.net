@@ -1,5 +1,6 @@
 # Protect version control files
 # Requires mod_alias and AllowOverride FileInfo enabled in server config
 
-RedirectMatch 404 "(?i)/\.?(cvs|svn|git|hg|bzr)"
+RedirectMatch 404 "(?i)/\.?(svn|git|hg|bzr)"
+RedirectMatch 404 "/CVS"
 
