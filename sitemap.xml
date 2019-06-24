@@ -2,22 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+                            http://www.w3.org/1999/xhtml
+                            http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
 <url>
   <loc>http://sotirov-bg.net/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/index.bg" /> 
   <lastmod>2019-05-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/news/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/news/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/news/index.bg" /> 
   <lastmod>2019-05-09</lastmod>
   <changefreq>daily</changefreq>
   <priority>0.9</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/news/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/news/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/slackpack/</loc>
@@ -27,51 +30,51 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/index.bg" /> 
   <lastmod>2019-05-19</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/cv/cv</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/cv/cv.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/cv/cv.bg" /> 
   <lastmod>2019-05-19</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/cv/cv.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/cv/cv.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/projects/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/projects/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/projects/index.bg" /> 
   <lastmod>2019-05-24</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/projects/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~gsotirov/projects/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/~ibeleva/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~ibeleva/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~iveleva/index.bg" /> 
   <lastmod>2017-01-06</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~ibeleva/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/~iveleva/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/calc/icalc/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/icalc/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/apps/calc/icalc/index.bg" /> 
   <lastmod>2019-05-30</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/icalc/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/apps/calc/icalc/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/calc/mcalc/</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/mcalc/index.en" /> 
-  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/apps/calc/mcalc/index.bg" /> 
   <lastmod>2019-05-30</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
+  <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/mcalc/index.en" />
+  <xhtml:link rel="alternate" hreflang="bg" href="http://sotirov-bg.net/apps/calc/mcalc/index.bg" />
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/7klas/</loc>
