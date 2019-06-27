@@ -7,25 +7,30 @@
 
   function get_month($number) {
     switch ($number) {
-      case  1: return 'Януари';
-      case  2: return 'Февруари';
-      case  3: return 'Март';
-      case  4: return 'Април';
-      case  5: return 'Май';
-      case  6: return 'Юни';
-      case  7: return 'Юли';
-      case  8: return 'Август';
-      case  9: return 'Септември';
-      case 10: return 'Октомври';
-      case 11: return 'Ноември';
-      case 12: return 'Декември';
+      case  1: $month = 'Януари';     break;
+      case  2: $month = 'Февруари';   break;
+      case  3: $month = 'Март';       break;
+      case  4: $month = 'Април';      break;
+      case  5: $month = 'Май';        break;
+      case  6: $month = 'Юни';        break;
+      case  7: $month = 'Юли';        break;
+      case  8: $month = 'Август';     break;
+      case  9: $month = 'Септември';  break;
+      case 10: $month = 'Октомври';   break;
+      case 11: $month = 'Ноември';    break;
+      case 12: $month = 'Декември';   break;
+      default: $month = '';
     }
+
+    return $month;
   }
 
-  if ( !$news_c = mysql_connect($news_host, $news_user, $news_pass) )
+  if ( !$news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     $error = CANNOT_CONNECT;
-  if ( !mysql_select_db($news_db, $news_c) )
+  }
+  if ( !mysql_select_db($news_db, $news_c) ) {
     $error = CANNOT_SEL_DB;
+  }
 
   if ( isset($_REQUEST['id']) ) {
     $news_id = $_REQUEST['id'];
@@ -40,10 +45,12 @@
     $q = $_REQUEST['q'];
     $safe_tokens = tokenize($q, 5);
   }
-  if ( isset($_REQUEST['m']) )
+  if ( isset($_REQUEST['m']) ) {
     $month = $_REQUEST['m'];
-  if ( isset($_REQUEST['y']) )
+  }
+  if ( isset($_REQUEST['y']) ) {
     $year = $_REQUEST['y'];
+  }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -53,18 +60,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <?php
-  if ( isset($news_id) && is_numeric($news_id) )
+  if ( isset($news_id) && is_numeric($news_id) ) {
     $page_title = "Sotirov-BG.Net - ".$ntitle;
-  elseif ( isset($month) || isset($year) ) {
-    if ( isset($month) )
-      $page_title = sprintf("Sotirov-BG.Net - Новини от %s, %4d", get_month($month), $year);
-    else
-      $page_title = sprintf("Sotirov-BG.Net - Новини за %4d г.", $year);
   }
-  elseif ( isset($q) )
+  elseif ( isset($month) || isset($year) ) {
+    if ( isset($month) ) {
+      $page_title = sprintf("Sotirov-BG.Net - Новини от %s, %4d", get_month($month), $year);
+    }
+    else {
+      $page_title = sprintf("Sotirov-BG.Net - Новини за %4d г.", $year);
+    }
+  }
+  elseif ( isset($q) ) {
     $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", $q);
-  else
+  }
+  else {
     $page_title = "Sotirov-BG.Net - Новини";
+  }
 ?>
 <title><?php echo $page_title ?></title>
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
@@ -91,18 +103,23 @@
 <body>
 <div id="header">
 <?php
-  if ( isset($news_id) && is_numeric($news_id) )
+  if ( isset($news_id) && is_numeric($news_id) ) {
     printf("<h1>Sotirov-BG.Net - %s</h1>", $ntitle);
-  elseif ( isset($month) || isset($year) ) {
-    if ( isset($month) )
-      printf("<h1>Новини от %s, %4d</h1>", get_month($month), $year);
-    else
-      printf("<h1>Новини за %4d г.</h1>", $year);
   }
-  elseif ( isset($q) )
+  elseif ( isset($month) || isset($year) ) {
+    if ( isset($month) ) {
+      printf("<h1>Новини от %s, %4d</h1>", get_month($month), $year);
+    }
+    else {
+      printf("<h1>Новини за %4d г.</h1>", $year);
+    }
+  }
+  elseif ( isset($q) ) {
     printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", $q);
-  else
+  }
+  else {
     printf("<h1>Новини от Sotirov-BG.Net</h1>");
+  }
 ?>
 </div>
 
@@ -167,8 +184,9 @@
 
 <div id="content">
 <?php
-  if ( isset($error) )
+  if ( isset($error) ) {
     print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
+  }
   else {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, nws.posted, ";
     $query .= "nws.updated, usr.name_bg, usr.firstname_bg, usr.email ";
@@ -190,15 +208,17 @@
     elseif ( isset($month) || isset($year) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id ";
       if ( isset($month) ) {
-        if ( is_numeric($month) && (int)$month >= 1 && (int)$month <= 12 )
+        if ( is_numeric($month) && (int)$month >= 1 && (int)$month <= 12 ) {
           $query .= "AND Month(nws.posted) = $month ";
+        }
         else {
           print("<p class=\"error\">Недействителен номер на месец '".htmlentities($month, ENT_QUOTES, "UTF-8")."'!</p>\n");
           unset($month);
         }
       }
-      if ( isset($year) && is_numeric($year) && (int)$year >= 2004 && (int)$year <= date('Y') )
+      if ( isset($year) && is_numeric($year) && (int)$year >= 2004 && (int)$year <= date('Y') ) {
         $query .= "AND Year(nws.posted) = $year ";
+      }
       else {
         print("<p class=\"error\">Недействителна година '".htmlentities($year, ENT_QUOTES, "UTF-8")."'!</p>\n");
         $year = date('Y');
@@ -211,10 +231,12 @@
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id AND (";
       while ( list($idx, $token) = each($safe_tokens) ) {
         $sql_token = mysql_real_escape_string($token, $news_c);
-        if ( $idx > 0 )
+        if ( $idx > 0 ) {
           $query .= "AND (nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
-        else
+        }
+        else {
           $query .= "(nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
+        }
       }
       $query .= ") ";
       $query .= "ORDER BY nws.posted DESC";
@@ -230,8 +252,9 @@
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
         print("<div class=\"news\" id=\"newsid_".$item['id']."\">\n");
-        if ( isset($q) )
+        if ( isset($q) ) {
           mark_token_text($safe_tokens, $item['title']);
+        }
         print("<h3>".$item['title']."</h3>\n");
         $mail_to = $item['firstname_bg']."%20".$item['name_bg']."%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
@@ -244,27 +267,31 @@
         }
         print("</p>\n");
         print("<div class=\"body\">\n");
-        if ( isset($q) )
+        if ( isset($q) ) {
           mark_token_html($safe_tokens, $item['body']);
+        }
         print($item['body']);
         print("</div>\n");
         print("</div>\n\n");
       }
     }
     else {
-      if ( isset($news_id) )
+      if ( isset($news_id) ) {
         print("<p class=\"error\">Няма такава новина.</p>\n");
-      elseif ( isset($month) or isset($year) ) {
+      }
+      elseif ( isset($month) || isset($year) ) {
         print("<p class=\"error\">Няма новини от ");
-        if ( isset($month) )
-         print(get_month($month).", ");
+        if ( isset($month) ) {
+          print(get_month($month).", ");
+        }
         print("$year</p>\n");
       }
       elseif ( isset($q) ) {
         print("<p class=\"info\">Търсеният от вас низ '".htmlentities($q, ENT_QUOTES, "UTF-8")."' не съвпадна с никакви новини.</p>");
       }
-      else
+      else {
         print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
+      }
     }
     mysql_free_result($res);
   }
