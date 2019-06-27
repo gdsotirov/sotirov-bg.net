@@ -69,16 +69,19 @@ href="#copyright" hreflang="en">Copyright</a>&nbsp;]
           print("$title</a><br />\n");
         }
       }
-      else
+      else {
         print("News currently not available.\n");
+      }
       mysql_free_result($res);
     }
-    else
+    else {
       print("News currently not available.\n");
+    }
     mysql_close($news_c);
   }
-  else
+  else {
     print("News currently not available.\n");
+  }
 ?></p>
 <p>
 <a href="news/index.en" hreflang="en">Archive</a>&nbsp;|&nbsp;

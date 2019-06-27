@@ -116,12 +116,15 @@
     $single_str = i18n_msg($single_str_id);
     $multiple_str = i18n_msg($multiple_str_id);
 
-    if ($unit == 0.0)
+    if ($unit == 0.0) {
       return "";
-    else if ($unit > 1.0)
+    }
+    else if ($unit > 1.0) {
       return sprintf("$format %s ", $unit, $multiple_str);
-    else
+    }
+    else {
       return sprintf("$format %s ", $unit, $single_str);
+    }
   }
 
   /**
@@ -170,8 +173,9 @@
    * @desc Human readable memory format
    */
   function hr_mem($mem_in_bytes) {
-    if ( !settype($mem_in_bytes, "float") )
+    if ( !settype($mem_in_bytes, "float") ) {
       return "";
+    }
     $unit = 0;
     $unit_arr = i18n_msg('inf_amnt_arr');
     while ($mem_in_bytes > 1024) {

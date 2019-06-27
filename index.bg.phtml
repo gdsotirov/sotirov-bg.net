@@ -69,16 +69,19 @@ href="#copyright" hreflang="bg">Авторски права</a>&nbsp;]
           print("$title</a><br />\n");
         }
       }
-      else
+      else {
         print("Новините не са достъпни в момента.\n");
+      }
       mysql_free_result($res);
     }
-    else
+    else {
       print("Новините не са достъпни в момента.\n");
+    }
     mysql_close($news_c);
   }
-  else
+  else {
     print("Новините не са достъпни в момента.\n");
+  }
 ?></p>
 <p>
 <a href="news/index.bg">Архив</a>&nbsp;|&nbsp;
