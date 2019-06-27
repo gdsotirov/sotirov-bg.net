@@ -91,7 +91,7 @@ function sprintf(fstring) {
   }
 
   converters['e'] =  function(flags, width, precision, arg) {
-    iPrecision = parseInt(precision);
+    var iPrecision = parseInt(precision);
     if ( isNaN(iPrecision) )
       iPrecision = 6;
     rs = (Math.abs(arg)).toExponential(iPrecision);
@@ -101,7 +101,7 @@ function sprintf(fstring) {
   }
 
   converters['f'] = function(flags, width, precision, arg) {
-    iPrecision = parseInt(precision);
+    var iPrecision = parseInt(precision);
     if ( isNaN(iPrecision) )
       iPrecision = 6;
     rs = (Math.abs(arg)).toFixed(iPrecision);
@@ -115,14 +115,14 @@ function sprintf(fstring) {
   }
 
   converters['g'] = function(flags, width, precision, arg) {
-    iPrecision = parseInt(precision);
-    absArg = Math.abs(arg);
-    rse = absArg.toExponential();
-    rsf = absArg.toFixed(6);
+    var iPrecision = parseInt(precision);
+    var absArg = Math.abs(arg);
+    var rse = absArg.toExponential();
+    var rsf = absArg.toFixed(6);
     if( !isNaN(iPrecision) ) {
-      rsep = absArg.toExponential(iPrecision);
+      var rsep = absArg.toExponential(iPrecision);
       rse = rsep.length < rse.length ? rsep : rse;
-      rsfp = absArg.toFixed(iPrecision);
+      var rsfp = absArg.toFixed(iPrecision);
       rsf = rsfp.length < rsf.length ? rsfp : rsf;
     }
     if ( rse.indexOf('.') < 0 && flags.indexOf('#') >= 0 )
@@ -173,6 +173,7 @@ function sprintf(fstring) {
   var fpRE = /([^%]*)%([-+ #]*)(\d*)\.?(\d*)([cdieEfFgGosuxX%])([^%]*)/g;
   var retstr = "";
   var index = 1;
+  var fps;
 
   while ( fps = fpRE.exec(fstring) ) {
     if ( arguments[index] || fps[5] == '%' )
