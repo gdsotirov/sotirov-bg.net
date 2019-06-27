@@ -150,10 +150,8 @@ return nStr + nStrEnd;
 }
 function toFormattedNF()
 {	
-var pos;
 var nNum = this.num; 
-var nStr;            
-var splitString = new Array(2);   
+var nStr;
 if (this.roundToPlaces) {
 nNum = this.getRounded(nNum);
 nStr = this.preserveZeros(Math.abs(nNum)); 
@@ -210,7 +208,7 @@ return (nStr);
 }
 function toPercentageNF()
 {
-nNum = this.num * 100;
+var nNum = this.num * 100;
 nNum = this.getRounded(nNum);
 return nNum + '%';
 }
@@ -232,13 +230,14 @@ if (eLoc != -1) {
 var plusLoc = newVal.toLowerCase().indexOf('+');
 var negLoc = newVal.toLowerCase().indexOf('-', eLoc); 
 var justNumber = newVal.substring(0, eLoc);
+var places;
 if (negLoc != -1) {
-var places = newVal.substring(negLoc + 1, newVal.length);
-justNumber = this.moveDecimalAsString(justNumber, true, parseInt(places));
+  places = newVal.substring(negLoc + 1, newVal.length);
+  justNumber = this.moveDecimalAsString(justNumber, true, parseInt(places));
 } else {
 if (plusLoc == -1) plusLoc = eLoc;
-var places = newVal.substring(plusLoc + 1, newVal.length);
-justNumber = this.moveDecimalAsString(justNumber, false, parseInt(places));
+  places = newVal.substring(plusLoc + 1, newVal.length);
+  justNumber = this.moveDecimalAsString(justNumber, false, parseInt(places));
 }
 newVal = justNumber;
 }
@@ -271,16 +270,17 @@ if (spaces <= 0) return val;
 var newVal = val + '';
 var extraZ = this.getZeros(spaces);
 var re1 = new RegExp('([0-9.]+)');
+var re2;
 if (left) {
 newVal = newVal.replace(re1, extraZ + '$1');
-var re2 = new RegExp('(-?)([0-9]*)([0-9]{' + spaces + '})(\\.?)');		
+re2 = new RegExp('(-?)([0-9]*)([0-9]{' + spaces + '})(\\.?)');		
 newVal = newVal.replace(re2, '$1$2.$3');
 } else {
 var reArray = re1.exec(newVal); 
 if (reArray != null) {
 newVal = newVal.substring(0,reArray.index) + reArray[1] + extraZ + newVal.substring(reArray.index + reArray[0].length); 
 }
-var re2 = new RegExp('(-?)([0-9]*)(\\.?)([0-9]{' + spaces + '})');
+re2 = new RegExp('(-?)([0-9]*)(\\.?)([0-9]{' + spaces + '})');
 newVal = newVal.replace(re2, '$1$2$4.');
 }
 newVal = newVal.replace(/\.$/, ''); 
@@ -329,7 +329,7 @@ return val;
 }
 function justNumberNF(val)
 {
-newVal = val + '';
+var newVal = val + '';
 var isPercentage = false;
 if (newVal.indexOf('%') != -1) {
 newVal = newVal.replace(/\%/g, '');
