@@ -45,11 +45,17 @@
     $q = $_REQUEST['q'];
     $safe_tokens = tokenize($q, 5);
   }
-  if ( isset($_REQUEST['m']) ) {
-    $month = $_REQUEST['m'];
+  if ( isset($_REQUEST['m']) && is_numeric($_REQUEST['m']) ) {
+    $month = (int)$_REQUEST['m'];
+    if ( $month < 1 || $month > 12 ) {
+      unset($month);
+    }
   }
-  if ( isset($_REQUEST['y']) ) {
+  if ( isset($_REQUEST['y']) && is_numeric($_REQUEST['y']) ) {
     $year = $_REQUEST['y'];
+    if ( $year < 2004 && $year > date("Y") ) {
+      unset($year);
+    }
   }
 ?>
 
@@ -72,7 +78,7 @@
     }
   }
   elseif ( isset($q) ) {
-    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", $q);
+    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", htmlspecialchars($q, ENT_XHTML, 'UTF-8'));
   }
   else {
     $page_title = "Sotirov-BG.Net - Новини";
@@ -114,7 +120,7 @@
     }
   }
   elseif ( isset($q) ) {
-    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", $q);
+    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_XHTML, 'UTF-8'));
   }
   else {
     printf("<h1>Новини от Sotirov-BG.Net</h1>");
