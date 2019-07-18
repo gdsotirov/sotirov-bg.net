@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Written by Georgi D. Sotirov <gdsotirov@dir.bg> -->
-<!-- $Id: rss.bg.xsl,v 1.4 2006/05/21 10:45:41 gsotirov Exp $ -->
 
 <!DOCTYPE html>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">

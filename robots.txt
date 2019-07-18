@@ -1,5 +1,4 @@
 # Robots Exclusions file for sotirov-bg.net
-# $Id: robots.txt,v 1.10 2017/06/29 06:57:12 gsotirov Exp $
 
 User-agent: *
 Disallow: /bginfo/

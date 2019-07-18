@@ -1,8 +1,6 @@
 # This script is intended to gnerate the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.pl.inc,v 1.30 2017/01/06 12:16:58 gsotirov Exp $
-#
 
 use strict;
 use CGI;

@@ -2,8 +2,6 @@
 # This script is intended to localize the news feeds of Sotirov-BG.Net
 # Written by Georgi D. Sotirov <gdsotirov@dir.bg>
 #
-# $Id: feed.bg.pl,v 1.7 2006/06/21 19:19:01 gsotirov Exp $
-#
 
 use strict;
 use Filter::Include;

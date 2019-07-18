@@ -2,7 +2,6 @@
   /* System Utilities Script 0.3.0
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
-   * $Id: sysutil.php,v 1.9 2017/06/24 05:25:25 gsotirov Exp $
    */
 
   /**
