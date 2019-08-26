@@ -78,7 +78,7 @@
     }
   }
   elseif ( isset($q) ) {
-    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", htmlspecialchars($q, ENT_XHTML, 'UTF-8'));
+    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", htmlspecialchars($q, ENT_QUOTES | ENT_XHTML, 'UTF-8'));
   }
   else {
     $page_title = "Sotirov-BG.Net - Новини";
@@ -120,7 +120,7 @@
     }
   }
   elseif ( isset($q) ) {
-    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_XHTML, 'UTF-8'));
+    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_QUOTES | ENT_XHTML, 'UTF-8'));
   }
   else {
     printf("<h1>Новини от Sotirov-BG.Net</h1>");
