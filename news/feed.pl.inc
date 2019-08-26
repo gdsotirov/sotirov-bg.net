@@ -8,6 +8,7 @@ use DBI;
 use Date::Parse;
 use Date::Language;
 use Date::Format;
+use HTML::Entities;
 use XML::Twig;
 use XML::RSS;
 use XML::Atom::Syndication::Feed;
@@ -137,7 +138,7 @@ elsif ( $format eq "rss" ) {
 
   my ($row_count, $res) = fetch_data;
 
-  my $rss = new XML::RSS (version => $version, encoding => 'utf-8');
+  my $rss = XML::RSS->new(version => $version, encode_output => 0, encoding => 'utf-8');
 
   # Build the chanel
   my $dc_date = time2str("%Y-%m-%dT%T%z", str2time($res->[0]->{'updated'}), "GMT");
@@ -164,7 +165,7 @@ elsif ( $format eq "rss" ) {
                   updateBase       => "2004-12-01T00:00+00:00"
                 });
   $rss->image(
-    title  => "Sotirov-BG.Net",
+    title  => $feed_title,
     url    => "http://".$ENV{SERVER_NAME}."/img/sotirov_net",
     link   => $feed_link,
     dc => {
@@ -185,7 +186,7 @@ elsif ( $format eq "rss" ) {
                    link        => $feed_entry_base.$res->[$i]->{'id'},
                    permaLink   => $feed_entry_base.$res->[$i]->{'id'},
                    content     => "application/xhtml+xml",
-                   description => $res->[$i]->{'body'},
+                   description => encode_entities($res->[$i]->{'body'}, '<>&"'),
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
                    dc => {
