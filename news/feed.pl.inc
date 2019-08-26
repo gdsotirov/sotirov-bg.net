@@ -19,7 +19,7 @@ use XML::Atom::Syndication::Text;
 use XML::Atom::Syndication::Content;
 
 my $q = new CGI;
-my $format = lc $q->param('f');
+my $format = lc($q->param('f') || '');
 
 # Function    : fetch_data
 # Description : Fetch the data for the feed
@@ -91,7 +91,7 @@ if ( $format eq "atom" ) {
   $feed->rights($feed_copy);
   my $gen = XML::Atom::Syndication::Generator->new;
   $gen->agent("Perl");
-  $gen->uri("http://perl.com");
+  $gen->uri("http://perl.com/");
   $gen->version($]);
   $feed->generator($gen);
 
@@ -133,7 +133,7 @@ if ( $format eq "atom" ) {
 #
 elsif ( $format eq "rss" ) {
   print $q->header(-type=>'application/xml',-charset=>'utf-8');
-  my $version = $q->param('v');
+  my $version = $q->param('v') || '2.0';
 
   my ($row_count, $res) = fetch_data;
 
@@ -209,5 +209,5 @@ elsif ( $format eq "rss" ) {
   no bytes;
 }
 else {
-  print $q->header(-location => '/news');
+  print $q->header(-location => '/news', charset => 'utf-8');
 }
