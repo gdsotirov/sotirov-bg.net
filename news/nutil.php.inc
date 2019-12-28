@@ -5,7 +5,7 @@
    * @param string $text A string where to replace tokens in (by reference)
    */
   function mark_token_text($tokens, &$text) {
-    while ( list($idx, $token) = each($tokens) ) {
+    foreach ($tokens as $idx => $token) {
       $safe_token = preg_replace(array('/\./', '/\-/'), array('\.', '\-'), $token);
       $text = preg_replace("/($safe_token)/ui",
                            "<span class=\"token".++$idx."\">$1</span>",

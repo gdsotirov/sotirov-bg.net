@@ -234,7 +234,7 @@
     // Search by tokens in the text
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id AND (";
-      while ( list($idx, $token) = each($safe_tokens) ) {
+      foreach ( $safe_tokens as $idx => $token) {
         $sql_token = mysql_real_escape_string($token, $news_c);
         if ( $idx > 0 ) {
           $query .= "AND (nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
