@@ -1,6 +1,4 @@
 <?php
-  global $words;
-
   function mark_token_text($tokens, &$text) {
     while ( list($idx, $token) = each($tokens) ) {
       $safe_token = preg_replace(array('/\./', '/\-/'), array('\.', '\-'), $token);
@@ -11,14 +9,11 @@
   }
 
   function mark_token_html($tokens, &$text) {
-    $words = $tokens;
-    $text = preg_replace_callback("/>([^<]+?)</", //"mark_callback"
-                                  create_function(
-                                  '$matches',
-                                  'global $words;
-                                   mark_token_text($words, $matches[1]);
-                                   return ">".$matches[1]."<";'
-                                  ),
+    $text = preg_replace_callback("/>([^<]+?)</", /* text between tags */
+                                  function ($matches) use($tokens) {
+                                    mark_token_text($tokens, $matches[1]);
+                                    return ">".$matches[1]."<";
+                                  },
                                   $text);
   }
 
