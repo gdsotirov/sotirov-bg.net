@@ -8,7 +8,7 @@
                             http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
 <url>
   <loc>http://sotirov-bg.net/</loc>
-  <lastmod>2019-05-19</lastmod>
+  <lastmod>2020-01-10</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/index.en" />
@@ -16,7 +16,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/news/</loc>
-  <lastmod>2019-05-09</lastmod>
+  <lastmod>2020-01-10</lastmod>
   <changefreq>daily</changefreq>
   <priority>0.9</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/news/index.en" />
@@ -24,13 +24,13 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/slackpack/</loc>
-  <lastmod>2019-05-07</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.0</priority>
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/</loc>
-  <lastmod>2019-05-19</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/index.en" />
@@ -38,7 +38,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/cv/cv</loc>
-  <lastmod>2019-05-19</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/cv/cv.en" />
@@ -46,7 +46,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/~gsotirov/projects/</loc>
-  <lastmod>2019-05-24</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~gsotirov/projects/index.en" />
@@ -54,7 +54,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/~ibeleva/</loc>
-  <lastmod>2017-01-06</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/~ibeleva/index.en" />
@@ -62,7 +62,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/calc/icalc/</loc>
-  <lastmod>2019-05-30</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/icalc/index.en" />
@@ -70,7 +70,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/calc/mcalc/</loc>
-  <lastmod>2019-05-30</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
   <xhtml:link rel="alternate" hreflang="en" href="http://sotirov-bg.net/apps/calc/mcalc/index.en" />
@@ -78,7 +78,7 @@
 </url>
 <url>
   <loc>http://sotirov-bg.net/apps/7klas/</loc>
-  <lastmod>2019-06-02</lastmod>
+  <lastmod>2029-01-10</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.0</priority>
 </url>
