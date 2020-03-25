@@ -1,5 +1,5 @@
 <?php
-  /* System Utilities Script 0.3.0
+  /* System Utilities Script 0.4.0
    * Some functions are Slackware specific
    * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
    */
@@ -40,8 +40,8 @@
         "Gbit/s" => "<abbr title=\"Giga bits per second\">Gbps</abbr>"
       ),
       'ups' => array(
-	"OL" => "On line (AC power)",
-	"OB" => "On battery (DC power)",
+        "OL" => "On line (AC power)",
+        "OB" => "On battery (DC power)",
         "LB" => "Low battery",
         "RB" => "Replace battery",
         "CHRG" => "Charging battery",
@@ -79,8 +79,8 @@
         "Gbit/s" => "<abbr title=\"Гига бита за секунда\">Гбзс</abbr>",
       ),
       'ups' => array(
-	"OL" => "На линия (мрежово захранване)",
-	"OB" => "На батерия (без мрежово зхранване)",
+        "OL" => "На линия (мрежово захранване)",
+        "OB" => "На батерия (без мрежово зхранване)",
         "LB" => "Слаба батерия",
         "RB" => "Батерия за смяна",
         "CHRG" => "Зарежда батерия",
@@ -149,10 +149,14 @@
    * @desc get system load average
    */
   function loadavg() {
-    $la = shell_exec("/usr/bin/cat /proc/loadavg");
-    $la_arr = explode(' ', $la);
-    $p_arr = explode('/', $la_arr[3]);
-    return sprintf(i18n_msg('la_msg'), $la_arr[0], $la_arr[1], $la_arr[2], $p_arr[0], $p_arr[1]);
+    exec("/usr/bin/cat /proc/loadavg", $la_out, $res);
+    if ( !$res ) {
+      $la = $la_out[0];
+      $la_arr = explode(' ', $la);
+      $p_arr = explode('/', $la_arr[3]);
+      return sprintf(i18n_msg('la_msg'), $la_arr[0], $la_arr[1], $la_arr[2], $p_arr[0], $p_arr[1]);
+    }
+    return "n/a";
   }
 
   /**
@@ -160,11 +164,16 @@
    * @desc get system up since and up time
    */
   function sysup() {
-    $up_arr = preg_split("/\s+/", trim(shell_exec("/usr/bin/cat /proc/stat | /usr/bin/grep -w btime")));
-    $upsince = $up_arr[1];
-    $uptime = time() - $upsince;
-    $upsince_str = date("Y-m-d H:i:s T", $upsince);
-    return array($upsince_str, uptime($uptime));
+    exec("/usr/bin/cat /proc/stat | /usr/bin/grep -w btime", $up_out, $res);
+    if ( !$res ) {
+      $up = $up_out[0];
+      $up_arr = preg_split("/\s+/", trim($up));
+      $upsince = $up_arr[1];
+      $uptime = time() - $upsince;
+      $upsince_str = date("Y-m-d H:i:s T", $upsince);
+      return array($upsince_str, uptime($uptime));
+    }
+    return array("n/a", "n/a");
   }
 
   /**
@@ -200,64 +209,81 @@
    * @desc provides associative array with memory info
    */
   function meminfo() {
-    $MAJMIN = trim(shell_exec("/usr/bin/uname -r | /usr/bin/awk -F. '{ print $1\".\"$2 }'"));
+    exec("/usr/bin/uname -r | /usr/bin/awk -F. '{ print $1\".\"$2 }'", $linux_ver, $res);
 
-    if ($MAJMIN == "2.4") {
-      $mi = shell_exec("/usr/bin/cat /proc/meminfo");
-      $mi_arr = split("\n", $mi);
-      $pm_arr = preg_split("/\s+/", $mi_arr[1]);
-      $vm_arr = preg_split("/\s+/", $mi_arr[2]);
+    if ( !$res ) {
+      $MAJMIN = trim($linux_ver[0]);
 
-      $mi_arr['MemFree']   = $pm_arr[1];
-      $mi_arr['MemTotal']  = $pm_arr[3];
-      $mi_arr['SwapFree']  = $vm_arr[1];
-      $mi_arr['SwapTotal'] = $vm_arr[3];
-    }
-    else {
-      $mi = trim(shell_exec("/usr/bin/cat /proc/meminfo"));
+      exec("/usr/bin/cat /proc/meminfo", $mi_arr_out, $res);
 
-      $mi_raw_arr = split("\n", $mi);
+      if ( !$res ) {
+        if ($MAJMIN == "2.4") {
+          //$mi_arr = split("\n", $mi_res);
+          $pm_arr = preg_split("/\s+/", $mi_arr_out[1]);
+          $vm_arr = preg_split("/\s+/", $mi_arr_out[2]);
 
-      for ($i = 0; $i < sizeof($mi_raw_arr); ++$i) {
-        $info = preg_split("/\s+/", trim($mi_raw_arr[$i]));
-        $mi_arr[trim($info[0], ":")] = $info[1];
+          $mi_arr['MemFree']   = $pm_arr[1];
+          $mi_arr['MemTotal']  = $pm_arr[3];
+          $mi_arr['SwapFree']  = $vm_arr[1];
+          $mi_arr['SwapTotal'] = $vm_arr[3];
+        }
+        else {
+          $mi_raw_arr = $mi_arr_out;
+
+          for ($i = 0; $i < sizeof($mi_raw_arr); ++$i) {
+            $info = preg_split("/\s+/", trim($mi_raw_arr[$i]));
+            $mi_arr[trim($info[0], ":")] = $info[1];
+          }
+        }
+
+        return $mi_arr;
       }
     }
-
-    return $mi_arr;
+    return array('MemFree'    => 0,
+                 'MemTotal'   => 0,
+                 'SwapFree'   => 0,
+                 'SwapTotal'  => 0);
   }
 
   function os_info() {
-    $os = shell_exec("/usr/bin/uname -o");
-
-    return sprintf("%s", trim($os));
+    exec("/usr/bin/uname -o", $os, $res);
+    if ( !$res ) {
+      return sprintf("%s", trim($os[0]));
+    }
+    return "n/a";
   }
 
   function kernel_info() {
-    $kernel = shell_exec("/usr/bin/uname -s");
-    $kernel_rel = shell_exec("/usr/bin/uname -r");
-
-    return sprintf("%s %s", trim($kernel), trim($kernel_rel));
+    exec("/usr/bin/uname -s; /usr/bin/uname -r", $kernel, $res);
+    if ( !$res ) {
+      return sprintf("%s %s", trim($kernel[0]), trim($kernel[1]));
+    }
+    return "n/a";
   }
 
   function mach_info() {
-    $machine = shell_exec("/usr/bin/uname -m");
-
-    return sprintf("%s", trim($machine));
+    exec("/usr/bin/uname -m", $machine, $res);
+    if ( !$res ) {
+      return sprintf("%s", trim($machine[0]));
+    }
+    return "n/a";
   }
 
   function cpu_info () {
-    $cpu_ln = shell_exec("/usr/bin/cat /proc/cpuinfo | /usr/bin/grep 'model name'");
-    $cpu_split = explode("\n", $cpu_ln);
-    $cpu_arr = preg_split("/:/", $cpu_split[0]);
-
-    return sprintf("%s", trim($cpu_arr[1]));
+    exec("/usr/bin/cat /proc/cpuinfo | /usr/bin/grep 'model name'", $cpu_lns, $res);
+    if ( !$res ) {
+      $cpu_arr = preg_split("/:/", $cpu_lns[0]);
+      return sprintf("%s", trim($cpu_arr[1]));
+    }
+    return "n/a";
   }
 
   function slack_ver() {
-    $slack_ver = shell_exec("/usr/bin/cat /etc/slackware-version");
-
-    return sprintf("%s", trim($slack_ver));
+    exec("/usr/bin/cat /etc/slackware-version", $slack_ver, $res);
+    if ( !$res ) {
+      return sprintf("%s", trim($slack_ver[0]));
+    }
+    return "n/a";
   }
 
   /**
@@ -266,9 +292,11 @@
    * @param name The name of the UPS device
    */
   function ups_charge($name) {
-    $ups_charge = shell_exec("/usr/bin/upsc $name | /usr/bin/grep 'battery.charge:' | /usr/bin/awk -F: '{ print $2 }'");
-
-    return sprintf("%s", trim($ups_charge));
+    exec("/usr/bin/upsc $name | /usr/bin/grep 'battery.charge:' | /usr/bin/awk -F: '{ print $2 }'", $ups_charge, $res);
+    if ( !$res ) {
+      return sprintf("%s", trim($ups_charge[0]));
+    }
+    return "n/a";
   }
 
   /**
@@ -277,10 +305,13 @@
    * @param name The name of the UPS device
    */
   function ups_power($name) {
-    $ups_pwr = shell_exec("/usr/bin/upsc $name | /usr/bin/grep 'ups.status:' | /usr/bin/awk -F': ' '{ print $2 }'");
-    $unit_arr = i18n_msg('ups');
-
-    return sprintf("%s", $unit_arr[trim($ups_pwr)]);
+    exec("/usr/bin/upsc $name | /usr/bin/grep 'ups.status:' | /usr/bin/awk -F': ' '{ print $2 }'", $ups_pwr, $res);
+    if ( !$res ) {
+      $unit_arr = i18n_msg('ups');
+      return sprintf("%s", $unit_arr[trim($ups_pwr[0])]);
+    }
+    return "n/a";
   }
 
 ?>
+
