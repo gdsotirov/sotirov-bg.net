@@ -24,7 +24,7 @@
       'hour' => "hour",
       'hours' => "hours",
       'uptime_msg' => "%s%s%s%d second(s)",
-      'la_msg' => "%s %s %s (%s of %s processes running)",
+      'la_msg' => "%s %s %s (%s of %s processes/threads running)",
       'mem_msg' => "%s of %s free",
       'inf_amnt_arr' => array(
         "<abbr title=\"Bytes\">B</abbr>",
@@ -63,7 +63,7 @@
       'hour' => "час",
       'hours' => "часа",
       'uptime_msg' => "%s%s%s%d секунди",
-      'la_msg' => "%s %s %s (%s от %s процеса се изпълняват)",
+      'la_msg' => "%s %s %s (%s от %s процеса/нишки се изпълняват)",
       'mem_msg' => "%s от %s свободни",
       'inf_amnt_arr' => array(
         "<abbr title=\"Байта\"><span lang=\"en\">Б</span></abbr>",
