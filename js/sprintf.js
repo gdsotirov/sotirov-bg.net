@@ -3,7 +3,7 @@
  *    "p" and "n" are not supported due to language restrictions)
  *
  * Copyright 2003 K&L Productions. All rights reserved
- * http://www.klproductions.com
+ * https://web.archive.org/web/20170604042129/https://klproductions.com/
  *
  * Terms of use: This function can be used free of charge IF this header is not
  *               modified and remains with the function code.

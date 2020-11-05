@@ -92,7 +92,7 @@ if ( $format eq "atom" ) {
   $feed->rights($feed_copy);
   my $gen = XML::Atom::Syndication::Generator->new;
   $gen->agent("Perl");
-  $gen->uri("http://perl.com/");
+  $gen->uri("https://perl.com/");
   $gen->version($]);
   $feed->generator($gen);
 
@@ -123,7 +123,7 @@ if ( $format eq "atom" ) {
   my $twig = new XML::Twig;
   $twig->set_indent(" "x2);
   $twig->parse($feed->as_xml);
-  $twig->add_stylesheet(css => "http://".$ENV{SERVER_NAME}."/style/atom.css");
+  $twig->add_stylesheet(css => "https://".$ENV{SERVER_NAME}."/style/atom.css");
   $twig->set_pretty_print('indented');
   use bytes;
   print $twig->sprint;
@@ -166,7 +166,7 @@ elsif ( $format eq "rss" ) {
                 });
   $rss->image(
     title  => $feed_title,
-    url    => "http://".$ENV{SERVER_NAME}."/img/sotirov_net",
+    url    => "https://".$ENV{SERVER_NAME}."/img/sotirov_net",
     link   => $feed_link,
     dc => {
       creator  => "Georgi D. Sotirov <gdsotirov\@dir.bg>",
