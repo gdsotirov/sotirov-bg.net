@@ -1,17 +1,15 @@
 <?php
-  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
   $I18N_LANG = 'en';
   include 'sysutil.php';
   include '../news.php.inc';
   $domain = "sotirov-bg.net";
 ?>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <title>Welcome to Sotirov-BG.Net</title>
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net - the home server of Georgi Sotirov" />
@@ -30,26 +28,29 @@
 </head>
 
 <body>
-<div id="header">
+
+<header>
 <h1>Welcome to Sotirov-BG.Net</h1>
-</div>
+</header>
 
-<div id="navigation">
-<p class="navigation">
-[&nbsp;<a href="#news" hreflang="en">News</a>&nbsp;|&nbsp;<a
-href="#about" hreflang="en">About</a>&nbsp;|&nbsp;<a
-href="#avail" hreflang="en">Availability</a>&nbsp;|&nbsp;<a
-href="#content" hreflang="en">Content</a>&nbsp;|&nbsp;<a
-href="/iss.en" hreflang="en"><abbr title="Iformation, Status, Statistics">ISS</abbr></a>&nbsp;|&nbsp;<a
-href="#copyright" hreflang="en">Copyright</a>&nbsp;]
-<br />
-[&nbsp;<a href="index.bg" hreflang="bg" lang="bg">Български</a>&nbsp;]
-</p>
-</div>
+<nav id="Main">
+<ul>
+<li><a href="#news" hreflang="en">News</a></li>
+<li><a href="#about" hreflang="en">About</a></li>
+<li><a href="#avail" hreflang="en">Availability</a></li>
+<li><a href="#content" hreflang="en">Content</a></li>
+<li><a href="/iss.en" hreflang="en">
+<abbr title="Iformation, Status, Statistics">ISS</abbr></a></li>
+<li><a href="#copyright" hreflang="en">Copyright</a></li>
+</ul>
+<ul>
+<li><a href="index.bg" hreflang="bg" lang="bg">Български</a></li>
+</ul>
+</nav>
 
-<div id="news">
+<section>
 <h2>News</h2>
-<p><?php
+<?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, posted";
@@ -58,39 +59,46 @@ href="#copyright" hreflang="en">Copyright</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
-        print("Last ten news headers.<br/><br/>\n");
+        print("<p class=\"text_p\">Last ten news headers.</p>\n");
+        print("<ul class=\"Last10\">\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          print("<b>".$news['posted']."&nbsp;");
+          print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
           print("<a href=\"/news/index.en?id=".$news['id']."\" hreflang=\"en\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
-          print("$title</a><br />\n");
+          print("$title</a></li>\n");
         }
+        print("</ul>\n");
       }
       else {
-        print("News currently not available.\n");
+        print("<p class=\"error\">News currently not available.</p>\n");
       }
       mysql_free_result($res);
     }
     else {
-      print("News currently not available.\n");
+      print("<p class=\"error\">News currently not available.</p>\n");
     }
     mysql_close($news_c);
   }
   else {
-    print("News currently not available.\n");
+    print("<p class=\"error\">News currently not available.</p>\n");
   }
-?></p>
-<p>
-<a href="news/index.en" hreflang="en">Archive</a>&nbsp;|&nbsp;
-<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
-<a href="news/feed.en?f=atom" hreflang="en">Atom feed</a>&nbsp;|&nbsp;
-<img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
-<a href="news/feed.en?f=rss&amp;v=2.0" hreflang="en"><acronym title="Really Simple Syndication">RSS</acronym>&nbsp;feed</a>
-</p>
-</div>
+?>
+<nav id="News">
+<ul>
+<li><a href="news/index.en">Archive</a></li>
+<li><img alt="Feed:"
+src="/icons/feed" />&nbsp;<a href="news/feed.en?f=atom" hreflang="en">Atom
+feed</a></li>
+<li><img alt="Feed:"
+src="/icons/feed" />&nbsp;<a href="news/feed.en?f=rss&amp;v=2.0"
+hreflang="en"><abbr title="Really Simple Syndication">RSS</abbr>
+&nbsp;feed</a></li>
+</ul>
+</nav>
+</section>
 
-<div id="about">
+<section>
 <h2>About</h2>
 <p class="text_p">This is the home server of <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">
 Georgi Sotirov</a>. Here you can find the most recent and actual information
@@ -103,9 +111,9 @@ standards of <a href="https://www.w3.org/" hreflang="en"><abbr
 title="World Wide Web Consortium">W3C</abbr></a>
 and are created thus to be as accessible as possible
 for a better and more quality Internet experience.</p>
-</div>
+</section>
 
-<div id="avail">
+<section>
 <h2>Availability</h2>
 <p class="text_p">This server have on its disposal a high speed <abbr
 title="Gigabit Passive Optical Network">PON</abbr> connection provided
@@ -119,17 +127,19 @@ The maximal (unwarranted) speeds are as follows:</p>
 </ul>
 <p class="text_p">The server is equipped with uninterruptible power supply
 (UPS), which in the best case could support it for up to 4 hours.</p>
-</div>
+</section>
 
-<div id="content">
+<section>
 <h2>Content</h2>
+<article>
 <h3>Hosted sites</h3>
 <ul class="inline">
 <li><a href="/~gsotirov/index.en" hreflang="en">Georgi's Personal Pages</a></li>
 <li><a href="/~ibeleva/index.en" hreflang="en">Ivelina's Personal Pages</a></li>
 <li><a href="/slackpack/" hreflang="en">SlackPack (Slackware Packages)</a></li>
 </ul>
-
+</article>
+<article>
 <h3>Hosted applications</h3>
 <ul class="inline">
 <li><a href="/bugzilla/" hreflang="en">Sotirov-BG.Net Bugzilla</a></li>
@@ -137,7 +147,8 @@ The maximal (unwarranted) speeds are as follows:</p>
 <li><a href="/apps/calc/mcalc/index.en" hreflang="en">Morgage calculator</a></li>
 <li><a href="/apps/7klas/" hreflang="bg">Where after 7th grade?</a></li>
 </ul>
-
+</article>
+<article>
 <h3>Mirrors</h3>
 <ul class="inline">
 <li><a href="http://slackware.com/">Slackware</a> - all releases with sources (by
@@ -153,52 +164,52 @@ The maximal (unwarranted) speeds are as follows:</p>
   <abbr title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
 </ul>
-</div>
+</article>
+</section>
 
-<div id="copyright">
+<footer>
 <hr />
 <p>Copyright &copy; 2004-2020 <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">Georgi
 D. Sotirov</a><br />All right reserved</p>
-</div>
 
-<div id="conformance">
-<map id="conformancebar">
+<map id="conformancebar" name="conformancebar">
 <p>
-<!-- Valid XHTML 1.0 -->
+<!-- Valid HTML 5.0 -->
 <a href="https://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Valid XHTML 1.0 icon]" height="31" longdesc="https://validator.w3.org/" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>
+<img alt="[Valid HTML 5.0 icon]" height="31" src="img/valid-html5" title="Valid HTML 5.0!" width="88" /></a>
 <!-- Valid CSS -->
 <a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Valid CSS icon]" height="31" longdesc="https://jigsaw.w3.org/" src="img/valid-css" title="Valid CSS!" width="88" /></a>
+<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" /></a>
 <!-- Valid Atom 1.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.en&amp;f=atom">
-<img alt="[Valid Atom 1.0]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-atom" title="Validate my Atom feed" width="88" /></a>
+<img alt="[Valid Atom 1.0]" height="31" src="/img/valid-atom" title="Validate my Atom feed" width="88" /></a>
 <!-- Valid RSS 2.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.en?f=rss&amp;v=2.0">
-<img alt="[Valid RSS]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-rss" title="Validate my RSS feed" width="88" /></a>
+<img alt="[Valid RSS]" height="31" src="/img/valid-rss" title="Validate my RSS feed" width="88" /></a>
 <!-- WAI WCAG Conformance -->
 <a href="https://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
 <img alt="[Level Double-A conformance icon]"
-height="31" longdesc="https://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
+height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="https://www.unicode.org/" hreflang="en">
-<img alt="[Encoded in UTF-8 icon]" height="31" longdesc="https://www.unicode.org/" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>
+</p>
+</map>
 
-<div id="poweredby">
-<map id="poweredbybar">
+<map id="poweredbybar" name="poweredbybar">
 <p><a href="https://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Linux]" height="31" longdesc="https://www.kernel.org/" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
+<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
 <a href="https://www.apache.org/" hreflang="en">
-<img alt="[Powered by Apache]" height="31" longdesc="https://www.apache.org/" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
+<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
 <a href="https://www.mysql.com/" hreflang="en">
-<img alt="[Works with MySQL]" height="31" longdesc="https://www.mysql.com/" src="img/mysql_pb" title="Works with MySQL" width="88" /></a>
+<img alt="[Works with MySQL]" height="31" src="img/mysql_pb" title="Works with MySQL" width="88" /></a>
 <a href="https://www.php.net/" hreflang="en">
-<img alt="[Powered by PHP]" height="31" longdesc="https://www.php.net/" src="img/php_pb" title="Powered by PHP" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" /></a>
+</p>
+</map>
+</footer>
 
 </body>
+
 </html>
 

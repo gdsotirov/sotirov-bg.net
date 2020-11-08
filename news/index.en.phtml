@@ -1,6 +1,5 @@
 <?php
   $I18N_LANG = 'en';
-  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
 
   include '../../news.php.inc';
   include 'nutil.php.inc';
@@ -58,13 +57,12 @@
     }
   }
 ?>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <?php
   if ( isset($news_id) && is_numeric($news_id) ) {
     $page_title = "Sotirov-BG.Net - ".$ntitle;
@@ -78,7 +76,7 @@
     }
   }
   elseif ( isset($q) ) {
-    $page_title = sprintf("Sotirov-BG.Net - News containing &quot;%s&quot;", htmlspecialchars($q, ENT_QUOTES | ENT_XHTML, 'UTF-8'));
+    $page_title = sprintf("Sotirov-BG.Net - News containing &quot;%s&quot;", htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
   }
   else {
     $page_title = "Sotirov-BG.Net - News";
@@ -104,8 +102,10 @@
 <link rel="alternate" href="feed.en?f=rss&amp;v=0.9" title="Sotirov-BG.Net News (RSS 0.9)" type="application/rdf+xml" />
 <link rel="start" href="../" title="Home" />
 </head>
+
 <body>
-<div id="header">
+
+<header>
 <?php
   if ( isset($news_id) && is_numeric($news_id) ) {
     printf("<h1>Sotirov-BG.Net - %s</h1>", $ntitle);
@@ -119,44 +119,52 @@
     }
   }
   elseif ( isset($q) ) {
-    printf("<h1>News containing &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_QUOTES | ENT_XHTML, 'UTF-8'));
+    printf("<h1>News containing &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
   }
   else {
     printf("<h1>News from Sotirov-BG.Net</h1>");
   }
 ?>
-</div>
+</header>
 
-<div id="navigation">
-<div id="nav_gen">
-<map id="nav_gen_map"><ul>
+<nav id="NewsNav">
+<ul>
 <li><a href="/">Home</a></li>
 <li><a href="/news/">Last news</a></li>
 <li><a href="#copyright">Copyright</a></li>
-</ul></map></div>
+</ul>
+</nav>
 
-<div id="sidebar">
-<div id="nav_lang">
+<section id="sidebar">
+<h2>Sidebar</h2>
+<article id="nav_gen">
 <h2>Language</h2>
-<map id="nav_lang_map"><ul>
+<map id="nav_lang_map" name="nav_lang_map">
+<ul>
 <li><a href="index.bg?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="bg" lang="bg">Български</a></li>
-</ul></map></div>
+</ul>
+</map>
+</article>
 
-<div id="nav_alt">
+<article id="nav_alt">
 <h2>Syndication</h2>
-<map id="nav_alt_map"><ul>
-<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed.en?f=atom" type="application/atom+xml">Atom Feed</a></li>
-<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed.en?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
-<li><img alt="Feed:" longdesc="http://feedicons.com/" src="/icons/feed"/>&nbsp;<a href="feed.en?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
+<map id="nav_alt_map" name="nav_alt_map">
+<ul>
+<li><img alt="Feed:" src="/icons/feed"/>&nbsp;<a href="feed.en?f=atom" type="application/atom+xml">Atom Feed</a></li>
+<li><img alt="Feed:" src="/icons/feed"/>&nbsp;<a href="feed.en?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Feed</a></li>
+<li><img alt="Feed:" src="/icons/feed"/>&nbsp;<a href="feed.en?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Feed</a></li>
 </ul>
 <ul>
 <li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Feed</a></li>
 <li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Feed</a></li>
-</ul></map></div>
+</ul>
+</map>
+</article>
 
-<div id="nav_arch">
+<article id="nav_arch">
 <h2>Archive</h2>
-<map id="nav_arch_map"><ul>
+<map id="nav_arch_map" name="nav_arch_map">
+<ul>
 <?php
   if ( !isset($error) ) {
     $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
@@ -175,18 +183,23 @@
     mysql_free_result($res);
   }
 ?>
-</ul></map></div>
+</ul>
+</map>
+</article>
 
-<div id="search">
+<article id="search">
 <h2>Search</h2>
 <p>Search in titles and text of the news</p>
 <form action="?" id="newsSearch" method="get">
-<p><label for="q">Query:&nbsp;<input alt="Text to search" id="q" name="q" maxlength="255" size="15" type="text" /></label><br />
+<p><label for="q">Query:&nbsp;<input id="q" name="q" maxlength="255"
+placeholder="Text to search" size="25" type="text" /></label><br />
 <input name="search" type="submit" value="Search" /></p>
 </form>
-</div></div></div>
+</article>
+</section>
 
-<div id="content">
+<section id="content">
+<h2>Latest news</h2>
 <?php
   if ( isset($error) ) {
     print("<p class=\"error\">News currently not available.</p>\n");
@@ -233,7 +246,7 @@
     // Search by tokens in the text
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted <> '0000-00-00 00:00:00' AND nws.author = usr.id AND (";
-      foreach ( $safe_tokens as $idx => $token) {
+      foreach ( $safe_tokens as $idx => $token ) {
         $sql_token = mysql_real_escape_string($token, $news_c);
         if ( $idx > 0 ) {
           $query .= "AND (nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
@@ -255,7 +268,7 @@
     $res = mysql_query($query, $news_c);
     if ( mysql_num_rows($res) > 0 ) {
       while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-        print("<div class=\"news\" id=\"newsid_".$item['id']."\">\n");
+        print("<article class=\"news\" id=\"newsid_".$item['id']."\">\n");
         if ( isset($q) ) {
           mark_token_text($safe_tokens, $item['title']);
         }
@@ -276,7 +289,7 @@
         }
         print($item['body']);
         print("</div>\n");
-        print("</div>\n\n");
+        print("</article>\n\n");
       }
     }
     else {
@@ -299,55 +312,53 @@
     }
     mysql_free_result($res);
   }
-?>
-</div>
 
-<div id="copyright" class="clear">
+  mysql_close($news_c);
+?>
+</section>
+
+<footer>
 <hr />
 <p>Copyright &copy; 2004-2020 <a href="mailto:gdsotirov@dir.bg">Georgi D. Sotirov</a><br />
 All right reserved</p>
-</div>
 
-<div id="conformance">
-<map id="conformancebar">
+<map id="conformancebar" name="conformancebar">
 <p>
-<!-- Valid XHTML 1.0 -->
+<!-- Valid HTML 5.0 -->
 <a href="https://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Valid XHTML 1.0 icon]" height="31" longdesc="https://validator.w3.org/" src="/img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>
+<img alt="[Valid HTML 5.0 icon]" height="31" src="/img/valid-html5" title="Valid HTML 5.0!" width="88" /></a>
 <!-- Valid CSS -->
 <a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Valid CSS icon]" height="31" longdesc="https://jigsaw.w3.org/" src="/img/valid-css" title="Valid CSS!" width="88" /></a>
+<img alt="[Valid CSS icon]" height="31" src="/img/valid-css" title="Valid CSS!" width="88" /></a>
 <!-- Valid Atom 1.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.en&amp;f=atom">
-<img alt="[Valid Atom 1.0]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-atom" title="Validate my Atom feed" width="88" /></a>
+<img alt="[Valid Atom 1.0]" height="31" src="/img/valid-atom" title="Validate my Atom feed" width="88" /></a>
 <!-- Valid RSS 2.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.en?f=rss&amp;v=2.0">
-<img alt="[Valid RSS]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-rss" title="Validate my RSS feed" width="88" /></a>
+<img alt="[Valid RSS]" height="31" src="/img/valid-rss" title="Validate my RSS feed" width="88" /></a>
 <!-- WAI WCAG Conformance -->
 <a href="https://www.w3.org/WAI/WCAG1AA-Conformance">
-<img alt="[Level Double-A conformance icon]" height="31" longdesc="https://www.w3.org/WAI/" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
+<img alt="[Level Double-A conformance icon]" height="31" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="https://www.unicode.org/" hreflang="en">
-<img alt="[Encoded in UTF-8 icon]" height="31" longdesc="https://www.unicode.org/" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Encoded in UTF-8 icon]" height="31" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>
+</p>
+</map>
 
-<div id="poweredby">
-<map id="poweredbybar">
+<map id="poweredbybar" name="poweredbybar">
 <p><a href="https://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Linux]" height="31" longdesc="https://www.kernel.org/" src="/img/linux_pb" title="Powered by Linux" width="88" /></a>
+<img alt="[Powered by Linux]" height="31" src="/img/linux_pb" title="Powered by Linux" width="88" /></a>
 <a href="https://www.apache.org/" hreflang="en">
-<img alt="[Powered by Apache]" height="31" longdesc="https://www.apache.org/" src="/img/apache_pb" title="Powered by Apache" width="88" /></a>
+<img alt="[Powered by Apache]" height="31" src="/img/apache_pb" title="Powered by Apache" width="88" /></a>
 <a href="https://www.mysql.com/" hreflang="en">
-<img alt="[Works with MySQL]" height="31" longdesc="https://www.mysql.com/" src="/img/mysql_pb" title="Works with MySQL" width="88" /></a>
+<img alt="[Works with MySQL]" height="31" src="/img/mysql_pb" title="Works with MySQL" width="88" /></a>
 <a href="https://www.php.net/" hreflang="en">
-<img alt="[Powered by PHP]" height="31" longdesc="https://www.php.net/" src="/img/php_pb" title="Powered by PHP" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Powered by PHP]" height="31" src="/img/php_pb" title="Powered by PHP" width="88" /></a>
+</p>
+</map>
+</footer>
 
 </body>
-<?php
-  mysql_close($news_c);
-?>
+
 </html>
 

@@ -1,15 +1,13 @@
 <?php
   $I18N_LANG = 'en';
   include 'sysutil.php';
-  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
 ?>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html lang="en">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <title>Sotirov-BG.Net - Information, Status, Statistics</title>
 <meta name="author" content="Georgi D. Sotirov, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net - Server information" />
@@ -26,30 +24,28 @@
 </head>
 
 <body>
-<div id="header">
+<header>
 <h1>Information, Status, Statistics</h1>
-</div>
+</header>
 
-<div id="navigation">
-<p class="navigation">
-[&nbsp;<a
-href="/">Home</a>&nbsp;|&nbsp;<a
-href="iss.bg.phtml" hreflang="bg" lang="bg">Български</a>&nbsp;]
-</p>
-</div>
+<nav id="Main">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="iss.bg.phtml" hreflang="bg" lang="bg">Български</a></li>
+</ul>
+</nav>
 
-<div>
-<p>This page provides general information and server status. The statistics
-are available only to administrators.</p>
-</div>
-
-<div id="info_status_stats">
-<div id="server_himself">
-<img alt="Server picture" id="server_pic" longdesc="img/server"
+<section>
+<h2>Information, status and statistics for the server</h2>
+<p class="text_p">This page provides general information and server
+status. The statistics are available only to administrators.</p>
+<div id="server_itself">
+<img alt="Server picture" id="server_pic"
 src="img/server" title="The server in the rack (2nd unit from top)" width="480" />
 </div>
 <div id="server_info_status_stats">
-<h2>General info</h2>
+<article>
+<h3>General info</h3>
 <pre><?php
   printf("<i><abbr title=\"Operating System\">OS</abbr></i>:           %s\n", os_info());
   printf("<i>Kernel</i>:       %s\n", kernel_info());
@@ -58,7 +54,9 @@ src="img/server" title="The server in the rack (2nd unit from top)" width="480" 
   printf("<i><abbr title=\"Central Processing Unit\">CPU</abbr></i>:          %s\n", cpu_info());
 ?>
 </pre>
-<h2>Server status</h2>
+</article>
+<article>
+<h3>Server status</h3>
 <pre><?php
   $sysup = sysup();
   printf("<i>Up since</i>:       %s\n", $sysup[0]);
@@ -84,7 +82,9 @@ src="img/server" title="The server in the rack (2nd unit from top)" width="480" 
                  hr_mem($vm_total*1024)));
 ?>
 </pre>
-<h2>Bandwith utilization</h2>
+</article>
+<article>
+<h3>Bandwith utilization</h3>
 <!-- The bandwidth bar program is available at:
  https://www.kernel.org/pub/software/web/bwbar/ -->
 <?php
@@ -97,10 +97,11 @@ src="img/server" title="The server in the rack (2nd unit from top)" width="480" 
 ?> of <?php printf("%6.2f %s", $max_bw, hr_bandw($unit));
 ?> used<br />
 <img alt="Използван капацитет" height="6"
-     longdesc="https://www.kernel.org/pub/software/web/bwbar/"
      src="bwbar/bwbar.png" width="400" />
 </p>
-<h2>Statistics</h2>
+</article>
+<article>
+<h3>Statistics</h3>
 <ul>
 <li><a href="stats/traffic/">Traffic</a>&nbsp;<img alt="[auth]"
 height="16" src="/img/lock" title="Login required" width="16" /></li>
@@ -113,43 +114,44 @@ width="16" />, <a href="stats/awstats/awstats.pl?config=ftp"><abbr title="File T
 alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
 width="16" /></li>
 </ul>
+</article>
 </div>
-</div>
+</section>
 
-<div id="conformance">
+<footer>
 <hr />
-<map id="conformancebar">
+<map id="conformancebar" name="conformancebar">
 <p>
-<!-- Valid XHTML 1.0 -->
+<!-- Valid HTML 5.0 -->
 <a href="https://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Valid XHTML 1.0 icon]" height="31" longdesc="https://validator.w3.org/" src="img/valid-xhtml" title="Valid XHTML 1.0!" width="88" /></a>
+<img alt="[Valid HTML 5.0 icon]" height="31" src="img/valid-html5" title="Valid HTML 5.0!" width="88" /></a>
 <!-- Valid CSS -->
 <a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Valid CSS icon]" height="31" longdesc="https://jigsaw.w3.org/" src="img/valid-css" title="Valid CSS!" width="88" /></a>
+<img alt="[Valid CSS icon]" height="31" src="img/valid-css" title="Valid CSS!" width="88" /></a>
 <!-- WAI WCAG Conformance -->
 <a href="https://www.w3.org/WAI/WCAG1AA-Conformance">
 <img alt="[Level Double-A conformance icon]"
-height="31" longdesc="https://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
+height="31" src="img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="https://www.unicode.org/" hreflang="en">
-<img alt="[Encoded in UTF-8 icon]" height="31" longdesc="https://www.unicode.org/" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Encoded in UTF-8 icon]" height="31" src="img/unicode" title="Encoded in UTF-8!" width="88" /></a>
+</p>
+</map>
 
-<div id="poweredby">
-<map id="poweredbybar">
+<map id="poweredbybar" name="poweredbybar">
 <p><a href="https://www.kernel.org/" hreflang="en">
-<img alt="[Powered by Linux]" height="31" longdesc="https://www.kernel.org/" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
+<img alt="[Powered by Linux]" height="31" src="img/linux_pb" title="Powered by Linux" width="88" /></a>
 <a href="https://www.apache.org/" hreflang="en">
-<img alt="[Powered by Apache]" height="31" longdesc="https://www.apache.org/" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
+<img alt="[Powered by Apache]" height="31" src="img/apache_pb" title="Powered by Apache" width="88" /></a>
 <a href="https://php.net/" hreflang="en">
-<img alt="[Powered by PHP]" height="31" longdesc="https://php.net/" src="img/php_pb" title="Powered by PHP" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Powered by PHP]" height="31" src="img/php_pb" title="Powered by PHP" width="88" /></a>
+</p>
+</map>
 
-<div id="generated">
-<p>Page generated: <?php echo date("Y-m-d H:i:s T"); ?></p>
-</div>
+<p class="generated">Page generated: <?php echo date("Y-m-d H:i:s T"); ?></p>
+</footer>
 
 </body>
+
 </html>
+

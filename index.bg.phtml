@@ -1,17 +1,15 @@
 <?php
-  print("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
   $I18N_LANG = 'bg';
   include 'sysutil.php';
   include '../news.php.inc';
   $domain = "sotirov-bg.net";
 ?>
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="bg" lang="bg">
+<html lang="bg">
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <title>Добре дошли в Sotirov-BG.Net</title>
 <meta name="author" content="Георги Д. Сотиров, gdsotirov@dir.bg" />
 <meta name="description" content="Sotirov-BG.Net - домашният сървър на Георги Сотиров" />
@@ -30,26 +28,29 @@
 </head>
 
 <body>
-<div id="header">
+
+<header>
 <h1>Добре дошли в Sotirov-BG.Net</h1>
-</div>
+</header>
 
-<div id="navigation">
-<p class="navigation">
-[&nbsp;<a href="#news" hreflang="bg">Новини</a>&nbsp;|&nbsp;<a
-href="#about" hreflang="bg">Относно</a>&nbsp;|&nbsp;<a
-href="#avail" hreflang="bg">Достъпност</a>&nbsp;|&nbsp;<a
-href="#content" hreflang="bg">Съдържание</a>&nbsp;|&nbsp;<a
-href="/iss.bg" hreflang="bg"><abbr title="Информация, Състояние, Статистики">ИСС</abbr></a>&nbsp;|&nbsp;<a
-href="#copyright" hreflang="bg">Авторски права</a>&nbsp;]
-<br />
-[&nbsp;<a href="index.en" hreflang="en" lang="en">English</a>&nbsp;]
-</p>
-</div>
+<nav id="Main">
+<ul>
+<li><a href="#news" hreflang="bg">Новини</a></li>
+<li><a href="#about" hreflang="bg">Относно</a></li>
+<li><a href="#avail" hreflang="bg">Достъпност</a></li>
+<li><a href="#content" hreflang="bg">Съдържание</a></li>
+<li><a href="/iss.bg" hreflang="bg">
+<abbr title="Информация, Състояние, Статистики">ИСС</abbr></a></li>
+<li><a href="#copyright" hreflang="bg">Авторски права</a></li>
+</ul>
+<ul>
+<li><a href="index.en" hreflang="en" lang="en">English</a></li>
+</ul>
+</nav>
 
-<div id="news">
+<section>
 <h2>Новини</h2>
-<p><?php
+<?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, posted";
@@ -58,39 +59,46 @@ href="#copyright" hreflang="bg">Авторски права</a>&nbsp;]
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
       if ( mysql_num_rows($res) > 0 ) {
-        print("Заглавия на 10-те последни новини.<br/><br/>\n");
+        print("<p class=\"text_p\">Заглавия на 10-те последни новини.</p>\n");
+        print("<ul class=\"Last10\">\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
-          print("<b>".$news['posted']."&nbsp;");
+          print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr lang=\"en\" title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
           print("<a href=\"/news/index.bg?id=".$news['id']."\" hreflang=\"bg\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
-          print("$title</a><br />\n");
+          print("$title</a></li>\n");
         }
+        print("</ul>\n");
       }
       else {
-        print("Новините не са достъпни в момента.\n");
+        print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
       }
       mysql_free_result($res);
     }
     else {
-      print("Новините не са достъпни в момента.\n");
+      print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
     }
     mysql_close($news_c);
   }
   else {
-    print("Новините не са достъпни в момента.\n");
+    print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
   }
-?></p>
-<p>
-<a href="news/index.bg">Архив</a>&nbsp;|&nbsp;
-<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
-<a href="news/feed.bg?f=atom" hreflang="bg">Atom емисия</a>&nbsp;|&nbsp;
-<img alt="Емисия:" longdesc="http://feedicons.com/" src="/icons/feed" />&nbsp;
-<a href="news/feed.bg?f=rss&amp;v=2.0" hreflang="bg"><acronym lang="en" title="Really Simple Syndication">RSS</acronym>&nbsp;емисия</a>
-</p>
-</div>
+?>
+<nav id="News">
+<ul>
+<li><a href="news/index.bg">Архив</a></li>
+<li><img alt="Емисия:"
+src="/icons/feed" />&nbsp;<a href="news/feed.bg?f=atom" hreflang="bg">Atom
+емисия</a></li>
+<li><img alt="Емисия:"
+src="/icons/feed" />&nbsp;<a href="news/feed.bg?f=rss&amp;v=2.0"
+hreflang="bg"><abbr lang="en" title="Really Simple Syndication">RSS</abbr>
+&nbsp;емисия</a></li>
+</ul>
+</nav>
+</section>
 
-<div id="about">
+<section>
 <h2>Относно</h2>
 <p class="text_p">Това е домашният сървър на <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">
 Георги Сотиров</a>. Тук можете да намерите най-актуалната и точна информация
@@ -103,9 +111,9 @@ href="#copyright" hreflang="bg">Авторски права</a>&nbsp;]
 title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr></a>
 и са създадени така, че да са възможно
 най-достъпни за едно по-добро и по-качествено Интернет изживяване.</p>
-</div>
+</section>
 
-<div id="avail">
+<section>
 <h2>Достъпност</h2>
 <p class="text_p">Този сървър разполага с високоскоростна <abbr
 title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
@@ -119,17 +127,19 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 </ul>
 <p class="text_p">Сървъра е екипиран с непрекъсваемо токозахранване
 (НТЗ), което в най-добрия случай може да го поддържа до 4 часа.</p>
-</div>
+</section>
 
-<div id="content">
+<section>
 <h2>Съдържание</h2>
+<article>
 <h3>Стопанисвани страници</h3>
 <ul class="inline">
 <li><a href="/~gsotirov/index.bg" hreflang="bg">Лични страници на Георги</a></li>
 <li><a href="/~ibeleva/index.bg" hreflang="bg">Лични страници на Ивелина</a></li>
 <li><a href="/slackpack/" hreflang="bg">SlackPack (Пакети за Slackware)</a></li>
 </ul>
-
+</article>
+<article>
 <h3>Стопанисвани приложения</h3>
 <ul class="inline">
 <li><a href="/bugzilla/" hreflang="en">Sotirov-BG.Net Bugzilla</a></li>
@@ -137,7 +147,8 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 <li><a href="/apps/calc/mcalc/index.bg" hreflang="bg">Ипотечен калкулатор</a></li>
 <li><a href="/apps/7klas/" hreflang="bg">Къде след 7 клас?</a></li>
 </ul>
-
+</article>
+<article>
 <h3>Огледала</h3>
 <ul class="inline">
 <li><a hreflang="en" href="http://slackware.com/">Slackware</a> - всички версии с изходен код (по
@@ -153,52 +164,52 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
   <abbr lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
 </ul>
-</div>
+</article>
+</section>
 
-<div id="copyright">
+<footer>
 <hr />
 <p>Автор &copy; 2004-2020 <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">Георги
 Д. Сотиров</a><br />Всички права запазени</p>
-</div>
 
-<div id="conformance">
-<map id="conformancebar">
+<map id="conformancebar" name="conformancebar">
 <p>
-<!-- Valid XHTML 1.0 -->
+<!-- Valid HTML 5.0 -->
 <a href="https://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Икона Валиден XHTML 1.0]" height="31" longdesc="https://validator.w3.org/" src="img/valid-xhtml" title="Валиден XHTML 1.0!" width="88" /></a>
+<img alt="[Икона Валиден HTML 5.0]" height="31" src="img/valid-html5" title="Валиден HTML 5.0!" width="88" /></a>
 <!-- Valid CSS -->
 <a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Икона Валиден CSS]" height="31" longdesc="https://jigsaw.w3.org/" src="img/valid-css" title="Валиден CSS!" width="88" /></a>
+<img alt="[Икона Валиден CSS]" height="31" src="img/valid-css" title="Валиден CSS!" width="88" /></a>
 <!-- Valid Atom 1.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.bg&amp;f=atom">
-<img alt="[Валиден Atom 1.0]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-atom" title="Проверете моята Atom емисия" width="88" /></a>
+<img alt="[Валиден Atom 1.0]" height="31" src="/img/valid-atom" title="Проверете моята Atom емисия" width="88" /></a>
 <!-- Valid RSS 2.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.bg?f=rss&amp;v=2.0">
-<img alt="[Валиден RSS]" height="31" longdesc="https://validator.w3.org/feed/" src="/img/valid-rss" title="Проверете моята RSS емисия" width="88" /></a>
+<img alt="[Валиден RSS]" height="31" src="/img/valid-rss" title="Проверете моята RSS емисия" width="88" /></a>
 <!-- WAI WCAG Conformance -->
 <a href="https://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
 <img alt="[Икона за съответствие с ниво двойно А]"
-height="31" longdesc="https://www.w3.org/WAI/" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
+height="31" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
 <!-- UTF-8 Encoded -->
 <a href="https://www.unicode.org/" hreflang="en">
-<img alt="[Икона Кодирано в UTF-8]" height="31" longdesc="https://www.unicode.org/" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Икона Кодирано в UTF-8]" height="31" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
+</p>
+</map>
 
-<div id="poweredby">
-<map id="poweredbybar">
+<map id="poweredbybar" name="poweredbybar">
 <p><a href="https://www.kernel.org/" hreflang="en">
-<img alt="[Работи с мощта на Linux]" height="31" longdesc="https://www.kernel.org/" src="img/linux_pb" title="Работи с мощта на Linux" width="88" /></a>
+<img alt="[Работи с мощта на Linux]" height="31" src="img/linux_pb" title="Работи с мощта на Linux" width="88" /></a>
 <a href="https://www.apache.org/" hreflang="en">
-<img alt="[Работи с мощта на Apache]" height="31" longdesc="https://www.apache.org/" src="img/apache_pb" title="Работи с мощта на Apache" width="88" /></a>
+<img alt="[Работи с мощта на Apache]" height="31" src="img/apache_pb" title="Работи с мощта на Apache" width="88" /></a>
 <a href="https://www.mysql.com/" hreflang="en">
-<img alt="[Работи с MySQL]" height="31" longdesc="https://www.mysql.com/" src="img/mysql_pb" title="Работи с MySQL" width="88" /></a>
+<img alt="[Работи с MySQL]" height="31" src="img/mysql_pb" title="Работи с MySQL" width="88" /></a>
 <a href="https://www.php.net/" hreflang="en">
-<img alt="[Работи с мощта на PHP]" height="31" longdesc="https://www.php.net/" src="img/php_pb" title="Работи с мощта на PHP" width="88" /></a>
-</p></map>
-</div>
+<img alt="[Работи с мощта на PHP]" height="31" src="img/php_pb" title="Работи с мощта на PHP" width="88" /></a>
+</p>
+</map>
+</footer>
 
 </body>
+
 </html>
 

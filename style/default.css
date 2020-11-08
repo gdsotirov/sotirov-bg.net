@@ -9,7 +9,7 @@
 
 /* Screen media specific styles */
 @media screen {
-  acronym:hover, abbr:hover, acronym[title], abbr[title] {
+  abbr:hover, abbr[title] {
     cursor: help;
   }
 
@@ -19,7 +19,7 @@
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  div#server_himself,
+  div#server_itself,
   div#server_info_status_stats {
     float: left;
   }
@@ -32,17 +32,13 @@
     border-bottom: none;
   }
 
-  div#conformance {
-    clear: left;
-  }
-
   div#news table {
     padding-left: 1em;
   }
 
   h1 {
     padding-top: 1em;
-    padding-bottom: 3em;
+    padding-bottom: 1em;
   }
 
   h2 {
@@ -63,30 +59,28 @@
     border-bottom: 1px solid #000;
   }
 
-  div#poweredby {
+  map#poweredbybar {
     display: none;
   }
 }
 
 /* Common styles */
 @media screen, print {
-  acronym, abbr {
+  abbr {
     font-style: normal;
   }
 
-  acronym[title], abbr[title] {
+  abbr[title] {
     border-bottom: thin dotted;
   }
 
-  div#copyright, div#conformance, div#generated, div#poweredby {
+  footer {
+    clear: both;
+    font-size: small;
     text-align: center;
   }
 
-  div#copyright, div#conformance {
-    font-size: small;
-  }
-
-  div#generated {
+  p.generated {
     color: #ccc;
     background-color: inherit;
     font-size: xx-small;
@@ -127,12 +121,44 @@
     padding-left: 0.3em;
   }
 
+  h3 {
+    padding-left: 0.5em;
+  }
+
   p.code {
     font-family: monospace;
   }
 
-  p.navigation {
+  nav#Main {
     text-align: center;
+  }
+
+  nav ul {
+    list-style: none;
+  }
+
+  nav#News ul {
+    padding-left: 0;
+  }
+
+  nav ul li {
+    display: inline;
+  }
+
+  nav#Main ul li:first-child::before {
+    content: "[ ";
+  }
+
+  nav#Main ul li:last-child::after {
+    content: " ]";
+  }
+
+  nav#News ul li:last-child::after {
+    content: "";
+  }
+
+  nav ul li:after {
+    content: " | "
   }
 
   p.text_p {
@@ -140,9 +166,18 @@
     text-indent: 1em;
   }
 
+  p.error {
+    color: red;
+  }
+
   ul.inline {
     margin-left: 3em;
     padding-left: 1em;
+  }
+
+  ul.Last10 {
+    list-style: none;
+    padding-left: 0;
   }
 
   ul {

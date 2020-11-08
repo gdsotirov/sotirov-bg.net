@@ -3,65 +3,76 @@
  */
 
 @media screen {
-  div#content {
-    margin-right: 14em;
-    padding-left: 1em;
-  }
-
-  div#header {
+  header {
     border-bottom: 2px solid #aaa;
     margin-bottom: 1em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
 
-  div#header h1 {
+  header h1 {
     margin: 0;
     padding: 0;
     text-align: left;
   }
 
-  div#navigation ul {
-    list-style-image: none;
-    list-style-type: none;
-    margin-left: 0.3em;
+  nav#NewsNav {
+    position: absolute;
+    top: 1em;
+    right: 1em;
   }
 
-  div#sidebar {
+  nav#NewsNav li:last-child:after {
+    content: "";
+  }
+
+  section#content {
+    margin-right: 14em;
+    padding-left: 1em;
+  }
+
+  section#sidebar {
     float: right;
     width: 13em;
   }
 
-  div#sidebar div {
+  section#sidebar article {
     border: 2px solid #aaa;
     margin-bottom: 1em;
   }
 
-  div#sidebar input[type=text] {
+  /* Display headers of articles, but not of section.
+   * The following two rule are just to pass HTML validation as
+   * section needs header.
+   */
+  section#sidebar h2:first-child {
+    display: none;
+  }
+
+  section#sidebar article h2:first-child {
+    display: block;
+  }
+
+  section#sidebar input[type=text] {
     background-color: inherit;
     border: 1px solid #aaa;
   }
 
-  div#sidebar h2 {
+  section#sidebar h2 {
     background-color: #ddd;
     border-bottom: 2px solid #aaa;
     padding: 0.1em;
     margin: 0;
   }
 
-  div#sidebar ul, div#sidebar form, div#sidebar p {
+  section#sidebar ul {
+    list-style: none;
+    margin-left: 0.3em;
+  }
+
+  section#sidebar ul, section#sidebar form, section#sidebar p {
     padding: 0.5em;
     margin: 0;
-  }
-
-  div#nav_gen {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-  }
-
-  div#nav_gen li {
-    display: inline;
   }
 
   div.news {

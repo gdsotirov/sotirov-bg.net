@@ -6,9 +6,9 @@
 <xsl:output method="html" />
 
 <xsl:template match="/">
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <title><xsl:value-of select="/rss/channel/title" /></title>
 <script type="text/javascript"><![CDATA[
 function trans() {
