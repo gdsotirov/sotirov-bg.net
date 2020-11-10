@@ -167,48 +167,12 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 </article>
 </section>
 
-<footer>
-<hr />
-<p>Автор &copy; 2004-2020 <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">Георги
-Д. Сотиров</a><br />Всички права запазени</p>
+<?php
+  $footer_atom_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg&amp;f=atom";
+  $footer_rss_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg?f=rss&amp;v=2.0";
 
-<map id="conformancebar" name="conformancebar">
-<p>
-<!-- Valid HTML 5.0 -->
-<a href="https://validator.w3.org/check?uri=referer" hreflang="en">
-<img alt="[Икона Валиден HTML 5.0]" height="31" src="img/valid-html5" title="Валиден HTML 5.0!" width="88" /></a>
-<!-- Valid CSS -->
-<a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
-<img alt="[Икона Валиден CSS]" height="31" src="img/valid-css" title="Валиден CSS!" width="88" /></a>
-<!-- Valid Atom 1.0 -->
-<a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.bg&amp;f=atom">
-<img alt="[Валиден Atom 1.0]" height="31" src="/img/valid-atom" title="Проверете моята Atom емисия" width="88" /></a>
-<!-- Valid RSS 2.0 -->
-<a href="https://validator.w3.org/feed/check.cgi?url=https://<?php echo $_SERVER['SERVER_NAME'] ?>/news/feed.bg?f=rss&amp;v=2.0">
-<img alt="[Валиден RSS]" height="31" src="/img/valid-rss" title="Проверете моята RSS емисия" width="88" /></a>
-<!-- WAI WCAG Conformance -->
-<a href="https://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
-<img alt="[Икона за съответствие с ниво двойно А]"
-height="31" src="img/wai-wcag-1.0-2a" title="Обяснение на съотвестстие със ниво двойно А" width="88" /></a>
-<!-- UTF-8 Encoded -->
-<a href="https://www.unicode.org/" hreflang="en">
-<img alt="[Икона Кодирано в UTF-8]" height="31" src="img/unicode" title="Кодирано в UTF-8!" width="88" /></a>
-</p>
-</map>
-
-<map id="poweredbybar" name="poweredbybar">
-<p><a href="https://www.kernel.org/" hreflang="en">
-<img alt="[Работи с мощта на Linux]" height="31" src="img/linux_pb" title="Работи с мощта на Linux" width="88" /></a>
-<a href="https://www.apache.org/" hreflang="en">
-<img alt="[Работи с мощта на Apache]" height="31" src="img/apache_pb" title="Работи с мощта на Apache" width="88" /></a>
-<a href="https://www.mysql.com/" hreflang="en">
-<img alt="[Работи с MySQL]" height="31" src="img/mysql_pb" title="Работи с MySQL" width="88" /></a>
-<a href="https://www.php.net/" hreflang="en">
-<img alt="[Работи с мощта на PHP]" height="31" src="img/php_pb" title="Работи с мощта на PHP" width="88" /></a>
-</p>
-</map>
-</footer>
-
+  include 'footer.bg.phtml'
+?>
 </body>
 
 </html>

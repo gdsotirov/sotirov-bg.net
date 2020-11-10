@@ -1,0 +1,56 @@
+<footer>
+<hr />
+<p>Copyright &copy; 2004-2020 <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@dir.bg%3E">Georgi
+D. Sotirov</a><br />All right reserved</p>
+
+<map id="conformancebar" name="conformancebar">
+<p>
+<!-- Valid HTML 5.0 -->
+<a href="https://validator.w3.org/check?uri=referer" hreflang="en">
+<img alt="[Valid HTML 5.0 icon]" height="31" src="/img/valid-html5" title="Valid HTML 5.0!" width="88" /></a>
+<!-- Valid CSS -->
+<a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
+<img alt="[Valid CSS icon]" height="31" src="/img/valid-css" title="Valid CSS!" width="88" /></a>
+<?php
+  if ( $footer_atom_feed ) {
+?>
+<!-- Valid Atom 1.0 -->
+<a href="https://validator.w3.org/feed/check.cgi?url=<?php echo $footer_atom_feed ?>">
+<img alt="[Valid Atom 1.0]" height="31" src="/img/valid-atom" title="Validate my Atom feed" width="88" /></a>
+<?php
+  }
+?>
+<?php
+  if ( $footer_atom_feed ) {
+?>
+<!-- Valid RSS 2.0 -->
+<a href="https://validator.w3.org/feed/check.cgi?url=<?php echo $footer_rss_feed ?>">
+<img alt="[Valid RSS]" height="31" src="/img/valid-rss" title="Validate my RSS feed" width="88" /></a>
+<?php
+  }
+?>
+<!-- WAI WCAG Conformance -->
+<a href="https://www.w3.org/WAI/WCAG1AA-Conformance" hreflang="en">
+<img alt="[Level Double-A conformance icon]"
+height="31" src="/img/wai-wcag-1.0-2a" title="Explanation of Level Double-A Conformance" width="88" /></a>
+<!-- UTF-8 Encoded -->
+<a href="https://www.unicode.org/" hreflang="en">
+<img alt="[Encoded in UTF-8 icon]" height="31" src="/img/unicode" title="Encoded in UTF-8!" width="88" /></a>
+</p>
+</map>
+
+<map id="poweredbybar" name="poweredbybar">
+<p><a href="https://www.kernel.org/" hreflang="en">
+<img alt="[Powered by Linux]" height="31" src="/img/linux_pb" title="Powered by Linux" width="88" /></a>
+<a href="https://www.apache.org/" hreflang="en">
+<img alt="[Powered by Apache]" height="31" src="/img/apache_pb" title="Powered by Apache" width="88" /></a>
+<a href="https://www.mysql.com/" hreflang="en">
+<img alt="[Works with MySQL]" height="31" src="/img/mysql_pb" title="Works with MySQL" width="88" /></a>
+<a href="https://www.php.net/" hreflang="en">
+<img alt="[Powered by PHP]" height="31" src="/img/php_pb" title="Powered by PHP" width="88" /></a>
+</p>
+</map>
+
+<p class="generated">Page generated: <?php echo date("Y-m-d H:i:s T"); ?></p>
+</footer>
+
