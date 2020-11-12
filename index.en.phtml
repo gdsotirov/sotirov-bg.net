@@ -53,8 +53,8 @@
 <?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
-      $query = "SELECT id, title, posted";
-      $query .= " FROM news WHERE posted <> '0000-00-00 00:00:00'";
+      $query = "SELECT id, title, CONVERT_TZ(posted, 'SYSTEM', 'UTC') posted";
+      $query .= " FROM news WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";
       $query .= " LIMIT 10";
       $res = mysql_query($query, $news_c);
@@ -63,7 +63,7 @@
         print("<ul class=\"Last10\">\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
-          print("<abbr title=\"Eastern European Time\">EET</abbr></b>&nbsp;");
+          print("<abbr title=\"Coordinated Universal Time\">UTC</abbr></b>&nbsp;");
           print("<a href=\"/news/index.en?id=".$news['id']."\" hreflang=\"en\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
           print("$title</a></li>\n");
