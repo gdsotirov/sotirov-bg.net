@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # This script is intended to localize the news feeds of Sotirov-BG.Net
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Written by Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 
 use strict;
@@ -18,11 +18,11 @@ my $feed_icon = "https://".$ENV{SERVER_NAME}."/img/sotirov_net";
 my $feed_copy = "Copyright (c) 2004-2020 Georgi D. Sotirov";
 my $feed_author_name = "Georgi D. Sotirov";
 my $feed_author_uri = "https://".$ENV{SERVER_NAME}."/~gsotirov/";
-my $feed_author_email = 'gsotirov@dir.bg';
+my $feed_author_email = 'gdsotirov@gmail.com';
 my $feed_editor_name = 'Georgi D. Sotirov';
-my $feed_editor_email = 'gsotirov@dir.bg';
+my $feed_editor_email = 'gdsotirov@gmail.com';
 my $feed_master_name = 'Georgi D. Sotirov';
-my $feed_master_email = 'gsotirov@dir.bg';
+my $feed_master_email = 'gdsotirov@gmail.com';
 # The URL to prpend to each entry link
 my $feed_entry_base = "$feed_link?id=";
 my $item_author_name_field = 'name';

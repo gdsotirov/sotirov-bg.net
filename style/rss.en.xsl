@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Written by Georgi D. Sotirov <gdsotirov@dir.bg> -->
+<!-- Written by Georgi D. Sotirov <gdsotirov@gmail.com> -->
 
 <!DOCTYPE html>
 <xsl:stylesheet xmlns:xsl="https://www.w3.org/1999/XSL/Transform" version="1.0">

@@ -1,5 +1,5 @@
-# This script is intended to gnerate the news feeds of Sotirov-BG.Net
-# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# This script is intended to generate the news feeds of Sotirov-BG.Net
+# Written by Georgi D. Sotirov <gdsotirov@gmail.com>
 #
 
 use strict;
@@ -169,7 +169,7 @@ elsif ( $format eq "rss" ) {
     url    => "https://".$ENV{SERVER_NAME}."/img/sotirov_net",
     link   => $feed_link,
     dc => {
-      creator  => "Georgi D. Sotirov <gdsotirov\@dir.bg>",
+      creator  => "Georgi D. Sotirov <gdsotirov\@gmail.com>",
     });
 
   # Build entires

@@ -12,7 +12,7 @@
  *        for anything.
  ********************************************************************************/
 
-/* Modified by Georgi D. Sotirov <gdsotirov@dir.bg>
+/* Modified by Georgi D. Sotirov <gdsotirov@gmail.com>
  *
  * 2005-12-04 Added support for %% which should escape % character
  */

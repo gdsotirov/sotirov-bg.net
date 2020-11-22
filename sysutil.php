@@ -1,7 +1,7 @@
 <?php
   /* System Utilities Script 0.4.0
    * Some functions are Slackware specific
-   * Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+   * Written by Georgi D. Sotirov <gdsotirov@gmail.com>
    */
 
   /**
