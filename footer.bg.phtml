@@ -12,7 +12,7 @@
 <a href="https://jigsaw.w3.org/css-validator/check/referer" hreflang="en">
 <img alt="[Икона Валиден CSS]" height="31" src="/img/valid-css" title="Валиден CSS!" width="88" /></a>
 <?php
-  if ( $footer_atom_feed ) {
+  if ( isset($footer_atom_feed) ) {
 ?>
 <!-- Valid Atom 1.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=<?php echo $footer_atom_feed ?>">
@@ -21,7 +21,7 @@
   }
 ?>
 <?php
-  if ( $footer_atom_feed ) {
+  if ( isset($footer_rss_feed) ) {
 ?>
 <!-- Valid RSS 2.0 -->
 <a href="https://validator.w3.org/feed/check.cgi?url=<?php echo $footer_rss_feed ?>">
