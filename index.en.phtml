@@ -49,7 +49,7 @@
 </nav>
 
 <section>
-<h2>News</h2>
+<h2 id="news">News</h2>
 <?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
@@ -99,7 +99,7 @@ hreflang="en"><abbr title="Really Simple Syndication">RSS</abbr>
 </section>
 
 <section>
-<h2>About</h2>
+<h2 id="about">About</h2>
 <p class="text_p">This is the home server of <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@gmail.com%3E">
 Georgi Sotirov</a>. Here you can find the most recent and actual information
 about me, to view and use the things that I made and in general to get familiar
@@ -114,7 +114,7 @@ for a better and more quality Internet experience.</p>
 </section>
 
 <section>
-<h2>Availability</h2>
+<h2 id="avail">Availability</h2>
 <p class="text_p">This server have on its disposal a high speed <abbr
 title="Gigabit Passive Optical Network">PON</abbr> connection provided
 by <a href="https://www.vivacom.bg/">Vivacom</a>.
@@ -130,7 +130,7 @@ The maximal (unwarranted) speeds are as follows:</p>
 </section>
 
 <section>
-<h2>Content</h2>
+<h2 id="content">Content</h2>
 <article>
 <h3>Hosted sites</h3>
 <ul class="inline">

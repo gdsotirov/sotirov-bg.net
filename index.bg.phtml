@@ -49,7 +49,7 @@
 </nav>
 
 <section>
-<h2>Новини</h2>
+<h2 id="news">Новини</h2>
 <?php
   if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
     if ( mysql_select_db($news_db, $news_c) ) {
@@ -99,7 +99,7 @@ hreflang="bg"><abbr lang="en" title="Really Simple Syndication">RSS</abbr>
 </section>
 
 <section>
-<h2>Относно</h2>
+<h2 id="about">Относно</h2>
 <p class="text_p">Това е домашният сървър на <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@gmail.com%3E">
 Георги Сотиров</a>. Тук можете да намерите най-актуалната и точна информация
 за мен, да разгледате и ползвате нещата които съм направил и като цяло да се
@@ -114,7 +114,7 @@ title="World Wide Web Consortium - Консорциум на Световнат�
 </section>
 
 <section>
-<h2>Достъпност</h2>
+<h2 id="avail">Достъпност</h2>
 <p class="text_p">Този сървър разполага с високоскоростна <abbr
 title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 предоставена от <a href="https://www.vivacom.bg/">Vivacom</a>.
@@ -130,7 +130,7 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 </section>
 
 <section>
-<h2>Съдържание</h2>
+<h2 id="content">Съдържание</h2>
 <article>
 <h3>Стопанисвани страници</h3>
 <ul class="inline">
