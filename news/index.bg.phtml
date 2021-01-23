@@ -69,14 +69,16 @@
   }
   elseif ( isset($month) || isset($year) ) {
     if ( isset($month) ) {
-      $page_title = sprintf("Sotirov-BG.Net - Новини от %s, %4d", get_month($month), $year);
+      $page_title = sprintf("Sotirov-BG.Net - Новини от %s, %4d",
+                            get_month($month), $year);
     }
     else {
       $page_title = sprintf("Sotirov-BG.Net - Новини за %4d г.", $year);
     }
   }
   elseif ( isset($q) ) {
-    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;", htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+    $page_title = sprintf("Sotirov-BG.Net - Новини съдържащи &quot;%s&quot;",
+                    htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
   }
   else {
     $page_title = "Sotirov-BG.Net - Новини";
@@ -91,15 +93,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" href="/img/sotirov_net" />
 <link rel="shortcut icon" href="/img/sotirov_net" />
-<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/default.css" />
-<link rel="stylesheet" media="screen, print" title="По подразбриране" type="text/css" href="/style/news.css" />
-<link rel="stylesheet" media="speech" title="По подразбиране" type="text/css" href="/style/speech.css" />
-<link rel="alternate" type="text/html" href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en" lang="en" title="<?php echo $page_title ?>" />
-<link rel="alternate" href="feed.bg?f=atom" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
-<link rel="alternate" href="feed.bg?f=rss&amp;v=2.0" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="feed.bg?f=rss&amp;v=1.0" title="Новини от Sotirov-BG.Net (RSS 1.0)" type="application/rdf+xml" />
-<link rel="alternate" href="feed.bg?f=rss&amp;v=0.91" title="Новини от Sotirov-BG.Net (RSS 0.91)" type="application/rss+xml" />
-<link rel="alternate" href="feed.bg?f=rss&amp;v=0.9" title="Новини от Sotirov-BG.Net (RSS 0.9)" type="application/rdf+xml" />
+<link rel="stylesheet" media="screen, print" title="По подразбриране"
+      type="text/css" href="/style/default.css" />
+<link rel="stylesheet" media="screen, print" title="По подразбриране"
+      type="text/css" href="/style/news.css" />
+<link rel="stylesheet" media="speech" title="По подразбиране"
+      type="text/css" href="/style/speech.css" />
+<link rel="alternate" type="text/html"
+      href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en"
+      lang="en" title="<?php echo $page_title ?>" />
+<link rel="alternate" href="feed.bg?f=atom"
+      title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
+<link rel="alternate" href="feed.bg?f=rss&amp;v=2.0"
+      title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
+<link rel="alternate" href="feed.bg?f=rss&amp;v=1.0"
+      title="Новини от Sotirov-BG.Net (RSS 1.0)" type="application/rdf+xml" />
+<link rel="alternate" href="feed.bg?f=rss&amp;v=0.91"
+      title="Новини от Sotirov-BG.Net (RSS 0.91)" type="application/rss+xml" />
+<link rel="alternate" href="feed.bg?f=rss&amp;v=0.9"
+      title="Новини от Sotirov-BG.Net (RSS 0.9)" type="application/rdf+xml" />
 <link rel="start" href="../" title="Начало" />
 </head>
 
@@ -119,7 +131,8 @@
     }
   }
   elseif ( isset($q) ) {
-    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>", htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+    printf("<h1>Новини съдържащи &quot;%s&quot;</h1>",
+           htmlspecialchars($q, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
   }
   else {
     printf("<h1>Новини от Sotirov-BG.Net</h1>");
@@ -141,7 +154,8 @@
 <h2>Език</h2>
 <map id="nav_lang_map" name="nav_lang_map">
 <ul>
-<li><a href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en" lang="en">English</a></li>
+<li><a href="index.en?<?php echo $_SERVER['QUERY_STRING'] ?>" hreflang="en"
+lang="en">English</a></li>
 </ul>
 </map>
 </article>
@@ -150,13 +164,20 @@
 <h2>Обединяване</h2>
 <map id="nav_alt_map" name="nav_alt_map">
 <ul>
-<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed.bg?f=atom" type="application/atom+xml">Atom Емисия</a></li>
-<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed.bg?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Емисия</a></li>
-<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed.bg?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Емисия</a></li>
+<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a href="feed.bg?f=atom"
+type="application/atom+xml">Atom Емисия</a></li>
+<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a
+href="feed.bg?f=rss&amp;v=2.0" type="application/rss+xml">RSS 2.0 Емисия</a>
+</li>
+<li><img alt="Емисия:" src="/icons/feed"/>&nbsp;<a
+href="feed.bg?f=rss&amp;v=1.0" type="application/rdf+xml">RSS 1.0 Емисия</a>
+</li>
 </ul>
 <ul>
-<li><a href="feed?f=rss&amp;v=0.91" type="application/rss+xml">RSS 0.91 Емисия</a></li>
-<li><a href="feed?f=rss&amp;v=0.9" type="application/rdf+xml">RSS 0.9 Емисия</a></li>
+<li><a href="feed?f=rss&amp;v=0.91"
+type="application/rss+xml">RSS 0.91 Емисия</a></li>
+<li><a href="feed?f=rss&amp;v=0.9"
+type="application/rdf+xml">RSS 0.9 Емисия</a></li>
 </ul>
 </map>
 </article>
@@ -168,9 +189,9 @@
 <?php
   if ( !isset($error) ) {
     $query  = "SELECT Month(nws.posted) AS Month, Year(nws.posted) AS Year ";
-    $query .= "FROM news_bg AS nws ";
-    $query .= "GROUP BY Month(nws.posted), Year(nws.posted) ";
-    $query .= "ORDER BY Year(nws.posted) DESC, Month(nws.posted) DESC";
+    $query .= "  FROM news_bg AS nws ";
+    $query .= " GROUP BY Month(nws.posted), Year(nws.posted) ";
+    $query .= " ORDER BY Year(nws.posted) DESC, Month(nws.posted) DESC";
 
     $res = mysql_query($query, $news_c);
     if ( mysql_num_rows($res) > 0 ) {
@@ -206,18 +227,20 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
   }
   else {
     $query  = "SELECT nws.id, nws.title, nws.body, nws.author, ";
-    $query .= "CONVERT_TZ(nws.posted , 'SYSTEM', 'UTC') posted, ";
-    $query .= "CONVERT_TZ(nws.updated, 'SYSTEM', 'UTC') updated,";
-    $query .= "usr.name_bg, usr.firstname_bg, usr.email ";
-    $query .= "FROM news_bg AS nws, users AS usr ";
+    $query .= "       CONVERT_TZ(nws.posted , 'SYSTEM', 'UTC') posted, ";
+    $query .= "       CONVERT_TZ(nws.updated, 'SYSTEM', 'UTC') updated, ";
+    $query .= "       usr.name_bg, usr.firstname_bg, usr.email ";
+    $query .= "  FROM news_bg AS nws, users AS usr ";
     // Search by ID
     if ( isset($news_id) ) {
       if ( is_numeric($news_id) ) {
-        $query .= "WHERE nws.id = ".(int)$news_id." AND nws.posted IS NOT NULL ";
-        $query .= "AND nws.author = usr.id ";
+        $query .= "WHERE nws.id = ".(int)$news_id;
+        $query .= "  AND nws.posted IS NOT NULL";
+        $query .= "  AND nws.author = usr.id";
       }
       else {
-        print("<p class=\"error\">Недействителен идентификатор на новина '".htmlentities($news_id, ENT_QUOTES, "UTF-8")."'!</p>\n");
+        print("<p class=\"error\">Недействителен идентификатор на новина '");
+        print(htmlentities($news_id, ENT_QUOTES, "UTF-8")."'!</p>\n");
         $query .= "WHERE nws.posted IS NOT NULL AND nws.author = usr.id ";
         $query .= "ORDER BY nws.posted DESC ";
         $query .= "LIMIT 10";
@@ -231,15 +254,19 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
           $query .= "AND Month(nws.posted) = $month ";
         }
         else {
-          print("<p class=\"error\">Недействителен номер на месец '".htmlentities($month, ENT_QUOTES, "UTF-8")."'!</p>\n");
+          print("<p class=\"error\">Недействителен номер на месец '");
+          print(htmlentities($month, ENT_QUOTES, "UTF-8")."'!</p>\n");
           unset($month);
         }
       }
-      if ( isset($year) && is_numeric($year) && (int)$year >= 2004 && (int)$year <= date('Y') ) {
+      if ( isset($year) && is_numeric($year) && (int)$year >= 2004
+          && (int)$year <= date('Y') )
+      {
         $query .= "AND Year(nws.posted) = $year ";
       }
       else {
-        print("<p class=\"error\">Недействителна година '".htmlentities($year, ENT_QUOTES, "UTF-8")."'!</p>\n");
+        print("<p class=\"error\">Недействителна година '");
+        print(htmlentities($year, ENT_QUOTES, "UTF-8")."'!</p>\n");
         $year = date('Y');
         $query .= "AND Year(nws.posted) = $year ";
       }
@@ -251,10 +278,12 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
       foreach ( $safe_tokens as $idx => $token ) {
         $sql_token = mysql_real_escape_string($token, $news_c);
         if ( $idx > 0 ) {
-          $query .= "AND (nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
+          $query .= "AND (nws.title LIKE '%$sql_token%' ";
+          $query .= " OR nws.body LIKE '%$sql_token%') ";
         }
         else {
-          $query .= "(nws.title LIKE '%$sql_token%' OR nws.body LIKE '%$sql_token%') ";
+          $query .= "(nws.title LIKE '%$sql_token%' ";
+          $query .= " OR nws.body LIKE '%$sql_token%') ";
         }
       }
       $query .= ") ";
@@ -275,14 +304,17 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
           mark_token_text($safe_tokens, $item['title']);
         }
         print("<h3>".$item['title']."</h3>\n");
-        $mail_to = $item['firstname_bg']."%20".$item['name_bg']."%20%3C".$item['email']."%3E";
+        $mail_to  = $item['firstname_bg']."%20".$item['name_bg'];
+        $mail_to .= "%20%3C".$item['email']."%3E";
         $user_name = $item['firstname_bg']." ".$item['name_bg'];
         print("<p class=\"italic\">Публикувано от ");
         print("<a href=\"mailto:".$mail_to."\">");
         print($user_name."</a>");
-        print(" на ".$item['posted']."&nbsp;<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC</abbr>");
+        print(" на ".$item['posted']."&nbsp;<abbr lang=\"en\" ");
+        print("title=\"Coordinated Universal Time\">UTC</abbr>");
         if ( strtotime($item['updated']) > strtotime($item['posted']) ) {
-          print(", променено на ".$item['updated']."&nbsp;<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC</abbr>");
+          print(", променено на ".$item['updated']."&nbsp;<abbr lang=\"en\" ");
+          print("title=\"Coordinated Universal Time\">UTC</abbr>");
         }
         print("</p>\n");
         print("<div class=\"body\">\n");
@@ -306,7 +338,9 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
         print("$year</p>\n");
       }
       elseif ( isset($q) ) {
-        print("<p class=\"info\">Търсеният от вас низ '".htmlentities($q, ENT_QUOTES, "UTF-8")."' не съвпадна с никакви новини.</p>");
+        print("<p class=\"info\">Търсеният от вас низ '");
+        print(htmlentities($q, ENT_QUOTES, "UTF-8"));
+        print("' не съвпадна с никакви новини.</p>");
       }
       else {
         print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
@@ -320,8 +354,10 @@ placeholder="Текст за търсене" size="25" type="text" /></label><br
 </section>
 
 <?php
-  $footer_atom_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg&amp;f=atom";
-  $footer_rss_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg?f=rss&amp;v=2.0";
+  $footer_atom_feed  = "https://".$_SERVER['SERVER_NAME'];
+  $footer_atom_feed .= "/news/feed.bg&amp;f=atom";
+  $footer_rss_feed   = "https://".$_SERVER['SERVER_NAME'];
+  $footer_rss_feed  .= "/news/feed.bg?f=rss&amp;v=2.0";
 
   include '../footer.bg.phtml'
 ?>

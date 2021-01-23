@@ -19,12 +19,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
-<link rel="stylesheet" href="style/default.css" media="screen, print" title="По подразбиране" type="text/css" />
-<link rel="stylesheet" href="style/speech.css" media="speech" title="По подразбиране" type="text/css" />
-<link rel="alternate" type="text/html" href="index.en" hreflang="en" lang="en" title="Sotirov-BG.Net - The home server of Georgi Sotirov" />
-<link rel="alternate" type="text/html" href="index.bg" hreflang="bg" lang="bg" title="Sotirov-BG.Net - Домашният сървър на Георги Сотиров" />
-<link rel="alternate" href="news/feed.bg?f=rss&amp;v=2.0" hreflang="bg" lang="bg" title="Новини от Sotirov-BG.Net (RSS 2.0)" type="application/rss+xml" />
-<link rel="alternate" href="news/feed.bg?f=atom" hreflang="bg" lang="bg" title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
+<link rel="stylesheet" href="style/default.css" media="screen, print"
+      title="По подразбиране" type="text/css" />
+<link rel="stylesheet" href="style/speech.css" media="speech"
+      title="По подразбиране" type="text/css" />
+<link rel="alternate" type="text/html" href="index.en" hreflang="en" lang="en"
+      title="Sotirov-BG.Net - The home server of Georgi Sotirov" />
+<link rel="alternate" type="text/html" href="index.bg" hreflang="bg" lang="bg"
+      title="Sotirov-BG.Net - Домашният сървър на Георги Сотиров" />
+<link rel="alternate" href="news/feed.bg?f=rss&amp;v=2.0" hreflang="bg"
+      lang="bg" title="Новини от Sotirov-BG.Net (RSS 2.0)"
+      type="application/rss+xml" />
+<link rel="alternate" href="news/feed.bg?f=atom" hreflang="bg" lang="bg"
+      title="Новини от Sotirov-BG.Net (Atom)" type="application/atom+xml" />
 </head>
 
 <body>
@@ -68,8 +75,9 @@ src="img/bgkoleda" title="Българската Коледа - Подари н�
         print("<ul class=\"Last10\">\n");
         while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
-          print("<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC</abbr></b>&nbsp;");
-          print("<a href=\"/news/index.bg?id=".$news['id']."\" hreflang=\"bg\">");
+          print("<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC");
+          print("</abbr></b>&nbsp;<a ");
+          print("href=\"/news/index.bg?id=".$news['id']."\" hreflang=\"bg\">");
           $title = preg_replace('/<[^<]+>/', '', $news['title']);
           print("$title</a></li>\n");
         }
@@ -105,16 +113,17 @@ hreflang="bg"><abbr lang="en" title="Really Simple Syndication">RSS</abbr>
 
 <section>
 <h2 id="about">Относно</h2>
-<p class="text_p">Това е домашният сървър на <a href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@gmail.com%3E">
-Георги Сотиров</a>. Тук можете да намерите най-актуалната и точна информация
+<p class="text_p">Това е домашният сървър на <a
+href="mailto:Georgi%20Sotirov%20%3Cgdsotirov@gmail.com%3E">Георги Сотиров</a>.
+Тук можете да намерите най-актуалната и точна информация
 за мен, да разгледате и ползвате нещата които съм направил и като цяло да се
 запознаете с моите способности. Моля, имайте в предвид, че цялото съдържание
 намиращо се на този сървър в момента е под <strong>постоянна
 разработка</strong>.</p>
 <p class="text_p">Всички станици на този сървър са издържани в публичните
 стандарти на <a href="https://www.w3.org/" hreflang="en"><abbr
-title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr></a>
-и са създадени така, че да са възможно
+title="World Wide Web Consortium - Консорциум на Световната Мрежа">W3C</abbr>
+</a> и са създадени така, че да са възможно
 най-достъпни за едно по-добро и по-качествено Интернет изживяване.</p>
 </section>
 
@@ -139,11 +148,15 @@ title="Gigabit Passive Optical Network" lang="en">GPON</abbr> връзка
 <article>
 <h3>Стопанисвани страници</h3>
 <ul class="inline">
-<li><a href="/~gsotirov/index.bg" hreflang="bg">Лични страници на Георги</a></li>
-<li><a href="/~ibeleva/index.bg" hreflang="bg">Лични страници на Ивелина</a></li>
-<li><a href="https://slackpack.eu/" hreflang="bg">SlackPack (Пакети за Slackware)</a></li>
+<li><a href="/~gsotirov/index.bg" hreflang="bg">Лични страници на Георги</a>
+</li>
+<li><a href="/~ibeleva/index.bg" hreflang="bg">Лични страници на Ивелина</a>
+</li>
+<li><a href="https://slackpack.eu/" hreflang="bg">SlackPack (Пакети за
+Slackware)</a></li>
 <li><a href="https://iva-12.com/" hreflang="bg">Страници на Ива 12-20 <abbr
-title="Еднолично Ограничено Отговорно Дружество">ЕООД</abbr></a></li>
+title="Еднолично Ограничено Отговорно Дружество">ЕООД</abbr></a>
+</li>
 </ul>
 </article>
 <article>
@@ -151,33 +164,39 @@ title="Еднолично Ограничено Отговорно Дружест
 <ul class="inline">
 <li><a href="/bugzilla/" hreflang="en">Sotirov-BG.Net Bugzilla</a> (с
 лоцализация на Български)</li>
-<li><a href="/apps/calc/icalc/index.bg" hreflang="bg">Лихвен калкулатор</a></li>
-<li><a href="/apps/calc/mcalc/index.bg" hreflang="bg">Ипотечен калкулатор</a></li>
+<li><a href="/apps/calc/icalc/index.bg" hreflang="bg">Лихвен калкулатор</a>
+</li>
+<li><a href="/apps/calc/mcalc/index.bg" hreflang="bg">Ипотечен калкулатор</a>
+</li>
 <li><a href="/apps/7klas/" hreflang="bg">Къде след 7 клас?</a></li>
 </ul>
 </article>
 <article>
 <h3>Огледала</h3>
 <ul class="inline">
-<li><a hreflang="en" href="http://slackware.com/">Slackware</a> - всички версии с изходен код (по
-<a href="ftp://<?php echo $domain ?>/pub/mirrors/slackware/">
-  <abbr lang="en" title="File Transfer Protocol">FTP</abbr></a>,
-<a href="https://ftp.<?php echo $domain ?>/pub/mirrors/slackware/">
-  <abbr lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
+<li><a hreflang="en" href="http://slackware.com/">Slackware</a> - всички
+версии с изходен код (по <a
+href="ftp://<?php echo $domain ?>/pub/mirrors/slackware/"><abbr lang="en"
+title="File Transfer Protocol">FTP</abbr></a>, <a
+href="https://ftp.<?php echo $domain ?>/pub/mirrors/slackware/"><abbr
+lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
-<li><a hreflang="en" href="https://gnu.org/"><abbr title="Gnu's Not Unix">GNU</abbr></a> - всичко (по
-<a href="ftp://<?php echo $domain ?>/pub/mirrors/gnu/">
-  <abbr lang="en" title="File Transfer Protocol">FTP</abbr></a>,
-<a href="https://ftp.<?php echo $domain ?>/pub/mirrors/gnu/">
-  <abbr lang="en" title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
+<li><a hreflang="en" href="https://gnu.org/"><abbr
+title="Gnu's Not Unix">GNU</abbr></a> - всичко (по <a
+href="ftp://<?php echo $domain ?>/pub/mirrors/gnu/"><abbr lang="en"
+title="File Transfer Protocol">FTP</abbr></a>, <a
+href="https://ftp.<?php echo $domain ?>/pub/mirrors/gnu/"><abbr lang="en"
+title="Hypertext Transfer Protocol Secure">HTTPS</abbr></a>)
 </li>
 </ul>
 </article>
 </section>
 
 <?php
-  $footer_atom_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg&amp;f=atom";
-  $footer_rss_feed = "https://".$_SERVER['SERVER_NAME']."/news/feed.bg?f=rss&amp;v=2.0";
+  $footer_atom_feed  = "https://".$_SERVER['SERVER_NAME'];
+  $footer_atom_feed .= "/news/feed.bg&amp;f=atom";
+  $footer_rss_feed   = "https://".$_SERVER['SERVER_NAME'];
+  $footer_rss_feed  .= "/news/feed.bg?f=rss&amp;v=2.0";
 
   include 'footer.bg.phtml'
 ?>

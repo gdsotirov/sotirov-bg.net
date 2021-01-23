@@ -16,10 +16,14 @@
 <meta name="robots" content="NOARCHIVE" />
 <link rel="icon" href="img/sotirov_net" />
 <link rel="shortcut icon" href="img/sotirov_net" />
-<link rel="stylesheet" media="screen, print" title="По подразбиране" type="text/css" href="style/default.css" />
-<link rel="stylesheet" media="speech" title="По подразбиране" type="text/css" href="style/speech.css" />
-<link rel="alternate" type="text/html" href="iss.en" hreflang="en" lang="en" title="Sotirov.Net - Server information" />
-<link rel="alternate" type="text/html" href="iss.bg" hreflang="bg" lang="bg" title="Sotirov.Net - Информация за сървъра" />
+<link rel="stylesheet" media="screen, print" title="По подразбиране"
+      type="text/css" href="style/default.css" />
+<link rel="stylesheet" media="speech" title="По подразбиране" type="text/css"
+      href="style/speech.css" />
+<link rel="alternate" type="text/html" href="iss.en" hreflang="en" lang="en"
+      title="Sotirov.Net - Server information" />
+<link rel="alternate" type="text/html" href="iss.bg" hreflang="bg" lang="bg"
+      title="Sotirov.Net - Информация за сървъра" />
 <link rel="start" href="index" title="Начало" />
 </head>
 
@@ -40,18 +44,20 @@
 <p class="text_p">Страницата предоставя обща информация и състояние на
 сървъра. Статистиките са достъпни само за администратори.</p>
 <div id="server_itself">
-<img alt="Снимка на сървъра" id="server_pic"
-src="img/server" title="Сървъра в шкафа (2-рата единица от горе)" width="480" />
+<img alt="Снимка на сървъра" id="server_pic" width="480"
+src="img/server" title="Сървъра в шкафа (2-рата единица от горе)" />
 </div>
 <div id="server_info_status_stats">
 <article>
 <h3>Обща информация</h3>
 <pre><?php
-  printf("<i><abbr title=\"Операционна система\">ОС</abbr></i>:          <span lang=\"en\">%s</span>\n", os_info());
+  printf("<i><abbr title=\"Операционна система\">ОС</abbr></i>:");
+  printf("          <span lang=\"en\">%s</span>\n"          , os_info());
   printf("<i>Ядро</i>:        <span lang=\"en\">%s</span>\n", kernel_info());
   printf("<i>Дистрибуция</i>: <span lang=\"en\">%s</span>\n", slack_ver());
   printf("<i>Архитектура</i>: <span lang=\"en\">%s</span>\n", mach_info());
-  printf("<i>Процесор</i>:    <span lang=\"en\">%s</span>\n", cpu_info());
+  printf("<i><abbr title=\"Централен процесор\">ЦП</abbr></i>:");
+  printf("          <span lang=\"en\">%s</span>\n", cpu_info());
 ?>
 </pre>
 </article>
@@ -104,13 +110,15 @@ src="img/server" title="Сървъра в шкафа (2-рата единица 
 <h3>Статистики</h3>
 <ul>
 <li><a href="stats/traffic/" hreflang="en">Трафик</a>&nbsp;<img alt="[парола]"
-height="16" src="/img/lock" title="Изисква се удостоверяване" width="16" /></li>
-<li><a href="stats/cacti/graph_view.php?action=tree" hreflang="en">Системна статистика</a>&nbsp;
-<img alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
-width="16" /></li>
+height="16" src="/img/lock" title="Изисква се удостоверяване" width="16" />
+</li>
+<li><a href="stats/cacti/graph_view.php?action=tree" hreflang="en">Системна
+статистика</a>&nbsp;<img alt="[парола]" height="16" src="/img/lock"
+title="Изисква се удостоверяване" width="16" /></li>
 <li><a href="stats/awstats/awstats.pl?config=web">Web статистики</a>&nbsp;<img
 alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
-width="16" />, <a href="stats/awstats/awstats.pl?config=ftp"><abbr lang="en" title="File Transfer Protocl">FTP</abbr>&nbsp;статистики</a>&nbsp;<img
+width="16" />, <a href="stats/awstats/awstats.pl?config=ftp"><abbr lang="en"
+title="File Transfer Protocl">FTP</abbr>&nbsp;статистики</a>&nbsp;<img
 alt="[парола]" height="16" src="/img/lock" title="Изисква се удостоверяване"
 width="16" /></li>
 </ul>
