@@ -9,3 +9,7 @@ Disallow: /phpipam/
 Disallow: /stats/
 Disallow: /viewvc/
 Disallow: /webcam/
+
+User-agent: SemrushBot
+Disallow: /
+
