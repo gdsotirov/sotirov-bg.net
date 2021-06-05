@@ -155,12 +155,12 @@ elsif ( $format eq "rss" ) {
                 pubDate         => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
                 lastBuildDate   => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
                 generator       => "Perl $]",
-                managingEditor  => $feed_editor_name." (mailto:".$feed_editor_email.")",
-                webMaster       => $feed_master_name." (mailto:".$feed_master_email.")",
+                managingEditor  => $feed_editor_email." (".$feed_editor_name.")",
+                webMaster       => $feed_master_email." (".$feed_master_name.")",
                 dc              => {
                   date          => $dc_date,
-                  publisher     => $feed_editor_name." (mailto:".$feed_editor_email.")",
-                  creator       => $feed_master_name." (mailto:".$feed_master_email.")"
+                  publisher     => $feed_editor_email." (".$feed_editor_name.")",
+                  creator       => $feed_master_email." (".$feed_master_name.")"
                 },
                 syn             => {
                   updatePeriod    => "daily",
