@@ -135,6 +135,7 @@ if ( $format eq "atom" ) {
 elsif ( $format eq "rss" ) {
   print $q->header(-type=>'application/xml',-charset=>'utf-8');
   my $version = $q->param('v') || '2.0';
+  my $version_self = $q->param('v') ? "&amp;v=$version" : "";
 
   my ($row_count, $res) = fetch_data;
 
@@ -168,7 +169,7 @@ elsif ( $format eq "rss" ) {
                 },
                 atom            => {
                   link  => {
-                    'href'      => $feed_self."?f=".$format,
+                    'href'      => $feed_self."?f=".$format.$version_self,
                     'rel'       => 'self',
                     'type'      => 'application/rss+xml'
                   }
