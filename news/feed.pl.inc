@@ -155,12 +155,12 @@ elsif ( $format eq "rss" ) {
                 pubDate         => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
                 lastBuildDate   => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
                 generator       => "Perl $]",
-                managingEditor  => $feed_editor_email." (".$feed_editor_name.")",
-                webMaster       => $feed_master_email." (".$feed_master_name.")",
+                managingEditor  => $feed_editor_name." (mailto:".$feed_editor_email.")",
+                webMaster       => $feed_master_name." (mailto:".$feed_master_email.")",
                 dc              => {
                   date          => $dc_date,
-                  publisher     => $feed_editor_email." (".$feed_editor_name.")",
-                  creator       => $feed_master_email." (".$feed_master_name.")"
+                  publisher     => $feed_editor_name." (mailto:".$feed_editor_email.")",
+                  creator       => $feed_master_name." (mailto:".$feed_master_email.")"
                 },
                 syn             => {
                   updatePeriod    => "daily",
@@ -179,10 +179,10 @@ elsif ( $format eq "rss" ) {
     url    => "https://".$ENV{SERVER_NAME}."/img/sotirov_net",
     link   => $feed_link,
     dc => {
-      creator  => "Georgi D. Sotirov <gdsotirov\@gmail.com>",
+      creator  => "Georgi D. Sotirov (mailto:gdsotirov\@gmail.com)",
     });
 
-  # Build entires
+  # Build entries
   for ( my $i = 0; $i < $row_count; ++$i ) {
     my $title = $res->[$i]->{'title'};
     # Strips the html tags for this version
@@ -195,7 +195,7 @@ elsif ( $format eq "rss" ) {
     $rss->add_item(title       => $title,
                    link        => $feed_entry_base.$res->[$i]->{'id'},
                    permaLink   => $feed_entry_base.$res->[$i]->{'id'},
-                   content     => "application/xhtml+xml",
+                   content     => $version ne "1.0" ? "application/xhtml+xml" : "",
                    description => encode_entities($res->[$i]->{'body'}, '<>&"'),
                    author      => $res->[$i]->{'email'}." (".$res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}.")",
                    pubDate     => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[$i]->{'posted'}), "GMT"),
@@ -203,7 +203,7 @@ elsif ( $format eq "rss" ) {
                      format   => "text/html",
                      date     => $dc_date,
                      source   => $feed_link,
-                     creator  => $res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}." (".$res->[$i]->{'email'}.")"
+                     creator  => $res->[$i]->{$item_author_fname_field}." ".$res->[$i]->{$item_author_name_field}." (mailto:".$res->[$i]->{'email'}.")"
                    });
   }
 
