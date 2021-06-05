@@ -199,7 +199,7 @@ elsif ( $format eq "rss" ) {
 
   my $twig = new XML::Twig;
   $twig->set_indent(" "x2);
-  $twig->set_pretty_print('indented');
+  $twig->set_pretty_print('indented_c');
   $twig->parse($rss->as_string);
   if ( $version eq "0.91" or $version eq "2.0" ) {
     $twig->add_stylesheet(xsl => "/style/rss.".$feed_lang_id.".xsl");
