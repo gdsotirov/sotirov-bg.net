@@ -139,30 +139,39 @@ elsif ( $format eq "rss" ) {
   my ($row_count, $res) = fetch_data;
 
   my $rss = XML::RSS->new(version => $version, encode_output => 0, encoding => 'utf-8');
+  # See https://github.com/shlomif/perl-XML-RSS/issues/8#issuecomment-854689916
+  $rss->add_module(prefix=>'atom', uri=>'http://www.w3.org/2005/Atom');
 
   # Build the chanel
   my $dc_date = time2str("%Y-%m-%dT%T%z", str2time($res->[0]->{'updated'}), "GMT");
   # Format the time zone, so to be valid W3C Date and Time foramt
   $dc_date =~ s/([+-])([0-9]{2})([0-9]{2})/$1$2:$3/;
-  $rss->channel(title          => $feed_title,
-                link           => $feed_link,
-                language       => $feed_lang_id,
-                description    => $feed_desc,
-                copyright      => $feed_copy,
-                pubDate        => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
-                lastBuildDate  => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
-                generator      => "Perl $]",
-                managingEditor => $feed_editor_email." (".$feed_editor_name.")",
-                webMaster      => $feed_master_email." (".$feed_master_name.")",
-                dc => {
-                  date         => $dc_date,
-                  publisher    => $feed_editor_email." (".$feed_editor_name.")",
-                  creator      => $feed_master_email." (".$feed_master_name.")"
+  $rss->channel(title           => $feed_title,
+                link            => $feed_link,
+                language        => $feed_lang_id,
+                description     => $feed_desc,
+                copyright       => $feed_copy,
+                pubDate         => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'posted'}), "GMT"),
+                lastBuildDate   => $lang->time2str("%a, %d %h %Y %T %Z", str2time($res->[0]->{'updated'}), "GMT"),
+                generator       => "Perl $]",
+                managingEditor  => $feed_editor_email." (".$feed_editor_name.")",
+                webMaster       => $feed_master_email." (".$feed_master_name.")",
+                dc              => {
+                  date          => $dc_date,
+                  publisher     => $feed_editor_email." (".$feed_editor_name.")",
+                  creator       => $feed_master_email." (".$feed_master_name.")"
                 },
-                syn => {
-                  updatePeriod     => "daily",
-                  updateFrequency  => "1",
-                  updateBase       => "2004-12-01T00:00+00:00"
+                syn             => {
+                  updatePeriod    => "daily",
+                  updateFrequency => "1",
+                  updateBase      => "2004-12-01T00:00+00:00"
+                },
+                atom            => {
+                  link  => {
+                    'href'      => $feed_self."?f=".$format,
+                    'rel'       => 'self',
+                    'type'      => 'application/rss+xml'
+                  }
                 });
   $rss->image(
     title  => $feed_title,
