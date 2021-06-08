@@ -4,3 +4,7 @@
 RedirectMatch 404 "(?i)/\.(svn|git|hg|bzr)"
 RedirectMatch 404 "/CVS"
 
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; object-src 'none'; require-trusted-types-for 'script'; report-uri /csp_report.php;"
+</IfModule>
+
