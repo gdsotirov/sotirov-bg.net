@@ -24,10 +24,19 @@ DROP TABLE IF EXISTS `csp_reports`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `csp_reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `report` json NOT NULL COMMENT 'Raw CSP report in JSON format',
+  `report` json NOT NULL COMMENT 'Raw CSP report in JSON format.\nTODO: Make invisible in 8.0',
   `received` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `blocked_uri` varchar(512) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."blocked-uri"'))) VIRTUAL COMMENT 'The URI of the resource that was blocked from loading by the Content Security Policy.',
+  `disposition` varchar(8) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."disposition"'))) VIRTUAL COMMENT 'Either "enforce" or "report" depending on whether the Content-Security-Policy header or the Content-Security-Policy-Report-Only header is used.',
+  `document_uri` varchar(512) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."document-uri"'))) VIRTUAL COMMENT 'The URI of the document in which the violation occurred.',
+  `effective_directive` varchar(64) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."effective-directive"'))) VIRTUAL COMMENT 'The directive whose enforcement caused the violation.',
+  `original_policy` varchar(512) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."original-policy"'))) VIRTUAL COMMENT 'The original policy as specified by the Content-Security-Policy-Report-Only HTTP header.',
+  `referrer` varchar(512) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."referrer"'))) VIRTUAL COMMENT 'The referrer of the document in which the violation occurred.',
+  `script_sample` varchar(64) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."script-sample"'))) VIRTUAL COMMENT 'The first 40 characters of the inline script, event handler, or style that caused the violation.',
+  `status_code` int(11) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."status-code"'))) VIRTUAL COMMENT 'The HTTP status code of the resource on which the global object was instantiated.',
+  `violated_directive` varchar(128) GENERATED ALWAYS AS (json_unquote(json_extract(`report`,'$."csp-report"."violated-directive"'))) VIRTUAL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='Content Security Policy (CSP) violation reports';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Content Security Policy (CSP) violation reports';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,4 +201,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-08 22:42:55
+-- Dump completed on 2021-06-12 14:20:33
