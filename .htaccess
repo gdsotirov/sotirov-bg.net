@@ -9,6 +9,7 @@ RedirectMatch 404 "/CVS"
 default-src 'self'; \
 object-src 'none'; \
 report-uri /csp_report.php; \
-require-trusted-types-for 'script'"
+require-trusted-types-for 'script'; \
+script-src 'self' 'report-sample'"
 </IfModule>
 
