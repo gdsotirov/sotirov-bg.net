@@ -63,17 +63,17 @@ src="img/bgkoleda" title="Българската Коледа - Подари н�
 <section>
 <h2 id="news">Новини</h2>
 <?php
-  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
-    if ( mysql_select_db($news_db, $news_c) ) {
+  if ( $news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
+    if ( mysqli_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, CONVERT_TZ(posted, 'SYSTEM', 'UTC') posted";
       $query .= " FROM news_bg WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";
       $query .= " LIMIT 10";
-      $res = mysql_query($query, $news_c);
-      if ( mysql_num_rows($res) > 0 ) {
+      $res = mysqli_query($query, $news_c);
+      if ( mysqli_num_rows($res) > 0 ) {
         print("<p class=\"text_p\">Заглавия на 10-те последни новини.</p>\n");
         print("<ul class=\"Last10\">\n");
-        while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $news = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC");
           print("</abbr></b>&nbsp;<a ");
@@ -86,12 +86,12 @@ src="img/bgkoleda" title="Българската Коледа - Подари н�
       else {
         print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
       }
-      mysql_free_result($res);
+      mysqli_free_result($res);
     }
     else {
       print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");
     }
-    mysql_close($news_c);
+    mysqli_close($news_c);
   }
   else {
     print("<p class=\"error\">Новините не са достъпни в момента.</p>\n");

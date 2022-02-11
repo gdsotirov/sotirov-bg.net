@@ -24,10 +24,10 @@
     return $month;
   }
 
-  if ( !$news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
+  if ( !$news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
     $error = CANNOT_CONNECT;
   }
-  if ( !mysql_select_db($news_db, $news_c) ) {
+  if ( !mysqli_select_db($news_db, $news_c) ) {
     $error = CANNOT_SEL_DB;
   }
 
@@ -35,9 +35,9 @@
     $news_id = $_REQUEST['id'];
     if ( isset($news_id) && is_numeric($news_id) ) {
       $qtitle = "SELECT title from news WHERE id = ".(int)$news_id.";";
-      $ntres = mysql_query($qtitle, $news_c);
-      $ntitle = mysql_result($ntres, 0);
-      mysql_free_result($ntres);
+      $ntres = mysqli_query($qtitle, $news_c);
+      $ntitle = mysqli_result($ntres, 0);
+      mysqli_free_result($ntres);
     }
   }
   if ( isset($_REQUEST['q']) ) {
@@ -193,15 +193,15 @@ type="application/rdf+xml">RSS 0.9 Feed</a></li>
     $query .= " GROUP BY Month(nws.posted), Year(nws.posted) ";
     $query .= " ORDER BY Year(nws.posted) DESC, Month(nws.posted) DESC";
 
-    $res = mysql_query($query, $news_c);
-    if ( mysql_num_rows($res) > 0 ) {
-      while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+    $res = mysqli_query($query, $news_c);
+    if ( mysqli_num_rows($res) > 0 ) {
+      while ( $item = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         $link = "?m=".$item['Month']."&amp;y=".$item['Year'];
         $name = get_month($item['Month']).", ".$item['Year'];
         print("<li><a href=\"$link\">$name</a></li>\n");
       }
     }
-    mysql_free_result($res);
+    mysqli_free_result($res);
   }
 ?>
 </ul>
@@ -276,7 +276,7 @@ placeholder="Text to search" size="25" type="text" /></label><br />
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted IS NOT NULL AND nws.author = usr.id AND (";
       foreach ( $safe_tokens as $idx => $token ) {
-        $sql_token = mysql_real_escape_string($token, $news_c);
+        $sql_token = mysqli_real_escape_string($token, $news_c);
         if ( $idx > 0 ) {
           $query .= "AND (nws.title LIKE '%$sql_token%' ";
           $query .= " OR nws.body LIKE '%$sql_token%') ";
@@ -296,9 +296,9 @@ placeholder="Text to search" size="25" type="text" /></label><br />
       $query .= "LIMIT 10";
     }
 
-    $res = mysql_query($query, $news_c);
-    if ( mysql_num_rows($res) > 0 ) {
-      while ( $item = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+    $res = mysqli_query($query, $news_c);
+    if ( mysqli_num_rows($res) > 0 ) {
+      while ( $item = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         print("<article class=\"news\" id=\"newsid_".$item['id']."\">\n");
         if ( isset($q) ) {
           mark_token_text($safe_tokens, $item['title']);
@@ -346,10 +346,10 @@ placeholder="Text to search" size="25" type="text" /></label><br />
         print("<p class=\"error\">News currently not available.</p>\n");
       }
     }
-    mysql_free_result($res);
+    mysqli_free_result($res);
   }
 
-  mysql_close($news_c);
+  mysqli_close($news_c);
 ?>
 </section>
 

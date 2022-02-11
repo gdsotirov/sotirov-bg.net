@@ -63,17 +63,17 @@ src="img/bgkoleda" title="Bulgarian Christmas - Give hope to a child in need">
 <section>
 <h2 id="news">News</h2>
 <?php
-  if ( $news_c = mysql_connect($news_host, $news_user, $news_pass) ) {
-    if ( mysql_select_db($news_db, $news_c) ) {
+  if ( $news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
+    if ( mysqli_select_db($news_db, $news_c) ) {
       $query = "SELECT id, title, CONVERT_TZ(posted, 'SYSTEM', 'UTC') posted";
       $query .= " FROM news WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";
       $query .= " LIMIT 10";
-      $res = mysql_query($query, $news_c);
-      if ( mysql_num_rows($res) > 0 ) {
+      $res = mysqli_query($query, $news_c);
+      if ( mysqli_num_rows($res) > 0 ) {
         print("<p class=\"text_p\">Last ten news headers.</p>\n");
         print("<ul class=\"Last10\">\n");
-        while ( $news = mysql_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $news = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr title=\"Coordinated Universal Time\">UTC</abbr>");
           print("</b>&nbsp;<a ");
@@ -86,12 +86,12 @@ src="img/bgkoleda" title="Bulgarian Christmas - Give hope to a child in need">
       else {
         print("<p class=\"error\">News currently not available.</p>\n");
       }
-      mysql_free_result($res);
+      mysqli_free_result($res);
     }
     else {
       print("<p class=\"error\">News currently not available.</p>\n");
     }
-    mysql_close($news_c);
+    mysqli_close($news_c);
   }
   else {
     print("<p class=\"error\">News currently not available.</p>\n");
