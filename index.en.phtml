@@ -64,7 +64,7 @@ src="img/bgkoleda" title="Bulgarian Christmas - Give hope to a child in need">
 <h2 id="news">News</h2>
 <?php
   if ( $news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
-    if ( mysqli_select_db($news_db, $news_c) ) {
+    if ( mysqli_select_db($news_c, $news_db) ) {
       $query = "SELECT id, title, CONVERT_TZ(posted, 'SYSTEM', 'UTC') posted";
       $query .= " FROM news WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";

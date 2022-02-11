@@ -27,7 +27,7 @@
   if ( !$news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
     $error = CANNOT_CONNECT;
   }
-  if ( !mysqli_select_db($news_db, $news_c) ) {
+  if ( !mysqli_select_db($news_c, $news_db) ) {
     $error = CANNOT_SEL_DB;
   }
 

@@ -4,7 +4,7 @@
   if ( !$conn = mysqli_connect($db_host, $db_user, $db_pass) ) {
     $error = CANNOT_CONNECT;
   }
-  if ( !mysqli_select_db($db_db, $conn) ) {
+  if ( !mysqli_select_db($conn, $db_db) ) {
     $error = CANNOT_SEL_DB;
   }
 

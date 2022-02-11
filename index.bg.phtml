@@ -64,7 +64,7 @@ src="img/bgkoleda" title="Българската Коледа - Подари н�
 <h2 id="news">Новини</h2>
 <?php
   if ( $news_c = mysqli_connect($news_host, $news_user, $news_pass) ) {
-    if ( mysqli_select_db($news_db, $news_c) ) {
+    if ( mysqli_select_db($news_c, $news_db) ) {
       $query = "SELECT id, title, CONVERT_TZ(posted, 'SYSTEM', 'UTC') posted";
       $query .= " FROM news_bg WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";
