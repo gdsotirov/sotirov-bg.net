@@ -14,7 +14,7 @@
     $query  = "INSERT INTO csp_reports (report) VALUES ('";
     $query .= mysqli_real_escape_string($report) . "')";
 
-    mysqli_query($query, $conn);
+    mysqli_query($conn, $query);
   }
 ?>
 

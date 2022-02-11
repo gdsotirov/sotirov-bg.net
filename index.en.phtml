@@ -69,7 +69,7 @@ src="img/bgkoleda" title="Bulgarian Christmas - Give hope to a child in need">
       $query .= " FROM news WHERE posted IS NOT NULL";
       $query .= " ORDER BY posted DESC";
       $query .= " LIMIT 10";
-      $res = mysqli_query($query, $news_c);
+      $res = mysqli_query($news_c, $query);
       if ( mysqli_num_rows($res) > 0 ) {
         print("<p class=\"text_p\">Last ten news headers.</p>\n");
         print("<ul class=\"Last10\">\n");

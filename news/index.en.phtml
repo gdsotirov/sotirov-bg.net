@@ -35,7 +35,7 @@
     $news_id = $_REQUEST['id'];
     if ( isset($news_id) && is_numeric($news_id) ) {
       $qtitle = "SELECT title from news WHERE id = ".(int)$news_id.";";
-      $ntres = mysqli_query($qtitle, $news_c);
+      $ntres = mysqli_query($news_c, $qtitle);
       $ntitle = mysqli_result($ntres, 0);
       mysqli_free_result($ntres);
     }
@@ -193,7 +193,7 @@ type="application/rdf+xml">RSS 0.9 Feed</a></li>
     $query .= " GROUP BY Month(nws.posted), Year(nws.posted) ";
     $query .= " ORDER BY Year(nws.posted) DESC, Month(nws.posted) DESC";
 
-    $res = mysqli_query($query, $news_c);
+    $res = mysqli_query($news_c, $query);
     if ( mysqli_num_rows($res) > 0 ) {
       while ( $item = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         $link = "?m=".$item['Month']."&amp;y=".$item['Year'];
@@ -296,7 +296,7 @@ placeholder="Text to search" size="25" type="text" /></label><br />
       $query .= "LIMIT 10";
     }
 
-    $res = mysqli_query($query, $news_c);
+    $res = mysqli_query($news_c, $query);
     if ( mysqli_num_rows($res) > 0 ) {
       while ( $item = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
         print("<article class=\"news\" id=\"newsid_".$item['id']."\">\n");
