@@ -73,7 +73,7 @@ src="img/bgkoleda" title="Българската Коледа - Подари н�
       if ( mysqli_num_rows($res) > 0 ) {
         print("<p class=\"text_p\">Заглавия на 10-те последни новини.</p>\n");
         print("<ul class=\"Last10\">\n");
-        while ( $news = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $news = mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr lang=\"en\" title=\"Coordinated Universal Time\">UTC");
           print("</abbr></b>&nbsp;<a ");

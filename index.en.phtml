@@ -73,7 +73,7 @@ src="img/bgkoleda" title="Bulgarian Christmas - Give hope to a child in need">
       if ( mysqli_num_rows($res) > 0 ) {
         print("<p class=\"text_p\">Last ten news headers.</p>\n");
         print("<ul class=\"Last10\">\n");
-        while ( $news = mysqli_fetch_array($res, MYSQL_ASSOC) ) {
+        while ( $news = mysqli_fetch_array($res, MYSQLI_ASSOC) ) {
           print("<li><b>".$news['posted']."&nbsp;");
           print("<abbr title=\"Coordinated Universal Time\">UTC</abbr>");
           print("</b>&nbsp;<a ");
