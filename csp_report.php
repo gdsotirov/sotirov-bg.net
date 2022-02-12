@@ -12,7 +12,7 @@
     $report = trim(file_get_contents('php://input'));
 
     $query  = "INSERT INTO csp_reports (report) VALUES ('";
-    $query .= mysqli_real_escape_string($report) . "')";
+    $query .= mysqli_real_escape_string($conn, $report) . "')";
 
     mysqli_query($conn, $query);
   }
