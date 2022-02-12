@@ -36,7 +36,7 @@
     if ( isset($news_id) && is_numeric($news_id) ) {
       $qtitle = "SELECT title from news_bg WHERE id = ".(int)$news_id.";";
       $ntres = mysqli_query($news_c, $qtitle);
-      $ntitle = mysqli_field_seek($ntres, 0);
+      $ntitle = mysqli_fetch_row($ntres)[0];
       mysqli_free_result($ntres);
     }
   }
