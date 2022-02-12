@@ -276,7 +276,7 @@ placeholder="Text to search" size="25" type="text" /></label><br />
     elseif ( isset($q) ) {
       $query .= "WHERE nws.posted IS NOT NULL AND nws.author = usr.id AND (";
       foreach ( $safe_tokens as $idx => $token ) {
-        $sql_token = mysqli_real_escape_string($token, $news_c);
+        $sql_token = mysqli_real_escape_string($news_c, $token);
         if ( $idx > 0 ) {
           $query .= "AND (nws.title LIKE '%$sql_token%' ";
           $query .= " OR nws.body LIKE '%$sql_token%') ";
