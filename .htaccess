@@ -4,18 +4,18 @@
 RedirectMatch 404 "(?i)/\.(svn|git|hg|bzr)"
 RedirectMatch 404 "/CVS"
 
-<IfModule mod_headers.c>
-  Header always set Report-To "{\
-group: csp-endpoint, \
-max_age: 10886400, \
-endpoints: [ { url: https://sotirov-bg.net/csp_report.php } ] \
-}"
-  Header always set Content-Security-Policy-Report-Only "\
-default-src 'self'; \
-object-src 'none'; \
-report-to csp_endpoint; \
-report-uri /csp_report.php; \
-require-trusted-types-for 'script'; \
-script-src 'self' 'report-sample'"
-</IfModule>
+#<IfModule mod_headers.c>
+##  Header always set Report-To "{\
+##group: csp-endpoint, \
+##max_age: 10886400, \
+##endpoints: [ { url: https://sotirov-bg.net/csp_report.php } ] \
+##}"
+#  Header always set Content-Security-Policy-Report-Only "\
+#default-src 'self'; \
+#object-src 'none'; \
+##report-to csp_endpoint; \
+#report-uri /csp_report.php; \
+#require-trusted-types-for 'script'; \
+#script-src 'self' 'report-sample'"
+#</IfModule>
 
