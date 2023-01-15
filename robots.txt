@@ -10,6 +10,11 @@ Disallow: /stats/
 Disallow: /viewvc/
 Disallow: /webcam/
 
+# See https://ahrefs.com/robot
+User-agent: AhrefsBot
+# See http://webmeup-crawler.com/
+User-agent: BLEXBot
+# See https://www.semrush.com/bot/
 User-agent: SemrushBot
 Disallow: /
 
