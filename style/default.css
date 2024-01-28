@@ -166,10 +166,6 @@
     text-indent: 1em;
   }
 
-  p.error {
-    color: red;
-  }
-
   ul.inline {
     margin-left: 3em;
     padding-left: 1em;
