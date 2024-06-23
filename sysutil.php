@@ -305,10 +305,16 @@
    * @param name The name of the UPS device
    */
   function ups_power($name) {
-    exec("/usr/bin/upsc $name | /usr/bin/grep 'ups.status:' | /usr/bin/awk -F'[: ]+' '{ print $2 }'", $ups_pwr, $res);
+    exec("/usr/bin/upsc $name | /usr/bin/grep 'ups.status:' | /usr/bin/awk -F'[: ]+' '{ print $2; print $3 }'", $ups_pwr, $res);
     if ( !$res ) {
+      $ups_alarm  = "";
+      $ups_status = trim($ups_pwr[0]);
+      if ( $ups_pwr[0] == "ALARM" ) {
+        $ups_status = trim($ups_pwr[1]);
+        $ups_alarm  = " (!)";
+      }
       $unit_arr = i18n_msg('ups');
-      return sprintf("%s", $unit_arr[trim($ups_pwr[0])]);
+      return sprintf("%s%s", $unit_arr[$ups_status], $ups_alarm);
     }
     return "n/a";
   }
