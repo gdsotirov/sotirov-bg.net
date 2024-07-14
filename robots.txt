@@ -2,6 +2,7 @@
 
 User-agent: *
 Disallow: /bginfo/
+Disallow: /bugzilla/
 Disallow: /bwbar/
 Disallow: /cgi-bin/
 Disallow: /errordocs/
