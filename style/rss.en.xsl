@@ -8,7 +8,7 @@
 <xsl:template match="/">
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <title><xsl:value-of select="/rss/channel/title" /></title>
 <script type="text/javascript"><![CDATA[
 function trans() {
